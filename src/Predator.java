@@ -1,4 +1,3 @@
-
 public class Predator {
 	private int id;
 	private String name = null;
