@@ -1,20 +1,25 @@
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 
-public class MazePanel extends JPanel implements ActionListener, MouseListener {
+public class MazePanel extends JPanel implements ActionListener, MouseListener, KeyListener {
 	
+	private MainWindow mw;
+
 	public MazePanel(MainWindow window) {
-		
+		this.mw = window;
 	}
 	
 	public Dimension getPreferredSize() {
-        return new Dimension(770,770);
+        return new Dimension(600,600);
     }
 	
 	@Override
@@ -49,6 +54,27 @@ public class MazePanel extends JPanel implements ActionListener, MouseListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == mw.getMenu()){
+			JOptionPane.showMessageDialog(null,"Instructions");
+			System.out.println("Test");
+		}
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
