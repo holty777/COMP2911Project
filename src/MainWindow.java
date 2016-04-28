@@ -28,29 +28,21 @@ public class MainWindow {
 	}
 	
 	public MainWindow() throws IOException {
-
+		
+		
 		mainFrame = new JFrame("Test");
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		grid = new GridLayout(1,1);
-		mainFrame.setLayout(grid);
 		con = new GridBagConstraints();
 		
-		MazePanel = new MazePanel(this);
-		menuPanel = new JPanel();
+		MazePanel = new MazePanel(this, 10, 10);
 		
+		/**
+		menuPanel = new JPanel();
 		startButton = new JButton("Start");
 		menuButton = new JButton("Menu");
 		menuPanel.add(startButton, con);
 		menuPanel.add(menuButton, con);
-		
-	}
-
-	public JFrame getMainFrame() {
-		return mainFrame;
-	}
-
-	public void setMainFrame(JFrame mainFrame) {
-		this.mainFrame = mainFrame;
+		**/
 	}
 	
 	public JButton getMenu(){
@@ -58,11 +50,9 @@ public class MainWindow {
 	}
 
 	private void display() {
-
-		mainFrame.getContentPane().add(menuPanel);
-		mainFrame.getContentPane().add(MazePanel);
+		mainFrame.add(MazePanel);
 		mainFrame.pack();
+		mainFrame.setResizable(false);
         mainFrame.setVisible(true);
-        mainFrame.setResizable(false);
 	}
 }
