@@ -22,13 +22,14 @@ public class Maze{
 		this.mazemtx = new int [height][length];
 		this.length = length;
 		this.height = height;
-		//mazegenerator(difficulty);
+		mazegenerator(difficulty);
 	}
 	
 	//check if that block is empty
 	//error here
 	public boolean checkifempty (int row, int col){
-		if (mazemtx[row][col] == 1){
+		//System.out.println("dududududu row: "+row+" the col: "+col);
+		if (mazemtx[row][col] == 0){
 			return true;
 		}else{
 			return false;
@@ -42,8 +43,9 @@ public class Maze{
 	}
 	
 	
-	public void convertblock (int col, int row){
-		this.mazemtx [col][row] = 1;
+	public void convertblock (int row, int col){
+		
+		this.mazemtx [row][col] = 1;
 	}
 	
 	//uses some alogrithm to generate the path
@@ -57,9 +59,9 @@ public class Maze{
 		for (int i=0; i<height; i++){
 			for (int j=0; j<length; j++){
 				if (checkifempty(i, j)){
-					System.out.print("O");
+					System.out.print("o");
 				}else{
-					System.out.print("1");
+					System.out.print("x ");
 				}
 			}
 			System.out.println();
@@ -97,13 +99,33 @@ public class Maze{
 			int row = randomnum(this.height);
 			int col = randomnum(this.length);
 			
-			//check if the block is free
-			if (checkifempty (col, row)){
-				//change the block
-				convertblock(col, row);
+			if (row == height) row --;
+			if (col == length) col --;
+			
+			//check if the block on the top edge is empty
+			if (checkifempty(0, col)){
+				convertblock(0, col);
+				pathgenerated++;
+			}else if (checkifempty(height-1, col)){
+				convertblock(height-1, col);
+				pathgenerated++;
 			}
+			
+			if (checkifempty(row, 0)){
+				convertblock(row, 0);
+				pathgenerated++;
+			}else if (checkifempty(row, length-1)){
+				convertblock(row, length-1);
+				pathgenerated++;
+			}
+			
+			//System.out.println("the block generated: "+pathgenerated);
+			//System.out.println("the rokenblock: "+brokenblock);
+			
 		}
 	}
+	
+
 		public void buildTestMaze(){
 		for(int i=0; i < 10; i++){
         	for(int j=0; j < 10; j++){
