@@ -1,7 +1,7 @@
 
 public class Heuristic implements Strategy {
 	
-	public int getH(maze state){
+	public int getH(Maze state){
 		return 0;
 	}
 }

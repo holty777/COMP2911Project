@@ -19,7 +19,7 @@ public class MazePanel extends JPanel implements ActionListener, MouseListener, 
 	private int height;
 	private int length;
 	GridLayout grid;
-	maze mainMaze;
+	Maze mainMaze;
 
 	
 	public MazePanel(MainWindow window, int height, int length) {
@@ -27,7 +27,7 @@ public class MazePanel extends JPanel implements ActionListener, MouseListener, 
 		this.height = height;
 		this.length = length;
 	
-		mainMaze = new maze(10,10,1);
+		mainMaze = new Maze(10,10,1);
 		mainMaze.buildTestMaze();
 		grid = new GridLayout(10,10);
 		this.setLayout(grid);

@@ -12,12 +12,12 @@ import java.util.Random;
  * @author steve
  *
  */
-public class maze{
+public class Maze{
 	private int [][] mazemtx;
 	private int length;
 	private int height;
 	
-	public maze (int height, int length, int difficulty){
+	public Maze (int height, int length, int difficulty){
 		//height then length
 		this.mazemtx = new int [height][length];
 		this.length = length;

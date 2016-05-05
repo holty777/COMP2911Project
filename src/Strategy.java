@@ -1,5 +1,5 @@
 
 public interface Strategy {
 	
-	public int getH(maze state);
+	public int getH(Maze state);
 }
