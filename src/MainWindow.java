@@ -30,7 +30,7 @@ public class MainWindow {
 	public MainWindow() throws IOException {
 		
 		
-		mainFrame = new JFrame("Test");
+		mainFrame = new JFrame("MazeGame");
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		con = new GridBagConstraints();
 		

@@ -28,7 +28,7 @@ public class MazePanel extends JPanel implements ActionListener, MouseListener, 
 		this.length = length;
 	
 		mainMaze = new maze(10,10);
-		
+		mainMaze.buildTestMaze();
 		grid = new GridLayout(10,10);
 		this.setLayout(grid);
 
@@ -114,7 +114,6 @@ public class MazePanel extends JPanel implements ActionListener, MouseListener, 
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
