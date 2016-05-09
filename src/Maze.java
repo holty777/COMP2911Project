@@ -2,7 +2,7 @@
 import java.util.Random;
 
 /** 
- * generate a random path in the adjancey list
+ * generate a random path in the adjacency list
  * 
  * list of things to be passed in:
  * - difficulty
