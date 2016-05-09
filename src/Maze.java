@@ -1,4 +1,6 @@
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 /** 
@@ -28,7 +30,6 @@ public class Maze{
 	//check if that block is empty
 	//error here
 	public boolean checkifempty (int row, int col){
-		//System.out.println("dududududu row: "+row+" the col: "+col);
 		if (mazemtx[row][col] == 0){
 			return true;
 		}else{
@@ -42,9 +43,26 @@ public class Maze{
 	  return randomNum;
 	}
 	
+	public int randODD (int max){
+		  Random rand = new Random();
+		  int randomNum = 0;
+		  while (randomNum % 2 == 0){
+			  randomNum = rand.nextInt((max - 0) + 1) + 0; 
+		  }
+		  return randomNum;
+		}
+	
+	//random an array of 4 directions
+	public Integer[] randomDir (){
+		 ArrayList<Integer> randDirections = new ArrayList<Integer>();
+		 for (int i=0; i<4; i++){
+			 randDirections.add(i+1);
+		 }
+		 Collections.shuffle(randDirections);
+		return randDirections.toArray(new Integer[4]);
+	}
 	
 	public void convertblock (int row, int col){
-		
 		this.mazemtx [row][col] = 1;
 	}
 	
@@ -81,6 +99,7 @@ public class Maze{
 		 * 
 		*/	
 		
+		/*
 		//case statement to determine the number of entry/exit 
 		int brokenblock = 0;
 		switch (difficulty){
@@ -118,17 +137,87 @@ public class Maze{
 				convertblock(row, length-1);
 				openPTS++;
 			}
-			
-			//System.out.println("the block generated: "+pathgenerated);
-			//System.out.println("the rokenblock: "+brokenblock);
-			
 		}
-	}
-	
-	public void connectPTS(){
+			*/
+			
+		//random a point and start generating a path
+		int startX = randODD(length);
+		int startY = randODD(height);
+		
+		//System.out.println("the height and width: "+startY +" " +startX);
+		
+		convertblock (startY, startX);
+			
+		MazeDFS (startY, startX);
+			
 		
 	}
 	
+	public int MazeDFS (int row, int col){
+		//implements dfs alogrithm to generate a random maze
+ 
+		Integer [] randomDir = randomDir();
+		
+		for (int j=0; j<randomDir.length; j++){
+			System.out.println(randomDir[j]);
+			switch(randomDir[j]){
+			
+			//moving up
+			case 1:
+				if ((row-2) <= 0) continue;
+				if (checkifempty (row-2, col)){
+					convertblock (row-2, col);
+					convertblock(row-1, col);
+					return MazeDFS(row-2, col);
+				}
+				break;
+				
+				
+			//moving right
+			case 2:
+				if((col+2) >= (length-1) ) continue;
+				if (checkifempty (row,col+2)){
+					convertblock (row, col+2);
+					convertblock (row,col+1);
+					return MazeDFS(row,col+2);
+				}
+			break;
+			
+			//moving down
+			case 3:
+				if ((row+2) >= (height-1)) continue;
+				if (checkifempty (row+2, col)){
+					convertblock(row+2, col);
+					convertblock(row+1, col);
+					return MazeDFS(row+2, col);
+				}
+				break;
+				
+			//moving left
+			case 4:
+				//row and then col
+				if((col-2) <= 0) continue;
+				if (checkifempty (row,col-2)){
+					convertblock (row, col-2);
+					convertblock (row,col-1);
+					return MazeDFS(row,col-2);
+				}
+				break;
+			}
+		}
+		
+		if(true){
+			System.out.println("i broke out of here...."
+					+row+" "+col);
+			return 0;
+		}
+		return 0;
+	}
+
+	
+	public void optimalise (){
+		//use this fucntion to clean up the maze
+	}
 	
 	public void buildTestMaze(){
 		for(int i=0; i < 10; i++){
