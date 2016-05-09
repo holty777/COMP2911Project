@@ -1,4 +1,4 @@
-import java.util.LinkedList;
+
 import java.util.Random;
 
 /** 
@@ -61,7 +61,7 @@ public class Maze{
 				if (checkifempty(i, j)){
 					System.out.print("o");
 				}else{
-					System.out.print("x ");
+					System.out.print("*");
 				}
 			}
 			System.out.println();
@@ -91,9 +91,9 @@ public class Maze{
 		}
 			
 		//check if the edges is taken
-		int pathgenerated = 0;
+		int openPTS= 0;
 		
-		while (pathgenerated != brokenblock){
+		while (openPTS != brokenblock){
 			//call random number, problem: random might random two number next to each
 			//other, 
 			int row = randomnum(this.height);
@@ -105,18 +105,18 @@ public class Maze{
 			//check if the block on the top edge is empty
 			if (checkifempty(0, col)){
 				convertblock(0, col);
-				pathgenerated++;
+				openPTS++;
 			}else if (checkifempty(height-1, col)){
 				convertblock(height-1, col);
-				pathgenerated++;
+				openPTS++;
 			}
 			
 			if (checkifempty(row, 0)){
 				convertblock(row, 0);
-				pathgenerated++;
+				openPTS++;
 			}else if (checkifempty(row, length-1)){
 				convertblock(row, length-1);
-				pathgenerated++;
+				openPTS++;
 			}
 			
 			//System.out.println("the block generated: "+pathgenerated);
@@ -125,8 +125,12 @@ public class Maze{
 		}
 	}
 	
-
-		public void buildTestMaze(){
+	public void connectPTS(){
+		
+	}
+	
+	
+	public void buildTestMaze(){
 		for(int i=0; i < 10; i++){
         	for(int j=0; j < 10; j++){
         		if(i % 2 != 0){
