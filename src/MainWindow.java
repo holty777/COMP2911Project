@@ -37,7 +37,7 @@ public class MainWindow implements Runnable {
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		con = new GridBagConstraints();
 		
-		MazePanel = new MazePanel(this, 10, 10);
+		MazePanel = new MazePanel(this, 20, 20);
 		
 		GridBagLayout leftLayout = new GridBagLayout();
 		leftPanel = new JPanel();
@@ -95,7 +95,7 @@ public class MainWindow implements Runnable {
 	public void restart(){
 		mainFrame.getContentPane().remove(outsidePanel);
 		outsidePanel.remove(MazePanel);
-		MazePanel = new MazePanel(this,10,10);
+		MazePanel = new MazePanel(this,20,20);
 		outsidePanel.add(MazePanel);
 		this.display();
 	}

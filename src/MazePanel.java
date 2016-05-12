@@ -28,8 +28,8 @@ public class MazePanel extends JPanel implements ActionListener, MouseListener, 
 		this.height = height;
 		this.length = length;
 	
-		mainMaze = new Maze(10,10,1);
-		grid = new GridLayout(10,10);
+		mainMaze = new Maze(height,length,1);
+		grid = new GridLayout(height, length);
 		this.setLayout(grid);
 
         for(int i=0; i < height; i++){
@@ -39,9 +39,9 @@ public class MazePanel extends JPanel implements ActionListener, MouseListener, 
         			JLabel full = new JLabel();
         			full.setBackground(Color.BLACK);
         			full.setOpaque(true);
-        			full.setMinimumSize(new Dimension(10,10));
-        			full.setPreferredSize(new Dimension(10,10));
-        			full.setMaximumSize(new Dimension(10,10));
+        			full.setMinimumSize(new Dimension(1,1));
+        			full.setPreferredSize(new Dimension(1,1));
+        			full.setMaximumSize(new Dimension(1,1));
         			this.add(full);
         			
         		}
@@ -50,9 +50,9 @@ public class MazePanel extends JPanel implements ActionListener, MouseListener, 
         			JLabel blank = new JLabel();
         			blank.setBackground(Color.white);
         			blank.setOpaque(true);
-        			blank.setMinimumSize(new Dimension(10,10));
-        			blank.setPreferredSize(new Dimension(10,10));
-        			blank.setMaximumSize(new Dimension(10,10));
+        			blank.setMinimumSize(new Dimension(1,1));
+        			blank.setPreferredSize(new Dimension(1,1));
+        			blank.setMaximumSize(new Dimension(1,1));
         			this.add(blank);
         			
         		}
