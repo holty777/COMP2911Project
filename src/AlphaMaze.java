@@ -4,7 +4,7 @@ import java.util.Stack;
 
 /**
  * works for only odd dimensions odd x odd 
- * @author silviaxu
+ * @author steve
  *
  */
 
@@ -22,12 +22,13 @@ public class AlphaMaze {
 	}
 	
 	public void contruct(){
-		//construct the maze
+		//resets the 2d array, basically making everything a wall
 		reset();
-		//generate the maze
+		//maze generator method
 		generate();
 		print();
 	}
+	
 	
 	public void reset(){
 		for(int i=0; i<height; i++){
@@ -81,26 +82,30 @@ public class AlphaMaze {
 	//if not add +1 square and +2 square to the stack
 	//and return random +2square
 	public State possibleMoves(State curr, Stack<State> visited){
-		//check if it contains that state for north south east west
-		//create neighbors
+
 		ArrayList <State> possibleDIR = new ArrayList <State>();
+		
 		/*
+		 * Directory
+		 * 
 		 * north- 1
 		 * east - 2
 		 * south - 3
 		 * west - 4
 		 */
 		
-		
+		//get the location of the current 
 		int x = curr.getX(); 
 		int y = curr.getY();
 		
+		/*
 		System.out.println("**************");
 		System.out.println("the x and y coordinate @: "+x+" "+y);
 		System.out.println("**************");
+		*/
 		
+		//Initialization of the possible moves
 		
-		//initialisation
 		//north move
 		State checkN2 = new State (x, y-2, 1);
 		//east move
@@ -110,15 +115,11 @@ public class AlphaMaze {
 		//west move
 		State checkW2 = new State (x-2, y, 4);
 		
-		//check if the maze block is 0
-		
-		// use this to check isEmpty(int height, int width)
-		
 		//north
 		//edge cases to check out of bound
 		if (y-2 > 0){
 			// x & y
-			System.out.println("check north ok");
+			//System.out.println("check north ok");
 			if(isEmpty(y-2, x) 
 					&& isEmpty(y-1, x)
 					&& isEmpty(y-2, x+1)
@@ -131,7 +132,7 @@ public class AlphaMaze {
 		//edge cases to check out of bound
 		//check if +2 ahead left and right is taken
 		if (y+2 < height-1){
-			System.out.println("check south ok");
+			//System.out.println("check south ok");
 			if(isEmpty(y+2, x)
 					&& isEmpty(y+1, x)
 					&& isEmpty(y+2, x-1)
@@ -144,7 +145,7 @@ public class AlphaMaze {
 		//edge cases to check out of bound
 		//check if +2 north and south
 		if (x+2 < width-1){
-			System.out.println("check east ok");
+			//System.out.println("check east ok");
 			if(isEmpty(y, x+2)
 					&& isEmpty(y, x+1)
 					&& isEmpty(y-1, x+2)
@@ -157,7 +158,7 @@ public class AlphaMaze {
 		//edge cases to check out of bound
 		//check if +2 north and south
 		if(x-2 > 0){
-			System.out.println("check west ok");
+			//System.out.println("check west ok");
 			if(isEmpty(y, x-2)
 					&& isEmpty(y, x-1)
 					&& isEmpty(y+1, x-2)
@@ -171,7 +172,7 @@ public class AlphaMaze {
 		}	
 		
 		
-		//printing
+		/*printing
 		for (int i=0; i<possibleDIR.size();i++){
 			System.out.println("x:"+possibleDIR.get(i).getX()+" "
 					+"y:"+possibleDIR.get(i).getY());
@@ -181,10 +182,11 @@ public class AlphaMaze {
 		System.out.println();
 		print();
 		System.out.println();
+		*/
 		
 		if (!possibleDIR.isEmpty()){
-			System.out.println("the next move is at x:"+possibleDIR.get(0).getX()+" "
-					+"y:"+possibleDIR.get(0).getY());
+			/*System.out.println("the next move is at x:"+possibleDIR.get(0).getX()+" "
+					+"y:"+possibleDIR.get(0).getY());*/
 			return possibleDIR.get(0);
 		}else{
 			return null;
