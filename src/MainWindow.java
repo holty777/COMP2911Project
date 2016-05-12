@@ -26,6 +26,7 @@ public class MainWindow implements Runnable {
 		SwingUtilities.invokeLater(new Runnable() {
             public void run() {
             	mw.display();
+            	
             }
         });
 	}
@@ -37,8 +38,10 @@ public class MainWindow implements Runnable {
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		con = new GridBagConstraints();
 		
-		MazePanel = new MazePanel(this, 10, 10);
-		
+		MazePanel = new MazePanel(this, 20, 20);
+		MazePanel.addKeyListener(MazePanel);
+		MazePanel.setFocusable(true);
+
 		GridBagLayout leftLayout = new GridBagLayout();
 		leftPanel = new JPanel();
 		leftPanel.setLayout(leftLayout);
@@ -104,5 +107,12 @@ public class MainWindow implements Runnable {
 	public void run() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public void refresh(){
+		mainFrame.getContentPane().remove(outsidePanel);
+		outsidePanel.remove(MazePanel);
+		outsidePanel.add(MazePanel);
+		this.display();
 	}
 }

@@ -19,45 +19,65 @@ public class MazePanel extends JPanel implements ActionListener, MouseListener, 
 	private MainWindow mw;
 	private int height;
 	private int length;
+	private Player player;
 	GridLayout grid;
 	Maze mainMaze;
+	JLabel[][] labelGrid;
 
 	
 	public MazePanel(MainWindow window, int height, int length) {
+		labelGrid = new JLabel[height][length];
 		this.mw = window;
 		this.height = height;
 		this.length = length;
-	
-		mainMaze = new Maze(10,10,1);
-		grid = new GridLayout(10,10);
+		boolean check = false;
+		mainMaze = new Maze(height,length,1);
+		grid = new GridLayout(height,length);
 		this.setLayout(grid);
-
+		
         for(int i=0; i < height; i++){
         	for(int j=0; j < length; j++){
         		if(mainMaze.checkifempty(i,j) == false){
-        			
-        			JLabel full = new JLabel();
-        			full.setBackground(Color.BLACK);
-        			full.setOpaque(true);
-        			full.setMinimumSize(new Dimension(10,10));
-        			full.setPreferredSize(new Dimension(10,10));
-        			full.setMaximumSize(new Dimension(10,10));
-        			this.add(full);
-        			
+        			if(check == false){
+        				player = new Player(i, j, 25, 25);
+        				player.setMinimumSize(new Dimension(10,10));
+        				player.setPreferredSize(new Dimension(10,10));
+        				player.setMaximumSize(new Dimension(10,10));
+        				labelGrid[i][j] = player;
+        				//this.add(player);
+        				check = true;
+        			}
+        			else{
+        				JLabel full = new JLabel();
+        				full.setBackground(Color.white);
+        				full.setOpaque(true);
+        				full.setMinimumSize(new Dimension(10,10));
+        				full.setPreferredSize(new Dimension(10,10));
+        				full.setMaximumSize(new Dimension(10,10));
+        				labelGrid[i][j] = full;
+        				//this.add(full);
+        			}
         		}
         		else {
         			
         			JLabel blank = new JLabel();
-        			blank.setBackground(Color.white);
+        			blank.setBackground(Color.BLACK);
         			blank.setOpaque(true);
         			blank.setMinimumSize(new Dimension(10,10));
         			blank.setPreferredSize(new Dimension(10,10));
         			blank.setMaximumSize(new Dimension(10,10));
-        			this.add(blank);
+    				labelGrid[i][j] = blank;
+        			//this.add(blank);
         			
         		}
         	}
         }
+        
+        for(int i=0; i < height; i++){
+        	for(int j=0; j < length; j++){
+        			this.add(labelGrid[i][j]);
+        		}
+        	}
 
 	}
 	
@@ -118,6 +138,122 @@ public class MazePanel extends JPanel implements ActionListener, MouseListener, 
 
 	@Override
 	public void keyPressed(KeyEvent e) {
+		if(e.getKeyCode() == KeyEvent.VK_RIGHT){
+
+			int i = player.getILocation();
+			int j = player.getJLocation();
+			if(mainMaze.checkifempty(i, j+1) == false){
+				player.setILocation(i);
+				player.setJLocation(j+1);
+				labelGrid[i][j+1] = player;
+				JLabel blank = new JLabel();
+				blank.setBackground(Color.white);
+    			blank.setOpaque(true);
+    			blank.setMinimumSize(new Dimension(10,10));
+    			blank.setPreferredSize(new Dimension(10,10));
+    			blank.setMaximumSize(new Dimension(10,10));
+				labelGrid[i][j] = blank;
+				
+				this.removeAll();
+				for(int a=0; a < height; a++){
+		        	for(int b=0; b < length; b++){
+						//System.out.println(a + " " + b);
+
+		        			this.add(labelGrid[a][b]);
+		        		}
+		        	}
+				revalidate();
+				repaint();
+			}
+		}
+		
+		if(e.getKeyCode() == KeyEvent.VK_LEFT){
+
+			int i = player.getILocation();
+			int j = player.getJLocation();
+			if(mainMaze.checkifempty(i, j-1) == false){
+				player.setILocation(i);
+				player.setJLocation(j-1);
+				labelGrid[i][j-1] = player;
+				JLabel blank = new JLabel();
+				blank.setBackground(Color.white);
+    			blank.setOpaque(true);
+    			blank.setMinimumSize(new Dimension(10,10));
+    			blank.setPreferredSize(new Dimension(10,10));
+    			blank.setMaximumSize(new Dimension(10,10));
+				labelGrid[i][j] = blank;
+				
+				this.removeAll();
+				for(int a=0; a < height; a++){
+		        	for(int b=0; b < length; b++){
+						//System.out.println(a + " " + b);
+
+		        			this.add(labelGrid[a][b]);
+		        		}
+		        	}
+				revalidate();
+				repaint();
+			}
+		}
+		
+		if(e.getKeyCode() == KeyEvent.VK_UP){
+
+			int i = player.getILocation();
+			int j = player.getJLocation();
+			if(mainMaze.checkifempty(i-1, j) == false){
+				player.setILocation(i-1);
+				player.setJLocation(j);
+				labelGrid[i-1][j] = player;
+				JLabel blank = new JLabel();
+				blank.setBackground(Color.white);
+    			blank.setOpaque(true);
+    			blank.setMinimumSize(new Dimension(10,10));
+    			blank.setPreferredSize(new Dimension(10,10));
+    			blank.setMaximumSize(new Dimension(10,10));
+				labelGrid[i][j] = blank;
+				
+				this.removeAll();
+				for(int a=0; a < height; a++){
+		        	for(int b=0; b < length; b++){
+						//System.out.println(a + " " + b);
+
+		        			this.add(labelGrid[a][b]);
+		        		}
+		        	}
+				revalidate();
+				repaint();
+			}
+		}
+		
+		if(e.getKeyCode() == KeyEvent.VK_DOWN){
+
+			int i = player.getILocation();
+			int j = player.getJLocation();
+			if(mainMaze.checkifempty(i+1, j) == false){
+				player.setILocation(i+1);
+				player.setJLocation(j);
+				labelGrid[i+1][j] = player;
+				JLabel blank = new JLabel();
+				blank.setBackground(Color.white);
+    			blank.setOpaque(true);
+    			blank.setMinimumSize(new Dimension(10,10));
+    			blank.setPreferredSize(new Dimension(10,10));
+    			blank.setMaximumSize(new Dimension(10,10));
+				labelGrid[i][j] = blank;
+				
+				this.removeAll();
+				for(int a=0; a < height; a++){
+		        	for(int b=0; b < length; b++){
+						//System.out.println(a + " " + b);
+
+		        			this.add(labelGrid[a][b]);
+		        		}
+		        	}
+				revalidate();
+				repaint();
+			}
+		}
+		
 		
 	}
 
