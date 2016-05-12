@@ -13,11 +13,15 @@ public class AlphaMaze {
 	private int height;
 	private int width;
 	private int [][] mazemtx;
+	private int [][] start;
+	private int [][] end;
 	
 	public AlphaMaze (int height, int width){
 		this.mazemtx =  new int [height][width];
 		this.width = width;
 		this.height = height;
+		this.start = new int [1][1];
+		this.end = new int [1][1];
 		contruct();
 	}
 	
@@ -281,6 +285,16 @@ public class AlphaMaze {
 		}
 		return false;
 	}
+	
+	public int [][] getStart(){
+		return this.getStart();
+	}
+	
+	public int getEnd (){
+		return this.getEnd();
+	}
+	
+	
 	
 	//print the maze
 	public void print(){
