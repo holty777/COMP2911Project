@@ -14,10 +14,14 @@ import java.util.Random;
  * @author steve
  *
  */
-public class Maze{
+public class Maze implements Runnable{
 	private int [][] mazemtx;
 	private int length;
 	private int height;
+	
+	public Maze (){
+	}
+	
 	
 	public Maze (int height, int length, int difficulty){
 		//height then length
@@ -228,6 +232,12 @@ public class Maze{
         		else mazemtx[i][j] = 0;
         	}
 		}
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 

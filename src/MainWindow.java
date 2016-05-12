@@ -5,7 +5,7 @@ import java.awt.GridLayout;
 
 import javax.swing.*;
 
-public class MainWindow {
+public class MainWindow implements Runnable {
 	
 	private JFrame mainFrame;
 	private MazePanel MazePanel;
@@ -17,7 +17,7 @@ public class MainWindow {
 	GridBagConstraints con;
 	
 	public static void main(String[] args) throws IOException {
-		final MainWindow mw = new MainWindow();
+		final MainWindow mw = new MainWindow(null);
 		
 		// display the main window in a different thread.
 		SwingUtilities.invokeLater(new Runnable() {
@@ -27,7 +27,7 @@ public class MainWindow {
         });
 	}
 	
-	public MainWindow() throws IOException {
+	public MainWindow(Runnable mainMaze) throws IOException {
 		
 		
 		mainFrame = new JFrame("MazeGame");
@@ -54,5 +54,11 @@ public class MainWindow {
 		mainFrame.pack();
 		mainFrame.setResizable(false);
         mainFrame.setVisible(true);
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
 	}
 }
