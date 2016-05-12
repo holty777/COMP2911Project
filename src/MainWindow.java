@@ -98,7 +98,7 @@ public class MainWindow implements Runnable {
 	public void restart(){
 		mainFrame.getContentPane().remove(outsidePanel);
 		outsidePanel.remove(MazePanel);
-		MazePanel = new MazePanel(this,10,10);
+		MazePanel = new MazePanel(this,20,20);
 		outsidePanel.add(MazePanel);
 		this.display();
 	}
