@@ -3,20 +3,22 @@ import java.io.IOException;
 import javax.swing.JFrame;
 
 
-public class MazePuzzleGame {
+public class MazePuzzleGame implements Runnable {
 
 	private static Thread MG;
 	private static Thread GUI;
 	
 	private JFrame mainFrame;
 	private MenuPanel menuPanel;
+	private GameEngine gameEngine;
 	
 	//maybe change this to gamePanel
 	private MainWindow mazeWindow;
+	//maybe change to gameEngine
 	private Maze maze;
 	
-	public MazePuzzleGame(Maze maze) throws IOException {
-		this.maze = maze;
+	public MazePuzzleGame(GameEngine ge) throws IOException {
+		this.gameEngine = ge;
 		
 		mainFrame = new JFrame("Maze Puzzle Game");
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -29,15 +31,20 @@ public class MazePuzzleGame {
 	}
 	
 	public static void main(String[] args) throws IOException {
-		Runnable mainMaze = new Maze();
 		
 		//maze generation thread
-		MG = new Thread(mainMaze);
+		MG = new Thread(new GameEngine());
 		
 		//GUI thread
-		GUI = new Thread(new MainWindow(mainMaze));
+		GUI = new Thread(new MazePuzzleGame(new GameEngine()));
 		
 		MG.start();
 		GUI.start();
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
 	}
 }
