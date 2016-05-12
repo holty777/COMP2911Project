@@ -21,7 +21,7 @@ public class MazePanel extends JPanel implements ActionListener, MouseListener, 
 	private int length;
 	private Player player;
 	GridLayout grid;
-	Maze mainMaze;
+	AlphaMaze mainMaze;
 	JLabel[][] labelGrid;
 
 	
@@ -31,13 +31,13 @@ public class MazePanel extends JPanel implements ActionListener, MouseListener, 
 		this.height = height;
 		this.length = length;
 		boolean check = false;
-		mainMaze = new Maze(height,length,1);
+		mainMaze = new AlphaMaze(height,length);
 		grid = new GridLayout(height,length);
 		this.setLayout(grid);
 		
         for(int i=0; i < height; i++){
         	for(int j=0; j < length; j++){
-        		if(mainMaze.checkifempty(i,j) == false){
+        		if(mainMaze.isEmpty(i,j) == false){
         			if(check == false){
         				player = new Player(i, j, 25, 25);
         				player.setMinimumSize(new Dimension(10,10));
@@ -142,7 +142,7 @@ public class MazePanel extends JPanel implements ActionListener, MouseListener, 
 
 			int i = player.getILocation();
 			int j = player.getJLocation();
-			if(mainMaze.checkifempty(i, j+1) == false){
+			if(mainMaze.isEmpty(i, j+1) == false){
 				player.setILocation(i);
 				player.setJLocation(j+1);
 				labelGrid[i][j+1] = player;
@@ -171,7 +171,7 @@ public class MazePanel extends JPanel implements ActionListener, MouseListener, 
 
 			int i = player.getILocation();
 			int j = player.getJLocation();
-			if(mainMaze.checkifempty(i, j-1) == false){
+			if(mainMaze.isEmpty(i, j-1) == false){
 				player.setILocation(i);
 				player.setJLocation(j-1);
 				labelGrid[i][j-1] = player;
@@ -200,7 +200,7 @@ public class MazePanel extends JPanel implements ActionListener, MouseListener, 
 
 			int i = player.getILocation();
 			int j = player.getJLocation();
-			if(mainMaze.checkifempty(i-1, j) == false){
+			if(mainMaze.isEmpty(i-1, j) == false){
 				player.setILocation(i-1);
 				player.setJLocation(j);
 				labelGrid[i-1][j] = player;
@@ -229,7 +229,7 @@ public class MazePanel extends JPanel implements ActionListener, MouseListener, 
 
 			int i = player.getILocation();
 			int j = player.getJLocation();
-			if(mainMaze.checkifempty(i+1, j) == false){
+			if(mainMaze.isEmpty(i+1, j) == false){
 				player.setILocation(i+1);
 				player.setJLocation(j);
 				labelGrid[i+1][j] = player;
