@@ -13,6 +13,7 @@ import java.awt.GridLayout;
 
 
 
+
 public class MazePanel extends JPanel implements ActionListener, MouseListener, KeyListener {
 	
 	private MainWindow mw;
@@ -28,7 +29,6 @@ public class MazePanel extends JPanel implements ActionListener, MouseListener, 
 		this.length = length;
 	
 		mainMaze = new Maze(10,10,1);
-		mainMaze.buildTestMaze();
 		grid = new GridLayout(10,10);
 		this.setLayout(grid);
 
@@ -100,8 +100,12 @@ public class MazePanel extends JPanel implements ActionListener, MouseListener, 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == mw.getMenu()){
-			JOptionPane.showMessageDialog(null,"Instructions");
+			JOptionPane.showMessageDialog(null,"Instructions:\nTry find your way out of the\n maze as quick as you can\n"
+					+ "Don't let yourself get caught!");
 			System.out.println("Test");
+		}
+		if (e.getSource() == mw.getStart()){
+			mw.restart();
 		}
 		
 	}
