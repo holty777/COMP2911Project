@@ -28,7 +28,7 @@ public class MazePanel extends JPanel implements ActionListener, MouseListener, 
 		this.length = length;
 	
 		mainMaze = new Maze(10,10,1);
-		mainMaze.buildTestMaze();
+		//mainMaze.buildTestMaze();
 		grid = new GridLayout(10,10);
 		this.setLayout(grid);
 

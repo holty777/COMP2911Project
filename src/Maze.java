@@ -2,6 +2,7 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
+import java.util.Stack;
 
 /** 
  * generate a random path in the adjacency list
@@ -15,22 +16,34 @@ import java.util.Random;
  *
  */
 public class Maze{
-	private int [][] mazemtx;
+	private Element [][] mazemtx;
 	private int length;
 	private int height;
+	//Stack<?> stackOfPoints;
+	
 	
 	public Maze (int height, int length, int difficulty){
 		//height then length
-		this.mazemtx = new int [height][length];
+		this.mazemtx = new Element[height][length];
+		int i = 0;
+		int j = 0;
+		for (i = 0; i < length; i ++){
+			for (j = 0; j < height; j++){
+				this.mazemtx[j][i] = new Element(i,j);
+			}
+		}
+		
+		
 		this.length = length;
 		this.height = height;
+		//this.stackOfPoints = new Stack();
 		mazegenerator(difficulty);
 	}
 	
 	//check if that block is empty
 	//error here
 	public boolean checkifempty (int row, int col){
-		if (mazemtx[row][col] == 0){
+		if (mazemtx[row][col].beenVisited() == false){
 			return true;
 		}else{
 			return false;
@@ -63,7 +76,7 @@ public class Maze{
 	}
 	
 	public void convertblock (int row, int col){
-		this.mazemtx [row][col] = 1;
+		mazemtx[row][col].setElementToSeen();
 	}
 	
 	//uses some alogrithm to generate the path
@@ -79,7 +92,7 @@ public class Maze{
 				if (checkifempty(i, j)){
 					System.out.print("o");
 				}else{
-					System.out.print("*");
+					System.out.print("x");
 				}
 			}
 			System.out.println();
@@ -146,18 +159,20 @@ public class Maze{
 		
 		//System.out.println("the height and width: "+startY +" " +startX);
 		
-		convertblock (startY, startX);
+		//convertblock (startY, startX);
 			
 		MazeDFS (startY, startX);
 			
 		
 	}
 	
+	
+	/*
 	public int MazeDFS (int row, int col){
 		//implements dfs alogrithm to generate a random maze
  
 		Integer [] randomDir = randomDir();
-		
+		this.printer();
 		for (int j=0; j<randomDir.length; j++){
 			System.out.println(randomDir[j]);
 			switch(randomDir[j]){
@@ -214,11 +229,159 @@ public class Maze{
 		return 0;
 	}
 
+	*/
 	
+	public int MazeDFS (int row, int col){
+
+		Stack<Element> stack = new Stack<Element>();
+		/*
+		int leftCanVisit = 0;
+		int rightCanVisit = 0;
+		int upCanVisit = 0;
+		int downCanVisit = 0;
+		
+		*/
+		//mazemtx[0][0].setElementToSeen();
+
+		stack.push(mazemtx[0][0]);
+		
+		while (!stack.isEmpty()){
+			/*
+			leftCanVisit = 0;
+			rightCanVisit = 0;
+			upCanVisit = 0;
+			downCanVisit = 0;
+			*/
+			
+			//[up,right,down,left]
+			int directionsCanTravel[] = new int[5];
+			Element current = stack.pop();
+			mazemtx[current.getY()][current.getX()].setElementToSeen();
+			/*
+			while (current.beenVisited() == true){
+				current = stack.pop();
+			}
+			*/
+			//System.out.print(current.toString());
+			//System.out.println(" been visited: " + current.beenVisited());
+			if (current.getX() - 1 >= 0){
+				if (checkifempty(current.getY(),current.getX() - 1)){
+					directionsCanTravel[0] = 1;
+				}
+			}
+			if ((current.getX() + 1 < length)  ){
+				if (checkifempty(current.getY(),current.getX() + 1)){
+					directionsCanTravel[2] = 1;
+				}
+			}
+			if ((current.getY() - 1 >= 0)  ){
+				if (checkifempty( current.getY() - 1,current.getX())){
+					directionsCanTravel[3] = 1;
+				}
+			}
+			if ((current.getY() + 1 < height) ){
+				if (checkifempty( current.getY() + 1,current.getX())){
+					directionsCanTravel[1] = 1;
+				}
+			}
+			
+			
+			int travelInDirectionOf = 5;
+			Integer[] directions = randomDir();
+			
+			
+			if (directionsCanTravel[directions[0]] == 1){
+				travelInDirectionOf = directions[0];
+				if (travelInDirectionOf == 3){
+					System.out.println("going left");
+					stack.push(mazemtx[current.getY() - 1][current.getX()]);
+				}
+				if (travelInDirectionOf == 2){
+					stack.push(mazemtx[current.getY()][current.getX() + 1]);
+				}
+				if (travelInDirectionOf == 1){
+					stack.push(mazemtx[current.getY() + 1][current.getX()]);
+				}
+				if (travelInDirectionOf == 0){
+					stack.push(mazemtx[current.getY()][current.getX() - 1]);
+				}
+			} 
+			if (directionsCanTravel[directions[1]] == 1){
+				travelInDirectionOf = directions[1];
+				if (travelInDirectionOf == 3){
+					System.out.println("going left");
+					stack.push(mazemtx[current.getY() - 1][current.getX()]);
+				}
+				if (travelInDirectionOf == 2){
+					stack.push(mazemtx[current.getY()][current.getX() + 1]);
+				}
+				if (travelInDirectionOf == 1){
+					stack.push(mazemtx[current.getY() + 1][current.getX()]);
+				}
+				if (travelInDirectionOf == 0){
+					stack.push(mazemtx[current.getY()][current.getX() - 1]);
+				}
+			} 
+			if (directionsCanTravel[directions[2]] == 1){
+				
+				travelInDirectionOf = directions[2];
+				if (travelInDirectionOf == 3){
+					System.out.println("going left");
+					stack.push(mazemtx[current.getY() - 1][current.getX()]);
+				}
+				if (travelInDirectionOf == 2){
+					stack.push(mazemtx[current.getY()][current.getX() + 1]);
+				}
+				if (travelInDirectionOf == 1){
+					stack.push(mazemtx[current.getY() + 1][current.getX()]);
+				}
+				if (travelInDirectionOf == 0){
+					stack.push(mazemtx[current.getY()][current.getX() - 1]);
+				}
+			} 
+			if (directionsCanTravel[directions[3]] == 1) {
+				travelInDirectionOf = directions[3];
+				if (travelInDirectionOf == 3){
+					System.out.println("added a left");
+					stack.push(mazemtx[current.getY() - 1][current.getX()]);
+				}
+				if (travelInDirectionOf == 2){
+					stack.push(mazemtx[current.getY()][current.getX() + 1]);
+				}
+				if (travelInDirectionOf == 1){
+					stack.push(mazemtx[current.getY() + 1][current.getX()]);
+				}
+				if (travelInDirectionOf == 0){
+					stack.push(mazemtx[current.getY()][current.getX() - 1]);
+				}
+			} 
+			/*else {
+				System.out.println("backtrack");
+			}
+			*/
+			System.out.println("popped: " + current.toString());
+			printer();
+			System.out.println();
+		}
+		
+		
+		return 0;	
+	}
+	
+	
+	private boolean arrayAllZero(int[] directionsCanTravel) {
+		for (int i = 1; i < 4; i++){
+			if (directionsCanTravel[i] == 1){
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public void optimalise (){
 		//use this fucntion to clean up the maze
 	}
-	
+	/*
 	public void buildTestMaze(){
 		for(int i=0; i < 10; i++){
         	for(int j=0; j < 10; j++){
@@ -229,8 +392,9 @@ public class Maze{
         	}
 		}
 	}
-	
+	*/
 
 	
 	
 }
+                                                                                                                                       
