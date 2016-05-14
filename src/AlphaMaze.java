@@ -4,7 +4,7 @@ import java.util.Stack;
 
 /**
  * works for only odd dimensions odd x odd 
- * @author silviaxu
+ * @author steve
  *
  */
 
@@ -22,12 +22,13 @@ public class AlphaMaze {
 	}
 	
 	public void contruct(){
-		//construct the maze
+		//resets the 2d array, basically making everything a wall
 		reset();
-		//generate the maze
+		//maze generator method
 		generate();
 		//print();
 	}
+	
 	
 	public void reset(){
 		for(int i=0; i<height; i++){
@@ -81,26 +82,31 @@ public class AlphaMaze {
 	//if not add +1 square and +2 square to the stack
 	//and return random +2square
 	public State possibleMoves(State curr, Stack<State> visited){
-		//check if it contains that state for north south east west
-		//create neighbors
+
 		ArrayList <State> possibleDIR = new ArrayList <State>();
+		
 		/*
+		 * Directory
+		 * 
 		 * north- 1
 		 * east - 2
 		 * south - 3
 		 * west - 4
 		 */
 		
-		
+		//get the location of the current 
 		int x = curr.getX(); 
 		int y = curr.getY();
 		
-//		System.out.println("**************");
-//		System.out.println("the x and y coordinate @: "+x+" "+y);
-//		System.out.println("**************");
+
+		/*
+		System.out.println("**************");
+		System.out.println("the x and y coordinate @: "+x+" "+y);
+		System.out.println("**************");
+		*/
 		
+		//Initialization of the possible moves
 		
-		//initialisation
 		//north move
 		State checkN2 = new State (x, y-2, 1);
 		//east move
@@ -109,10 +115,6 @@ public class AlphaMaze {
 		State checkS2 = new State (x, y+2, 3);
 		//west move
 		State checkW2 = new State (x-2, y, 4);
-		
-		//check if the maze block is 0
-		
-		// use this to check isEmpty(int height, int width)
 		
 		//north
 		//edge cases to check out of bound
@@ -170,21 +172,24 @@ public class AlphaMaze {
 			Collections.shuffle(possibleDIR);
 		}	
 		
+
+		/*printing
+		for (int i=0; i<possibleDIR.size();i++){
+			System.out.println("x:"+possibleDIR.get(i).getX()+" "
+					+"y:"+possibleDIR.get(i).getY());
+		}
+		System.out.println("------------------------------");
 		
-//		//printing
-//		for (int i=0; i<possibleDIR.size();i++){
-//			System.out.println("x:"+possibleDIR.get(i).getX()+" "
-//					+"y:"+possibleDIR.get(i).getY());
-//		}
-//		System.out.println("------------------------------");
-//		
-//		System.out.println();
-//		print();
-//		System.out.println();
+		System.out.println();
+		print();
+		System.out.println();
+		*/
 		
 		if (!possibleDIR.isEmpty()){
 			//System.out.println("the next move is at x:"+possibleDIR.get(0).getX()+" "
 				//	+"y:"+possibleDIR.get(0).getY());
+			/*System.out.println("the next move is at x:"+possibleDIR.get(0).getX()+" "
+					+"y:"+possibleDIR.get(0).getY());*/
 			return possibleDIR.get(0);
 		}else{
 			return null;

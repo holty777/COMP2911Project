@@ -51,7 +51,7 @@ public class Maze implements Runnable{
 		  Random rand = new Random();
 		  int randomNum = 0;
 		  while (randomNum % 2 == 0){
-			  randomNum = rand.nextInt((max - 0) + 1) + 0; 
+			  randomNum = rand.nextInt((max - 1)); 
 		  }
 		  return randomNum;
 		}
@@ -60,6 +60,7 @@ public class Maze implements Runnable{
 	public Integer[] randomDir (){
 		 ArrayList<Integer> randDirections = new ArrayList<Integer>();
 		 for (int i=0; i<4; i++){
+			 //System.out.println("i: "+i);
 			 randDirections.add(i+1);
 		 }
 		 Collections.shuffle(randDirections);
@@ -81,9 +82,9 @@ public class Maze implements Runnable{
 		for (int i=0; i<height; i++){
 			for (int j=0; j<length; j++){
 				if (checkifempty(i, j)){
-					System.out.print("o");
+					System.out.print("o ");
 				}else{
-					System.out.print("*");
+					System.out.print("x ");
 				}
 			}
 			System.out.println();
@@ -145,76 +146,67 @@ public class Maze implements Runnable{
 			*/
 			
 		//random a point and start generating a path
-		int startX = randODD(length);
-		int startY = randODD(height);
+		//int startX = randODD(length);
+		//int startY = randODD(height);
 		
 		//System.out.println("the height and width: "+startY +" " +startX);
 		
-		convertblock (startY, startX);
+		convertblock (1, 1);
 			
-		MazeDFS (startY, startX);
+		MazeDFS (1, 1);
 			
 		
 	}
 	
 	public int MazeDFS (int row, int col){
 		//implements dfs alogrithm to generate a random maze
- 
+		System.out.println("the row: "+row+" the col: "+col);
 		Integer [] randomDir = randomDir();
 		
 		for (int j=0; j<randomDir.length; j++){
 			System.out.println(randomDir[j]);
-			switch(randomDir[j]){
+			
 			
 			//moving up
-			case 1:
-				if ((row-2) <= 0) continue;
-				if (checkifempty (row-2, col)){
-					convertblock (row-2, col);
-					convertblock(row-1, col);
-					return MazeDFS(row-2, col);
-				}
-				break;
+			if (randomDir[j]==1){
+				if ((row-2) <= 0)continue;
+					if (checkifempty (row-2, col)){
+						convertblock (row-2, col);
+						convertblock(row-1, col);
+						return MazeDFS(row-2, col);
+					}
 				
-				
+			}else if (randomDir[j]==2) {
 			//moving right
-			case 2:
 				if((col+2) >= (length-1) ) continue;
-				if (checkifempty (row,col+2)){
-					convertblock (row, col+2);
-					convertblock (row,col+1);
-					return MazeDFS(row,col+2);
-				}
-			break;
-			
-			//moving down
-			case 3:
-				if ((row+2) >= (height-1)) continue;
-				if (checkifempty (row+2, col)){
-					convertblock(row+2, col);
-					convertblock(row+1, col);
-					return MazeDFS(row+2, col);
-				}
-				break;
+					if (checkifempty (row,col+2)){
+						convertblock (row, col+2);
+						convertblock (row,col+1);
+						return MazeDFS(row,col+2);
+					}
 				
+			}else if (randomDir[j]==3){
+			//moving down
+				if ((row+2) >= (height-1)) continue;
+					if (checkifempty (row+2, col)){
+						convertblock(row+2, col);
+						convertblock(row+1, col);
+						return MazeDFS(row+2, col);
+					}
+				
+			}else if (randomDir[j]==4){
 			//moving left
-			case 4:
-				//row and then col
 				if((col-2) <= 0) continue;
-				if (checkifempty (row,col-2)){
-					convertblock (row, col-2);
-					convertblock (row,col-1);
-					return MazeDFS(row,col-2);
-				}
-				break;
+					if (checkifempty (row,col-2)){
+						convertblock (row, col-2);
+						convertblock (row,col-1);
+						return MazeDFS(row,col-2);
+					}
+				
 			}
 		}
 		
-		if(true){
-			System.out.println("i broke out of here...."
-					+row+" "+col);
-			return 0;
-		}
+
 		return 0;
 	}
 
