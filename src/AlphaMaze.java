@@ -26,7 +26,7 @@ public class AlphaMaze {
 		reset();
 		//generate the maze
 		generate();
-		print();
+		//print();
 	}
 	
 	public void reset(){
@@ -95,9 +95,9 @@ public class AlphaMaze {
 		int x = curr.getX(); 
 		int y = curr.getY();
 		
-		System.out.println("**************");
-		System.out.println("the x and y coordinate @: "+x+" "+y);
-		System.out.println("**************");
+//		System.out.println("**************");
+//		System.out.println("the x and y coordinate @: "+x+" "+y);
+//		System.out.println("**************");
 		
 		
 		//initialisation
@@ -118,7 +118,7 @@ public class AlphaMaze {
 		//edge cases to check out of bound
 		if (y-2 > 0){
 			// x & y
-			System.out.println("check north ok");
+			//System.out.println("check north ok");
 			if(isEmpty(y-2, x) 
 					&& isEmpty(y-1, x)
 					&& isEmpty(y-2, x+1)
@@ -131,7 +131,7 @@ public class AlphaMaze {
 		//edge cases to check out of bound
 		//check if +2 ahead left and right is taken
 		if (y+2 < height-1){
-			System.out.println("check south ok");
+			//System.out.println("check south ok");
 			if(isEmpty(y+2, x)
 					&& isEmpty(y+1, x)
 					&& isEmpty(y+2, x-1)
@@ -144,7 +144,7 @@ public class AlphaMaze {
 		//edge cases to check out of bound
 		//check if +2 north and south
 		if (x+2 < width-1){
-			System.out.println("check east ok");
+			//System.out.println("check east ok");
 			if(isEmpty(y, x+2)
 					&& isEmpty(y, x+1)
 					&& isEmpty(y-1, x+2)
@@ -157,7 +157,7 @@ public class AlphaMaze {
 		//edge cases to check out of bound
 		//check if +2 north and south
 		if(x-2 > 0){
-			System.out.println("check west ok");
+			//System.out.println("check west ok");
 			if(isEmpty(y, x-2)
 					&& isEmpty(y, x-1)
 					&& isEmpty(y+1, x-2)
@@ -171,20 +171,20 @@ public class AlphaMaze {
 		}	
 		
 		
-		//printing
-		for (int i=0; i<possibleDIR.size();i++){
-			System.out.println("x:"+possibleDIR.get(i).getX()+" "
-					+"y:"+possibleDIR.get(i).getY());
-		}
-		System.out.println("------------------------------");
-		
-		System.out.println();
-		print();
-		System.out.println();
+//		//printing
+//		for (int i=0; i<possibleDIR.size();i++){
+//			System.out.println("x:"+possibleDIR.get(i).getX()+" "
+//					+"y:"+possibleDIR.get(i).getY());
+//		}
+//		System.out.println("------------------------------");
+//		
+//		System.out.println();
+//		print();
+//		System.out.println();
 		
 		if (!possibleDIR.isEmpty()){
-			System.out.println("the next move is at x:"+possibleDIR.get(0).getX()+" "
-					+"y:"+possibleDIR.get(0).getY());
+			//System.out.println("the next move is at x:"+possibleDIR.get(0).getX()+" "
+				//	+"y:"+possibleDIR.get(0).getY());
 			return possibleDIR.get(0);
 		}else{
 			return null;

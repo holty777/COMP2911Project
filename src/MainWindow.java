@@ -38,7 +38,7 @@ public class MainWindow implements Runnable {
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		con = new GridBagConstraints();
 		
-		MazePanel = new MazePanel(this, 20, 20);
+		MazePanel = new MazePanel(this, 30, 30);
 		MazePanel.addKeyListener(MazePanel);
 		MazePanel.setFocusable(true);
 
@@ -64,7 +64,7 @@ public class MainWindow implements Runnable {
 	private void display() {
 		mainFrame.getContentPane().add(outsidePanel);
 		mainFrame.pack();
-		mainFrame.setResizable(false);
+		mainFrame.setResizable(true);
         mainFrame.setVisible(true);
 	}
 	
@@ -86,7 +86,7 @@ public class MainWindow implements Runnable {
 		con.gridx = 0;
 		con.gridy = 4;
 		con.gridwidth = 1;
-
+		
         leftPanel.add(menuButton, con);
         con.fill = GridBagConstraints.CENTER;
 		con.gridx = 1;
@@ -95,24 +95,11 @@ public class MainWindow implements Runnable {
 
 	}
 
-	public void restart(){
-		mainFrame.getContentPane().remove(outsidePanel);
-		outsidePanel.remove(MazePanel);
-		MazePanel = new MazePanel(this,20,20);
-		outsidePanel.add(MazePanel);
-		this.display();
-	}
-
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
 		
 	}
 	
-	public void refresh(){
-		mainFrame.getContentPane().remove(outsidePanel);
-		outsidePanel.remove(MazePanel);
-		outsidePanel.add(MazePanel);
-		this.display();
-	}
+
 }

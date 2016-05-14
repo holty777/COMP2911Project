@@ -30,11 +30,15 @@ public class MazePanel extends JPanel implements ActionListener, MouseListener, 
 		this.mw = window;
 		this.height = height;
 		this.length = length;
-		boolean check = false;
 		mainMaze = new AlphaMaze(height,length);
 		grid = new GridLayout(height,length);
 		this.setLayout(grid);
-		
+		initMaze();
+
+	}
+	
+	public void initMaze(){
+		boolean check = false;
         for(int i=0; i < height; i++){
         	for(int j=0; j < length; j++){
         		if(mainMaze.isEmpty(i,j) == false){
@@ -78,7 +82,6 @@ public class MazePanel extends JPanel implements ActionListener, MouseListener, 
         			this.add(labelGrid[i][j]);
         		}
         	}
-
 	}
 	
 	public Dimension getPreferredSize() {
@@ -122,10 +125,13 @@ public class MazePanel extends JPanel implements ActionListener, MouseListener, 
 		if (e.getSource() == mw.getMenu()){
 			JOptionPane.showMessageDialog(null,"Instructions:\nTry find your way out of the\n maze as quick as you can\n"
 					+ "Don't let yourself get caught!");
-			System.out.println("Test");
 		}
 		if (e.getSource() == mw.getStart()){
-			mw.restart();
+			mainMaze = new AlphaMaze(this.height,this.length);
+			initMaze();
+			refreshMaze();
+			
+			
 		}
 		
 	}
@@ -153,17 +159,8 @@ public class MazePanel extends JPanel implements ActionListener, MouseListener, 
     			blank.setPreferredSize(new Dimension(10,10));
     			blank.setMaximumSize(new Dimension(10,10));
 				labelGrid[i][j] = blank;
-				
-				this.removeAll();
-				for(int a=0; a < height; a++){
-		        	for(int b=0; b < length; b++){
-						//System.out.println(a + " " + b);
-
-		        			this.add(labelGrid[a][b]);
-		        		}
-		        	}
-				revalidate();
-				repaint();
+				System.out.println("TEST");
+				refreshMaze();
 			}
 		}
 		
@@ -183,16 +180,7 @@ public class MazePanel extends JPanel implements ActionListener, MouseListener, 
     			blank.setMaximumSize(new Dimension(10,10));
 				labelGrid[i][j] = blank;
 				
-				this.removeAll();
-				for(int a=0; a < height; a++){
-		        	for(int b=0; b < length; b++){
-						//System.out.println(a + " " + b);
-
-		        			this.add(labelGrid[a][b]);
-		        		}
-		        	}
-				revalidate();
-				repaint();
+				refreshMaze();
 			}
 		}
 		
@@ -212,16 +200,7 @@ public class MazePanel extends JPanel implements ActionListener, MouseListener, 
     			blank.setMaximumSize(new Dimension(10,10));
 				labelGrid[i][j] = blank;
 				
-				this.removeAll();
-				for(int a=0; a < height; a++){
-		        	for(int b=0; b < length; b++){
-						//System.out.println(a + " " + b);
-
-		        			this.add(labelGrid[a][b]);
-		        		}
-		        	}
-				revalidate();
-				repaint();
+				refreshMaze();
 			}
 		}
 		
@@ -241,22 +220,25 @@ public class MazePanel extends JPanel implements ActionListener, MouseListener, 
     			blank.setMaximumSize(new Dimension(10,10));
 				labelGrid[i][j] = blank;
 				
-				this.removeAll();
-				for(int a=0; a < height; a++){
-		        	for(int b=0; b < length; b++){
-						//System.out.println(a + " " + b);
+				refreshMaze();
 
-		        			this.add(labelGrid[a][b]);
-		        		}
-		        	}
-				revalidate();
-				repaint();
 			}
 		}
 		
 		
 	}
-
+	
+	public void refreshMaze(){
+		this.removeAll();
+		for(int a=0; a < height; a++){
+        	for(int b=0; b < length; b++){
+				//System.out.println(a + " " + b);
+        			this.add(labelGrid[a][b]);
+        		}
+        	}
+		revalidate();
+		repaint();
+	}
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
