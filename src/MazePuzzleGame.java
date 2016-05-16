@@ -13,10 +13,9 @@ public class MazePuzzleGame implements Runnable {
 	
 	private JFrame mainFrame;
 	private MenuPanel menuPanel;
-	private MazePanel mazePanel;
+	private GameBoardPanel gamePanel;
 	private GameEngine gameEngine;
 	private JPanel homeGlassPane;
-	
 	
 	public MazePuzzleGame(GameEngine ge) throws IOException {
 		this.gameEngine = ge;
@@ -26,8 +25,14 @@ public class MazePuzzleGame implements Runnable {
 		mainFrame.setLocationRelativeTo(null);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		menuPanel = new MenuPanel();
+		menuPanel = new MenuPanel(this);
 		menuPanel.setPreferredSize(new Dimension(200, 720));
+		
+		gamePanel = new GameBoardPanel(null, this);
+		gamePanel.setPreferredSize(new Dimension(750, 700));
+
+		homeGlassPane = new LogoPanel();
+		homeGlassPane.setPreferredSize(new Dimension(750, 700));
 	}
 	
 	public static void main(String[] args) throws IOException {
@@ -39,19 +44,96 @@ public class MazePuzzleGame implements Runnable {
 		mazeGameThread.start();
 		guiThread.start();
 	}
-
-	@Override
-	public void run() {
-		mainFrame.getContentPane().add(menuPanel, BorderLayout.EAST);
-		//mainFrame.getContentPane().add(mazePanel, BorderLayout.WEST);
+	
+	private void display() {
+		if (homeGlassPane != null) {
+			mainFrame.setGlassPane(homeGlassPane);
+			homeGlassPane.setOpaque(false);
+			homeGlassPane.setVisible(true);
+		}
+		mainFrame.getContentPane().add(menuPanel, BorderLayout.WEST);
+		mainFrame.getContentPane().add(gamePanel, BorderLayout.EAST);
 		mainFrame.setResizable(false);
 		mainFrame.pack();
 		mainFrame.setVisible(true);
+	}
+
+	public void setVisibility(boolean visible) {
+		mainFrame.setVisible(visible);
+	}
+
+	public GameEngine getGameEngine() {
+		return gameEngine;
+	}
+
+	public MenuPanel getMenuPanel() {
+		return menuPanel;
+	}
+
+	public JFrame getMainFrame() {
+		return mainFrame;
+	}
+
+	public void suspendGame() {
+		gameEngine.suspendGame();
+		guiThread.interrupt();
+	}
+	
+	/**
+	 * Change the glass panel on home screen.
+	 * @param mode 0 for logo panel, 1 for single player menu
+	 * 2 for double player menu, 3 for credit page, 
+	 * 4 for how to play page
+	 */
+	public void changeGlassPane(int mode) {
+		switch (mode) {
+		case 0:
+			// logo
+			homeGlassPane = new LogoPanel();
+			break;
+		case 1:
+			// single player menu
+			if (homeGlassPane instanceof SinglePlayerMenu)
+				homeGlassPane = new LogoPanel();
+			else
+				homeGlassPane = new SinglePlayerMenu(this);
+			break;
+		case 2:
+			// double players menu
+			if (homeGlassPane instanceof DoublePlayersMenu)
+				homeGlassPane = new LogoPanel();
+			else
+				homeGlassPane = new DoublePlayersMenu(this);
+			break;
+		case 3:
+			// credits page
+			if (homeGlassPane instanceof Credits)
+				homeGlassPane = new LogoPanel();
+			else
+				homeGlassPane = new Credits();
+			break;
+		case 4:
+			// how to play page
+			if (homeGlassPane instanceof HowToPlay)
+				homeGlassPane = new LogoPanel();
+			else
+				homeGlassPane = new HowToPlay();
+			break;
+		default:
+			// blank
+			homeGlassPane = new JPanel();
+		}
+		display();
+	}
+	
+	@Override
+	public void run() {
+		display();
 		
 		while (true) {
-			/*if (!gameEngine.isInGame() && mainFrame.isVisible()) {
-				simulationPanel.startSimulationGame();
-			}*/
+			if (!gameEngine.isInGame() && mainFrame.isVisible()) {
+				gamePanel.startSimulationGame();
+			}
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException ex) {
