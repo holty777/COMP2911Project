@@ -21,18 +21,18 @@ public class MazePuzzleGame implements Runnable {
 		this.gameEngine = ge;
 		
 		mainFrame = new JFrame("Maze Puzzle Game");
-		mainFrame.setSize(1280, 720);
+		mainFrame.setSize(900, 700);
 		mainFrame.setLocationRelativeTo(null);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		menuPanel = new MenuPanel(this);
-		menuPanel.setPreferredSize(new Dimension(200, 720));
+		menuPanel.setPreferredSize(new Dimension(200, 700));
 		
 		gamePanel = new GameBoardPanel(null, this);
-		gamePanel.setPreferredSize(new Dimension(750, 700));
+		gamePanel.setPreferredSize(new Dimension(700, 700));
 
 		homeGlassPane = new JPanel();
-		homeGlassPane.setPreferredSize(new Dimension(750, 700));
+		homeGlassPane.setPreferredSize(new Dimension(700, 700));
 	}
 	
 	public static void main(String[] args) throws IOException {
