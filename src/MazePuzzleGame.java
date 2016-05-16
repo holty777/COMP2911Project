@@ -105,13 +105,6 @@ public class MazePuzzleGame implements Runnable {
 			else
 				homeGlassPane = new DoublePlayersMenu(this);
 			break;
-		case 3:
-			// credits page
-			if (homeGlassPane instanceof Credits)
-				homeGlassPane = new HomePanel();
-			else
-				homeGlassPane = new Credits();
-			break;
 		case 4:
 			// how to play page
 			if (homeGlassPane instanceof Instructions)
