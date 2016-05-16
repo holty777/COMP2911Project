@@ -10,11 +10,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-/**
- * Game Statistics Panel is a panel that will display the current player, 
- * current AI in single player mode and contain a restart button for 
- * user to restart the game.
- */
 public class GameStatisticsPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;

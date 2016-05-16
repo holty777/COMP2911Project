@@ -10,12 +10,6 @@ public class GameState {
 	private Player winner;
 	private int turn;
 
-	/**
-	 * Construct a game state with the given players by 
-	 * initializing the board, the turn number, and the winDise array.
-	 * @param firstPlayer the first player
-	 * @param secondPlayer the second player
-	 */
 	public GameState(Player firstPlayer, Player secondPlayer) {
 		board = new Player[COL_MAX][ROW_MAX];
 		currPlayer = firstPlayer;
@@ -23,12 +17,6 @@ public class GameState {
 		turn = 1;
 	}
 
-	/**
-	 * Constructor for cloning the game state with 
-	 * the given board other specific of a game information 
-	 * including different players and the number of turn.
-	 * Use by the AI.
-	 */
 	public GameState(Player[][] board, Player currPlayer, Player nextPlayer,
 			Player winner, int turn) {
 		this.board = board;

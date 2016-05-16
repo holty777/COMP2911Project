@@ -1,8 +1,3 @@
-/**
- * Handle user input from GUI, also contains user information 
- * such as user name, the user input of next move, and 
- * the input is ready flag.
- */
 
 public class User {
 	String name;

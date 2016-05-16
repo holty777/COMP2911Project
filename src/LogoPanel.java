@@ -8,9 +8,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-/**
- * A panel for displaying game logo and welcome. With fading effect.
- */
 public class LogoPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;

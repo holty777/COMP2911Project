@@ -7,11 +7,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-/**
- * A glass panel for displaying double players mode menu.
- * The panel contains two text area for the user to 
- * enter their name and a button to start the game.
- */
 public class DoublePlayersMenu extends JPanel {
 
 	private static final long serialVersionUID = 1L;

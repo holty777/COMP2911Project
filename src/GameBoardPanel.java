@@ -9,11 +9,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-/**
- * The game board panel contains the whole board including the 42 disc.
- * The game board panel is in control of the color and pattern of each 
- * disc at different game state.
- */
 public class GameBoardPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;

@@ -8,11 +8,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-
-
-/**
- * A panel for displaying the game instruction. With fading effects.
- */
 public class HowToPlay extends JPanel {
 
 	private static final long serialVersionUID = 1L;
