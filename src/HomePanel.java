@@ -8,14 +8,14 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-public class LogoPanel extends JPanel {
+public class HomePanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
 	private Timer timer;
 	private float opacity = 0;
 
-	public LogoPanel() {
+	public HomePanel() {
 		timer = new Timer(15, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
