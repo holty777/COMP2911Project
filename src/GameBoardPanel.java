@@ -102,14 +102,6 @@ public class GameBoardPanel extends JPanel {
 		updateStatisticsPanel();
 	}
 
-	/**
-	 * Initialize a double players mode game by setting up 
-	 * the player's name for two players, starting the game engine, 
-	 * and update the statistics panel.
-	 * 
-	 * @param name1 first player name
-	 * @param name2 second player name
-	 */
 	public void initDoublePlayersGame(String name1, String name2) {
 		// set default name if input is empty
 		if (name1 == null || name1.equals("")) {
