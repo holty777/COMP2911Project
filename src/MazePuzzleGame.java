@@ -31,6 +31,7 @@ public class MazePuzzleGame implements Runnable {
 		gamePanel = new GameBoardPanel(null, this);
 		gamePanel.setPreferredSize(new Dimension(750, 700));
 
+		homeGlassPane = new JPanel();
 		homeGlassPane.setPreferredSize(new Dimension(750, 700));
 	}
 	
