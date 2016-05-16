@@ -31,7 +31,6 @@ public class MazePuzzleGame implements Runnable {
 		gamePanel = new GameBoardPanel(null, this);
 		gamePanel.setPreferredSize(new Dimension(750, 700));
 
-		homeGlassPane = new HomePanel();
 		homeGlassPane.setPreferredSize(new Dimension(750, 700));
 	}
 	
@@ -89,26 +88,26 @@ public class MazePuzzleGame implements Runnable {
 		switch (mode) {
 		case 0:
 			// logo
-			homeGlassPane = new HomePanel();
+			homeGlassPane.repaint();
 			break;
 		case 1:
 			// single player menu
 			if (homeGlassPane instanceof SinglePlayerMenu)
-				homeGlassPane = new HomePanel();
+				homeGlassPane.repaint();
 			else
 				homeGlassPane = new SinglePlayerMenu(this);
 			break;
 		case 2:
 			// double players menu
 			if (homeGlassPane instanceof DoublePlayersMenu)
-				homeGlassPane = new HomePanel();
+				homeGlassPane.repaint();
 			else
 				homeGlassPane = new DoublePlayersMenu(this);
 			break;
 		case 4:
 			// how to play page
 			if (homeGlassPane instanceof Instructions)
-				homeGlassPane = new HomePanel();
+				homeGlassPane.repaint();
 			else
 				homeGlassPane = new Instructions();
 			break;
