@@ -114,10 +114,10 @@ public class MazePuzzleGame implements Runnable {
 			break;
 		case 4:
 			// how to play page
-			if (homeGlassPane instanceof HowToPlay)
+			if (homeGlassPane instanceof Instructions)
 				homeGlassPane = new LogoPanel();
 			else
-				homeGlassPane = new HowToPlay();
+				homeGlassPane = new Instructions();
 			break;
 		default:
 			// blank
