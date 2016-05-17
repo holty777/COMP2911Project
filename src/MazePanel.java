@@ -169,7 +169,6 @@ public class MazePanel extends JPanel implements ActionListener, MouseListener, 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode() == KeyEvent.VK_RIGHT){
-			System.out.println("YEACUNT");
 			int i = player.getILocation();
 			int j = player.getJLocation();
 			if(mainMaze.isEmpty(i, j+1) == false){
