@@ -91,6 +91,8 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
         			this.add(labelGrid[i][j]);
         		}
         	}
+        
+        
 	}
 	
 //	public Dimension getPreferredSize() {
