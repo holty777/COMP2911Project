@@ -79,12 +79,6 @@ public class MazePuzzleGame implements Runnable {
 		guiThread.interrupt();
 	}
 	
-	/**
-	 * Change the glass panel on home screen.
-	 * @param mode 0 for logo panel, 1 for single player menu
-	 * 2 for double player menu, 3 for credit page, 
-	 * 4 for how to play page
-	 */
 	public void changeGlassPane(int mode) {
 		switch (mode) {
 		case 0:

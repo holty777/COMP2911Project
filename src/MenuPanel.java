@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -28,6 +29,15 @@ public class MenuPanel extends JPanel {
 		// Button for Single Player
 		gc.gridx = 0;
 		gc.gridy = 0;
+		JLabel currentHighScore = new JLabel("Current High Scores: ");
+		add(currentHighScore, gc);
+		gc.gridy = 1;
+		JLabel singlePlayerHighScores = new JLabel("Single Player High Scores:/n1.");
+		add(singlePlayerHighScores, gc);
+		gc.gridy = 2;
+		JLabel doublePlayerHighScores = new JLabel("Double Player High Scores:/n1.");
+		add(doublePlayerHighScores, gc);
+		gc.gridy = 3;
 
 		JButton singlePlayerButton = new JButton("Single Player");
 
@@ -45,7 +55,7 @@ public class MenuPanel extends JPanel {
 		});
 		
 		// Button for Two Player
-		gc.gridy = 1;
+		gc.gridy = 4;
 		JButton twoPlayersButton = new JButton("Double Player");
 		add(twoPlayersButton, gc);
 		twoPlayersButton.addActionListener(new ActionListener() {
@@ -61,7 +71,7 @@ public class MenuPanel extends JPanel {
 		});
 		
 		// how to play button
-		gc.gridy = 2;
+		gc.gridy = 5;
 		JButton htpButton = new JButton("Instructions");
 		add(htpButton, gc);
 		htpButton.addActionListener(new ActionListener() {
@@ -72,7 +82,7 @@ public class MenuPanel extends JPanel {
 		});
 
 		// Button for Quit
-		gc.gridy = 3;
+		gc.gridy = 6;
 		JButton quitButton = new JButton("Quit");
 		add(quitButton, gc);
 		quitButton.addActionListener(new ActionListener() {
