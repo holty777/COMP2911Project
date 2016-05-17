@@ -14,10 +14,8 @@ import java.awt.GridLayout;
 
 
 
-public class MazePanel extends JPanel implements ActionListener, MouseListener, KeyListener {
+public class MazePanel extends JPanel implements MouseListener, KeyListener {
 	
-	private MainWindow mw;
-	private GameWindow gw;
 	private int height;
 	private int length;
 	private Player player;
@@ -25,19 +23,6 @@ public class MazePanel extends JPanel implements ActionListener, MouseListener, 
 	GridLayout grid;
 	AlphaMaze mainMaze;
 	JLabel[][] labelGrid;
-
-	
-	public MazePanel(MainWindow window, int height, int length) {
-		labelGrid = new JLabel[height][length];
-		this.mw = window;
-		this.height = height;
-		this.length = length;
-		mainMaze = new AlphaMaze(height,length);
-		grid = new GridLayout(height,length);
-		this.setLayout(grid);
-		initMaze();
-
-	}
 	
 	public MazePanel(int height, int length) {
 		labelGrid = new JLabel[height][length];
@@ -144,21 +129,7 @@ public class MazePanel extends JPanel implements ActionListener, MouseListener, 
 		
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == mw.getMenu()){
-			JOptionPane.showMessageDialog(null,"Instructions:\nTry find your way out of the\n maze as quick as you can\n"
-					+ "Don't let yourself get caught!");
-		}
-		if (e.getSource() == mw.getStart()){
-			mainMaze = new AlphaMaze(this.height,this.length);
-			initMaze();
-			refreshMaze();
-			
-			
-		}
-		
-	}
+
 
 	@Override
 	public void keyTyped(KeyEvent e) {
