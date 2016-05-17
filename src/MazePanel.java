@@ -17,6 +17,7 @@ import java.awt.GridLayout;
 public class MazePanel extends JPanel implements ActionListener, MouseListener, KeyListener {
 	
 	private MainWindow mw;
+	private GameWindow gw;
 	private int height;
 	private int length;
 	private Player player;
@@ -28,6 +29,18 @@ public class MazePanel extends JPanel implements ActionListener, MouseListener, 
 	public MazePanel(MainWindow window, int height, int length) {
 		labelGrid = new JLabel[height][length];
 		this.mw = window;
+		this.height = height;
+		this.length = length;
+		mainMaze = new AlphaMaze(height,length);
+		grid = new GridLayout(height,length);
+		this.setLayout(grid);
+		initMaze();
+
+	}
+	
+	public MazePanel(GameWindow window, int height, int length) {
+		labelGrid = new JLabel[height][length];
+		this.gw = window;
 		this.height = height;
 		this.length = length;
 		mainMaze = new AlphaMaze(height,length);
@@ -84,9 +97,9 @@ public class MazePanel extends JPanel implements ActionListener, MouseListener, 
         	}
 	}
 	
-	public Dimension getPreferredSize() {
-        return new Dimension(500,500);
-    }
+//	public Dimension getPreferredSize() {
+//        return new Dimension(500,500);
+//    }
 	
 	
 
