@@ -85,7 +85,7 @@ public class MenuPanel extends JPanel {
 
 		// Button for Quit
 		gc.gridy = 6;
-		JButton quitButton = new JButton("Quit");
+		JButton quitButton = new JButton("Quit (Q)");
 		add(quitButton, gc);
 		quitButton.addActionListener(new ActionListener() {
 			@Override

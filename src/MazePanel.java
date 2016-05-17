@@ -4,8 +4,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
 import java.awt.GridLayout;
 
 
@@ -216,7 +218,9 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 
 			}
 		}
-		
+		if(e.getKeyCode() == KeyEvent.VK_Q){
+			System.exit(0);
+		}
 		
 	}
 	
