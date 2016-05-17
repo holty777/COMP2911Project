@@ -1,3 +1,4 @@
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -8,6 +9,7 @@ import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.text.Position;
 
 public class GameBoardPanel extends JPanel {
 
@@ -30,8 +32,10 @@ public class GameBoardPanel extends JPanel {
 
 		setOpaque(true);
 		setBackground(new Color(27, 120, 236));
-		setLayout(new GridLayout(6, 7));
-
+		//setLayout(new GridLayout(6, 7));
+		setLayout(new BorderLayout());
+		MazePanel testMaze = new MazePanel(gameWindow, 30,30);
+		this.add(testMaze, BorderLayout.CENTER);
 	}
 	
 	public void updateStatisticsPanel() {
