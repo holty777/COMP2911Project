@@ -21,12 +21,12 @@ public class MazePuzzleGame implements Runnable {
 		this.gameEngine = ge;
 		
 		mainFrame = new JFrame("Maze Puzzle Game");
-		mainFrame.setSize(900, 700);
+		mainFrame.setSize(1000, 700);
 		mainFrame.setLocationRelativeTo(null);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		menuPanel = new MenuPanel(this);
-		menuPanel.setPreferredSize(new Dimension(200, 700));
+		menuPanel.setPreferredSize(new Dimension(300, 700));
 		
 		gamePanel = new GameBoardPanel(null, this);
 		gamePanel.setPreferredSize(new Dimension(700, 700));

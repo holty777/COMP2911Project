@@ -11,6 +11,8 @@ import javax.swing.JPanel;
 
 public class MenuPanel extends JPanel {
 
+	private static final long serialVersionUID = 1L;
+	
 	private MazePuzzleGame mainGame;
 	
 	public MenuPanel(MazePuzzleGame mg) {
@@ -19,7 +21,7 @@ public class MenuPanel extends JPanel {
 		setLayout(new GridBagLayout());
 
 		setOpaque(true);
-		setBackground(Color.GRAY);
+		setBackground(Color.WHITE);
 
 		GridBagConstraints gc = new GridBagConstraints();
 		gc.weightx = 1;
@@ -29,13 +31,13 @@ public class MenuPanel extends JPanel {
 		// Button for Single Player
 		gc.gridx = 0;
 		gc.gridy = 0;
-		JLabel currentHighScore = new JLabel("Current High Scores: ");
+		JLabel currentHighScore = new JLabel(" Current High Score: ");
 		add(currentHighScore, gc);
 		gc.gridy = 1;
-		JLabel singlePlayerHighScores = new JLabel("Single Player High Scores:/n1.");
+		JLabel singlePlayerHighScores = new JLabel(" Single Player High Scores:");
 		add(singlePlayerHighScores, gc);
 		gc.gridy = 2;
-		JLabel doublePlayerHighScores = new JLabel("Double Player High Scores:/n1.");
+		JLabel doublePlayerHighScores = new JLabel(" Double Player High Scores:");
 		add(doublePlayerHighScores, gc);
 		gc.gridy = 3;
 
