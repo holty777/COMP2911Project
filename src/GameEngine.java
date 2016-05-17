@@ -1,3 +1,8 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Date;
+
+import javax.swing.Timer;
 
 public class GameEngine implements Runnable {
 
@@ -11,10 +16,10 @@ public class GameEngine implements Runnable {
 			GameBoardPanel gameBoardPanel) {
 		this.gameMode = gameMode;
 		this.gameBoardPanel = gameBoardPanel;
+		gameBoardPanel.setMaze(gameMode);
 		gameBoardPanel.getMaze().setFocusable(true);
 		gameBoardPanel.getMaze().requestFocus();
 		gameBoardPanel.getMaze().addKeyListener(gameBoardPanel.getMaze());
-
 		currState = new GameState(player1, player2);
 		totalGame++;
 		isInGame = true;
@@ -25,7 +30,13 @@ public class GameEngine implements Runnable {
 		// delay thread to wait game started
 		while (true) {
 			sleep(500);
-
+			Timer SimpleTimer = new Timer(1000, new ActionListener(){
+			    @Override
+			    public void actionPerformed(ActionEvent e) {
+			    //	System.out.println("Time =  " + SimpleTime.format(new Date()));
+			    }
+			});
+			SimpleTimer.start();
 			// start game run
 			int thisGame = totalGame;
 			while (isInGame && thisGame == totalGame) {

@@ -81,8 +81,10 @@ public class GameStatisticsPanel extends JPanel {
 	}
 
 	public void setPlayerNames(Player p1, Player p2) {
-		player1.setText(p1.getName());
-		player2.setText(p2.getName());
+//		player1.setText(p1.getName());
+//		player2.setText(p2.getName());
+		player1.setText("Player1");
+		player2.setText("Player2");
 		msg.setText("Game Started.");
 		msg.setForeground(Color.BLUE);
 	}
