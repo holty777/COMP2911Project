@@ -153,7 +153,6 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
     			blank.setPreferredSize(new Dimension(10,10));
     			blank.setMaximumSize(new Dimension(10,10));
 				labelGrid[i][j] = blank;
-				System.out.println("TEST");
 				refreshMaze();
 			}
 		}

@@ -11,10 +11,10 @@ public class GameEngine implements Runnable {
 			GameBoardPanel gameBoardPanel) {
 		this.gameMode = gameMode;
 		this.gameBoardPanel = gameBoardPanel;
+		gameBoardPanel.setMaze(gameMode);
 		gameBoardPanel.getMaze().setFocusable(true);
 		gameBoardPanel.getMaze().requestFocus();
 		gameBoardPanel.getMaze().addKeyListener(gameBoardPanel.getMaze());
-
 		currState = new GameState(player1, player2);
 		totalGame++;
 		isInGame = true;
