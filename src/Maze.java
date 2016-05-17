@@ -41,12 +41,22 @@ public class Maze implements Runnable{
 		}
 	}
 	
+	/**
+	 * Return a random number between 0 and "max"
+	 * @param max	The max for the range of random numbers (int)
+	 * @return	a random integer between 0 and "max" (int)
+	 */
 	public int randomnum (int max){
 	  Random rand = new Random();
 	  int randomNum = rand.nextInt((max - 0) + 1) + 0;
 	  return randomNum;
 	}
 	
+	/**
+	 * Return a random odd number between 0 and "max"
+	 * @param max	The max for the range of random numbers (int)
+	 * @return	 	random odd integer between 0 and "max" (int)
+	 */
 	public int randODD (int max){
 		  Random rand = new Random();
 		  int randomNum = 0;
@@ -56,7 +66,10 @@ public class Maze implements Runnable{
 		  return randomNum;
 		}
 	
-	//random an array of 4 directions
+	/**
+	 * fill an array with 0-3 in a random order.
+	 * @return	an array containing integers 0-3 in a random order (ArrayList<Integer>)
+	 */
 	public Integer[] randomDir (){
 		 ArrayList<Integer> randDirections = new ArrayList<Integer>();
 		 for (int i=0; i<4; i++){
@@ -67,6 +80,11 @@ public class Maze implements Runnable{
 		return randDirections.toArray(new Integer[4]);
 	}
 	
+	/**
+	 * Change a specific cell in the array matrix to 1
+	 * @param row	The row to change to 1 (int)
+	 * @param col	The column to change to 1 (int)
+	 */
 	public void convertblock (int row, int col){
 		this.mazemtx [row][col] = 1;
 	}
@@ -77,6 +95,9 @@ public class Maze implements Runnable{
 		
 	//}
 	
+	/**
+	 * Display the current state of the maze
+	 */
 	public void printer(){
 		//print the matrix
 		for (int i=0; i<height; i++){
@@ -92,7 +113,10 @@ public class Maze implements Runnable{
 	}
 	
 	
-	
+	/**
+	 * Generate the maze.
+	 * @param difficulty	The difficulty level of the maze (int)
+	 */
 	public void mazegenerator(int difficulty){
 		/*definition of difficulty
 		/difficulty is defined from 0 to 3 
@@ -158,6 +182,12 @@ public class Maze implements Runnable{
 		
 	}
 	
+	/**
+	 * Implement a depth first search to generate the maze.
+	 * @param row	The max row size (int)
+	 * @param col	The max column size (int)
+	 * @return	
+	 */
 	public int MazeDFS (int row, int col){
 		//implements dfs alogrithm to generate a random maze
 		System.out.println("the row: "+row+" the col: "+col);
@@ -215,6 +245,9 @@ public class Maze implements Runnable{
 		//use this fucntion to clean up the maze
 	}
 	
+	/**
+	 * Testing module to build a maze.
+	 */
 	public void buildTestMaze(){
 		for(int i=0; i < 10; i++){
         	for(int j=0; j < 10; j++){

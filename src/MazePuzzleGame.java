@@ -1,50 +1,138 @@
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.io.IOException;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 
 public class MazePuzzleGame implements Runnable {
 
-	private static Thread MG;
-	private static Thread GUI;
+	private static Thread mazeGameThread;
+	private static Thread guiThread;
 	
 	private JFrame mainFrame;
 	private MenuPanel menuPanel;
+	private GameBoardPanel gamePanel;
 	private GameEngine gameEngine;
-	
-	//maybe change this to gamePanel
-	private MainWindow mazeWindow;
-	//maybe change to gameEngine
-	private Maze maze;
+	private JPanel homeGlassPane;
 	
 	public MazePuzzleGame(GameEngine ge) throws IOException {
 		this.gameEngine = ge;
 		
 		mainFrame = new JFrame("Maze Puzzle Game");
+		mainFrame.setSize(900, 700);
+		mainFrame.setLocationRelativeTo(null);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		//need to use setPreferredSize for these
 		menuPanel = new MenuPanel(this);
-		//mazeWindow = new MainWindow();
-		maze = new Maze();
+		menuPanel.setPreferredSize(new Dimension(200, 700));
 		
+		gamePanel = new GameBoardPanel(null, this);
+		gamePanel.setPreferredSize(new Dimension(700, 700));
+
+		homeGlassPane = new JPanel();
+		homeGlassPane.setPreferredSize(new Dimension(700, 700));
 	}
 	
 	public static void main(String[] args) throws IOException {
 		
-		//maze generation thread
-		MG = new Thread(new GameEngine());
+		mazeGameThread = new Thread(new GameEngine());
 		
-		//GUI thread
-		GUI = new Thread(new MazePuzzleGame(new GameEngine()));
+		guiThread = new Thread(new MazePuzzleGame(new GameEngine()));
 		
-		MG.start();
-		GUI.start();
+		mazeGameThread.start();
+		guiThread.start();
+	}
+	
+	private void display() {
+		if (homeGlassPane != null) {
+			mainFrame.setGlassPane(homeGlassPane);
+			homeGlassPane.setOpaque(false);
+			homeGlassPane.setVisible(true);
+		}
+		mainFrame.getContentPane().add(menuPanel, BorderLayout.WEST);
+		mainFrame.getContentPane().add(gamePanel, BorderLayout.EAST);
+		mainFrame.setResizable(false);
+		mainFrame.pack();
+		mainFrame.setVisible(true);
 	}
 
+	public void setVisibility(boolean visible) {
+		mainFrame.setVisible(visible);
+	}
+
+	public GameEngine getGameEngine() {
+		return gameEngine;
+	}
+
+	public MenuPanel getMenuPanel() {
+		return menuPanel;
+	}
+
+	public JFrame getMainFrame() {
+		return mainFrame;
+	}
+
+	public void suspendGame() {
+		gameEngine.suspendGame();
+		guiThread.interrupt();
+	}
+	
+	/**
+	 * Change the glass panel on home screen.
+	 * @param mode 0 for logo panel, 1 for single player menu
+	 * 2 for double player menu, 3 for credit page, 
+	 * 4 for how to play page
+	 */
+	public void changeGlassPane(int mode) {
+		switch (mode) {
+		case 0:
+			// logo
+			homeGlassPane.repaint();
+			break;
+		case 1:
+			// single player menu
+			if (homeGlassPane instanceof SinglePlayerMenu)
+				homeGlassPane.repaint();
+			else
+				homeGlassPane = new SinglePlayerMenu(this);
+			break;
+		case 2:
+			// double players menu
+			if (homeGlassPane instanceof DoublePlayersMenu)
+				homeGlassPane.repaint();
+			else
+				homeGlassPane = new DoublePlayersMenu(this);
+			break;
+		case 4:
+			// how to play page
+			if (homeGlassPane instanceof Instructions)
+				homeGlassPane.repaint();
+			else
+				homeGlassPane = new Instructions();
+			break;
+		default:
+			// blank
+			homeGlassPane = new JPanel();
+		}
+		display();
+	}
+	
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
+		display();
+		
+		while (true) {
+			if (!gameEngine.isInGame() && mainFrame.isVisible()) {
+				gamePanel.startSimulationGame();
+			}
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException ex) {
+				Thread.currentThread().interrupt();
+			}
+		}
 		
 	}
 }

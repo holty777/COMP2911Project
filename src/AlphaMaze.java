@@ -30,7 +30,7 @@ public class AlphaMaze {
 		reset();
 		//maze generator method
 		generate();
-		print();
+		//print();
 	}
 	
 	
@@ -102,6 +102,7 @@ public class AlphaMaze {
 		int x = curr.getX(); 
 		int y = curr.getY();
 		
+
 		/*
 		System.out.println("**************");
 		System.out.println("the x and y coordinate @: "+x+" "+y);
@@ -175,7 +176,7 @@ public class AlphaMaze {
 			Collections.shuffle(possibleDIR);
 		}	
 		
-		
+
 		/*printing
 		for (int i=0; i<possibleDIR.size();i++){
 			System.out.println("x:"+possibleDIR.get(i).getX()+" "
@@ -189,6 +190,8 @@ public class AlphaMaze {
 		*/
 		
 		if (!possibleDIR.isEmpty()){
+			//System.out.println("the next move is at x:"+possibleDIR.get(0).getX()+" "
+				//	+"y:"+possibleDIR.get(0).getY());
 			/*System.out.println("the next move is at x:"+possibleDIR.get(0).getX()+" "
 					+"y:"+possibleDIR.get(0).getY());*/
 			return possibleDIR.get(0);
