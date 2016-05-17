@@ -23,11 +23,11 @@ public class GameWindow extends JFrame {
 
 		gameStatisticsPanel = new GameStatisticsPanel(this, mainGame);
 		gameStatisticsPanel.setPreferredSize(new Dimension(250, 700));
-		getContentPane().add(gameStatisticsPanel, BorderLayout.EAST);
+		getContentPane().add(gameStatisticsPanel, BorderLayout.WEST);
 
 		gameBoardPanel = new GameBoardPanel(this, mainGame);
 		gameBoardPanel.setPreferredSize(new Dimension(750, 700));
-		getContentPane().add(gameBoardPanel, BorderLayout.WEST);
+		getContentPane().add(gameBoardPanel, BorderLayout.EAST);
 
 		pack();
 	}

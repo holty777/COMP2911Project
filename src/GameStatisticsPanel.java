@@ -30,8 +30,6 @@ public class GameStatisticsPanel extends JPanel {
 		gameWindow = gw;
 		gameEngine = mainGame.getGameEngine();
 
-		Font defaultFont = new Font("Arial", Font.BOLD, 20);
-
 		setBackground(Color.WHITE);
 
 		setLayout(new GridBagLayout());
@@ -52,7 +50,7 @@ public class GameStatisticsPanel extends JPanel {
 
 		gc.anchor = GridBagConstraints.SOUTH;
 		msg = new JLabel();
-		msg.setFont(defaultFont);
+		msg.setFont(new Font("Arial", Font.BOLD, 20));
 		gc.gridy = 3;
 		add(msg, gc);
 
@@ -64,7 +62,7 @@ public class GameStatisticsPanel extends JPanel {
 		gc.gridy = 5;
 		add(modeDescription, gc);
 
-		JButton restartGameButton = new JButton();
+		JButton restartGameButton = new JButton("Restart");
 		restartGameButton.setContentAreaFilled(false);
 		restartGameButton.setFocusPainted(false);
 		restartGameButton.setBorderPainted(false);
@@ -72,6 +70,7 @@ public class GameStatisticsPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent event) {
 				gameWindow.getGameBoardPanel().restartNewGame();
+				//need a refreshMaze from mazepanel
 			}
 		});
 		gc.gridy = 6;
@@ -80,10 +79,11 @@ public class GameStatisticsPanel extends JPanel {
 	}
 
 	public void setPlayerNames(Player p1, Player p2) {
-//		player1.setText(p1.getName());
-//		player2.setText(p2.getName());
-		player1.setText("Player1");
-		player2.setText("Player2");
+		//uncommenting crashes 
+		//player1.setText(p1.getName());
+		//player2.setText(p2.getName());
+		player1.setText(" Player1");
+		player2.setText(" Player2");
 		msg.setText("Game Started.");
 		msg.setForeground(Color.BLUE);
 	}
