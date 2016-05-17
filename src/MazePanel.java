@@ -21,6 +21,7 @@ public class MazePanel extends JPanel implements ActionListener, MouseListener, 
 	private int height;
 	private int length;
 	private Player player;
+	private Player player2;
 	GridLayout grid;
 	AlphaMaze mainMaze;
 	JLabel[][] labelGrid;
@@ -38,9 +39,8 @@ public class MazePanel extends JPanel implements ActionListener, MouseListener, 
 
 	}
 	
-	public MazePanel(GameWindow window, int height, int length) {
+	public MazePanel(int height, int length) {
 		labelGrid = new JLabel[height][length];
-		this.gw = window;
 		this.height = height;
 		this.length = length;
 		mainMaze = new AlphaMaze(height,length);
@@ -52,11 +52,13 @@ public class MazePanel extends JPanel implements ActionListener, MouseListener, 
 	
 	public void initMaze(){
 		boolean check = false;
+		int x = 0;
+		int y = 0;
         for(int i=0; i < height; i++){
         	for(int j=0; j < length; j++){
         		if(mainMaze.isEmpty(i,j) == false){
         			if(check == false){
-        				player = new Player(i, j, 25, 25);
+        				player = new Player(i, j, 25, 25, 0);
         				player.setMinimumSize(new Dimension(10,10));
         				player.setPreferredSize(new Dimension(10,10));
         				player.setMaximumSize(new Dimension(10,10));
@@ -73,6 +75,8 @@ public class MazePanel extends JPanel implements ActionListener, MouseListener, 
         				full.setMaximumSize(new Dimension(10,10));
         				labelGrid[i][j] = full;
         				//this.add(full);
+        				x = i;
+        				y = j;
         			}
         		}
         		else {
@@ -87,9 +91,16 @@ public class MazePanel extends JPanel implements ActionListener, MouseListener, 
         			//this.add(blank);
         			
         		}
+        		
+
         	}
+        	
         }
-        
+        player2 = new Player(x, y, 25, 25, 1);
+		player2.setMinimumSize(new Dimension(10,10));
+		player2.setPreferredSize(new Dimension(10,10));
+		player2.setMaximumSize(new Dimension(10,10));
+    	labelGrid[x][y] = player2;
         for(int i=0; i < height; i++){
         	for(int j=0; j < length; j++){
         			this.add(labelGrid[i][j]);
@@ -158,7 +169,7 @@ public class MazePanel extends JPanel implements ActionListener, MouseListener, 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode() == KeyEvent.VK_RIGHT){
-
+			System.out.println("YEACUNT");
 			int i = player.getILocation();
 			int j = player.getJLocation();
 			if(mainMaze.isEmpty(i, j+1) == false){
