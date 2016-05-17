@@ -18,6 +18,7 @@ public class GameBoardPanel extends JPanel {
 	private GameWindow gameWindow;
 	private MazePuzzleGame mainGame;
 	private GameEngine gameEngine;
+	private MazePanel testMaze;
 
 	// game data
 	private Player player1;
@@ -34,8 +35,9 @@ public class GameBoardPanel extends JPanel {
 		setBackground(new Color(27, 120, 236));
 		//setLayout(new GridLayout(6, 7));
 		setLayout(new BorderLayout());
-		MazePanel testMaze = new MazePanel(gameWindow, 30,30);
+		testMaze = new MazePanel(30,30);
 		this.add(testMaze, BorderLayout.CENTER);
+		
 	}
 	
 	public void updateStatisticsPanel() {
@@ -133,5 +135,9 @@ public class GameBoardPanel extends JPanel {
 	private int randPlayer() {
 		Random rand = new Random();
 		return rand.nextInt(2);
+	}
+	
+	public MazePanel getMaze(){
+		return this.testMaze;
 	}
 }
