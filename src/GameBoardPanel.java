@@ -18,6 +18,7 @@ public class GameBoardPanel extends JPanel {
 	private GameWindow gameWindow;
 	private MazePuzzleGame mainGame;
 	private GameEngine gameEngine;
+	private MazePanel testMaze;
 
 	// game data
 	private Player player1;
@@ -34,8 +35,8 @@ public class GameBoardPanel extends JPanel {
 		setBackground(new Color(27, 120, 236));
 		//setLayout(new GridLayout(6, 7));
 		setLayout(new BorderLayout());
-		MazePanel testMaze = new MazePanel(gameWindow, 30,30);
-		this.add(testMaze, BorderLayout.CENTER);
+		
+		
 	}
 	
 	public void updateStatisticsPanel() {
@@ -61,7 +62,7 @@ public class GameBoardPanel extends JPanel {
 			}
 			gameWindow.getStatisticsPanel().setPlayerNames(player1, player2);
 		}
-
+		
 		startNewGame();
 		updateStatisticsPanel();
 	}
@@ -84,13 +85,13 @@ public class GameBoardPanel extends JPanel {
 		String nameAI = "AI";
 		switch (AIMode) {
 		case 0:
-			nameAI = "Woody";
+			gameMode = 0;
 			break;
 		case 1:
-			nameAI = "Tony Stark";
+			gameMode = 1;
 			break;
 		case 2:
-			nameAI = "Thunder God";
+			gameMode = 2;
 		}
 
 		/*if (randPlayer() == 0) {
@@ -100,7 +101,7 @@ public class GameBoardPanel extends JPanel {
 			player1 = new AI(nameAI, AIMode);
 			player2 = new User(playerName);
 		}*/
-		gameMode = 1;
+		//gameMode = 1;
 		gameWindow.getStatisticsPanel().setPlayerNames(player1, player2);
 		startNewGame();
 		updateStatisticsPanel();
@@ -133,5 +134,23 @@ public class GameBoardPanel extends JPanel {
 	private int randPlayer() {
 		Random rand = new Random();
 		return rand.nextInt(2);
+	}
+	
+	public MazePanel getMaze(){
+		return this.testMaze;
+	}
+	
+	public void setMaze(int gameMode){
+		if(gameMode == 0){
+			testMaze = new MazePanel(20,20);
+		} else if(gameMode == 1){
+			testMaze = new MazePanel(30,30);
+		} else if(gameMode == 2){
+			testMaze = new MazePanel(40,40);
+		} else {
+			testMaze = new MazePanel(100,100);
+		}
+			
+		this.add(testMaze, BorderLayout.CENTER);
 	}
 }

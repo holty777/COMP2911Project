@@ -14,33 +14,18 @@ import java.awt.GridLayout;
 
 
 
-public class MazePanel extends JPanel implements ActionListener, MouseListener, KeyListener {
+public class MazePanel extends JPanel implements MouseListener, KeyListener {
 	
-	private MainWindow mw;
-	private GameWindow gw;
 	private int height;
 	private int length;
 	private Player player;
+	private Player player2;
 	GridLayout grid;
 	AlphaMaze mainMaze;
 	JLabel[][] labelGrid;
-
 	
-	public MazePanel(MainWindow window, int height, int length) {
+	public MazePanel(int height, int length) {
 		labelGrid = new JLabel[height][length];
-		this.mw = window;
-		this.height = height;
-		this.length = length;
-		mainMaze = new AlphaMaze(height,length);
-		grid = new GridLayout(height,length);
-		this.setLayout(grid);
-		initMaze();
-
-	}
-	
-	public MazePanel(GameWindow window, int height, int length) {
-		labelGrid = new JLabel[height][length];
-		this.gw = window;
 		this.height = height;
 		this.length = length;
 		mainMaze = new AlphaMaze(height,length);
@@ -52,11 +37,13 @@ public class MazePanel extends JPanel implements ActionListener, MouseListener, 
 	
 	public void initMaze(){
 		boolean check = false;
+		int x = 0;
+		int y = 0;
         for(int i=0; i < height; i++){
         	for(int j=0; j < length; j++){
         		if(mainMaze.isEmpty(i,j) == false){
         			if(check == false){
-        				player = new Player(i, j, 25, 25);
+        				player = new Player(i, j, 25, 25, 0);
         				player.setMinimumSize(new Dimension(10,10));
         				player.setPreferredSize(new Dimension(10,10));
         				player.setMaximumSize(new Dimension(10,10));
@@ -73,6 +60,8 @@ public class MazePanel extends JPanel implements ActionListener, MouseListener, 
         				full.setMaximumSize(new Dimension(10,10));
         				labelGrid[i][j] = full;
         				//this.add(full);
+        				x = i;
+        				y = j;
         			}
         		}
         		else {
@@ -87,14 +76,23 @@ public class MazePanel extends JPanel implements ActionListener, MouseListener, 
         			//this.add(blank);
         			
         		}
+        		
+
         	}
+        	
         }
-        
+        player2 = new Player(x, y, 25, 25, 1);
+		player2.setMinimumSize(new Dimension(10,10));
+		player2.setPreferredSize(new Dimension(10,10));
+		player2.setMaximumSize(new Dimension(10,10));
+    	labelGrid[x][y] = player2;
         for(int i=0; i < height; i++){
         	for(int j=0; j < length; j++){
         			this.add(labelGrid[i][j]);
         		}
         	}
+        
+        
 	}
 	
 //	public Dimension getPreferredSize() {
@@ -133,21 +131,7 @@ public class MazePanel extends JPanel implements ActionListener, MouseListener, 
 		
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == mw.getMenu()){
-			JOptionPane.showMessageDialog(null,"Instructions:\nTry find your way out of the\n maze as quick as you can\n"
-					+ "Don't let yourself get caught!");
-		}
-		if (e.getSource() == mw.getStart()){
-			mainMaze = new AlphaMaze(this.height,this.length);
-			initMaze();
-			refreshMaze();
-			
-			
-		}
-		
-	}
+
 
 	@Override
 	public void keyTyped(KeyEvent e) {
@@ -158,7 +142,6 @@ public class MazePanel extends JPanel implements ActionListener, MouseListener, 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode() == KeyEvent.VK_RIGHT){
-
 			int i = player.getILocation();
 			int j = player.getJLocation();
 			if(mainMaze.isEmpty(i, j+1) == false){
@@ -172,7 +155,6 @@ public class MazePanel extends JPanel implements ActionListener, MouseListener, 
     			blank.setPreferredSize(new Dimension(10,10));
     			blank.setMaximumSize(new Dimension(10,10));
 				labelGrid[i][j] = blank;
-				System.out.println("TEST");
 				refreshMaze();
 			}
 		}

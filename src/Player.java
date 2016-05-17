@@ -17,14 +17,19 @@ public class Player extends JLabel {
 	private int iLocation;
 	private int jLocation;
 	
-	public Player(int i, int j, int height, int width) {
+	public Player(int i, int j, int height, int width, int character) {
 		this.height = height;
 		this.width = width;
 		this.iLocation = i;
 		this.jLocation = j;
 		Image img = null;
 		try {
-		    img = ImageIO.read(new File("src/link_stationary.png"));
+			if(character == 0){
+				img = ImageIO.read(new File("src/link_stationary.png"));
+			}
+			if(character == 1){
+				img = ImageIO.read(new File("src/triforce.jpg"));
+			}
 		} catch (IOException e) {
 		    e.printStackTrace();
 		}
