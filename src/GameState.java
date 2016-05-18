@@ -26,6 +26,11 @@ public class GameState {
 		this.turn = turn;
 	}
 
+	/**
+	 * 
+	 * @param col
+	 * @return
+	 */
 	public int runNextMove(int col) {
 		if (col >= 0 & col < COL_MAX) {
 			int row = getAvailableRow(col);
@@ -35,6 +40,12 @@ public class GameState {
 		return -1;
 	}
 
+	/**
+	 * Determine whether the Game has ended.
+	 * @return	Whether the game has ended:
+	 * 			- true: Game has ended.
+	 * 			- false: Game has not ended.
+	 */
 	public boolean checkGameEnd() {
 		boolean gameEnd = false;
 
@@ -58,12 +69,22 @@ public class GameState {
 		return false;
 	}
 
+	/**
+	 * Get a location given its coordinates.
+	 * @param col	The column in the grid. (int)
+	 * @param row	The row in the grid. (int)
+	 * @return		?
+	 */
 	public Player getLocation(int col, int row) {
 		if (col >= 0 && col < COL_MAX && row >= 0 && row < ROW_MAX)
-			return board[col][row];
+			return this.board[col][row];
 		return null;
 	}
 
+	/**
+	 * Get a clone of the board.
+	 * @return	A shallow copy of the board. (Player[][])
+	 */
 	public Player[][] getBoard() {
 		Player[][] cloneBoard = new Player[COL_MAX][];
 		for (int i = 0; i < COL_MAX; i++)
@@ -71,10 +92,19 @@ public class GameState {
 		return cloneBoard;
 	}
 
+	/**
+	 * Get the other player.
+	 * @return	The other player. (Player)
+	 */
 	public Player getOtherPlayer() {
 		return nextPlayer;
 	}
 
+	/**
+	 *
+	 * @param col
+	 * @return
+	 */
 	public int getAvailableRow(int col) {
 		if (col >= 0 && col < COL_MAX)
 			for (int r = 0; r < ROW_MAX; r++)
@@ -83,8 +113,12 @@ public class GameState {
 		return -1;
 	}
 
+	/**
+	 * Get the winner of the competition.
+	 * @return The winner (Player)
+	 */
 	public Player getWinner() {
-		return winner;
+		return this.winner;
 	}
 
 	public void setCurrPlayer(Player p) {
