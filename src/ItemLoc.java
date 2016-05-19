@@ -10,4 +10,13 @@ public class ItemLoc {
 		this.itemType = item;
 	}
 	
+	public int getX (){
+		return this.x;
+	}	
+	public int getY(){
+		return this.y;
+	}
+	public int getItemType (){
+		return this.itemType;
+	}
 }

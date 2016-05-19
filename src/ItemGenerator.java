@@ -19,7 +19,7 @@ public class ItemGenerator {
 	
 	public int randomItemType (){
 		Random Rand = new Random();
-		return int ;
+		return (Rand.nextInt(6)+1);
 		
 	}
 	
@@ -29,14 +29,15 @@ public class ItemGenerator {
 		int i = 0;
 		while (i != numItems){
 			//fix here
-			Random Rand = null;
+			Random Rand = new Random();
 			int x_coordinate = Rand.nextInt(m.getWidth());
 			int y_coordinate = Rand.nextInt(m.getHeight());
 			
-			if (!m.isEmpty(x_coordinate, y_coordinate)){
+			if (!m.isEmpty(y_coordinate, x_coordinate)){
 				//creating new object
 				ItemLoc newitem = new ItemLoc(x_coordinate, y_coordinate, randomItemType());
 				
+				//check if the that coordinate has that item already
 				if (!existingLoc.contains(newitem)){
 					existingLoc.add(newitem);
 					this.ItemLocations.add(newitem);
