@@ -18,10 +18,12 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 	private int height;
 	private int length;
 	private Player player;
-	private Player player2;
+	private Player triForce;
+	private Player predPlayer;
 	GridLayout grid;
 	AlphaMaze mainMaze;
 	JLabel[][] labelGrid;
+	Predator predator;
 	
 	public MazePanel(int height, int length) {
 		labelGrid = new JLabel[height][length];
@@ -30,10 +32,11 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 		mainMaze = new AlphaMaze(height,length);
 		grid = new GridLayout(height,length);
 		this.setLayout(grid);
+		this.predator = new Predator(mainMaze);
 		initMaze();
 
 	}
-	
+
 	public void initMaze(){
 		boolean check = false;
 		int x = 0;
@@ -80,17 +83,23 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
         	}
         	
         }
-        player2 = new Player(x, y, 25, 25, 1);
-		player2.setMinimumSize(new Dimension(10,10));
-		player2.setPreferredSize(new Dimension(10,10));
-		player2.setMaximumSize(new Dimension(10,10));
-    	labelGrid[x][y] = player2;
+        predator.setStart(x, 1);
+        predPlayer = new Player(x, 0, 25, 25, 2);
+		predPlayer.setMinimumSize(new Dimension(10,10));
+		predPlayer.setPreferredSize(new Dimension(10,10));
+		predPlayer.setMaximumSize(new Dimension(10,10));
+    	labelGrid[x][1] = predPlayer;
+    	
+        triForce = new Player(x, y, 25, 25, 1);
+		triForce.setMinimumSize(new Dimension(10,10));
+		triForce.setPreferredSize(new Dimension(10,10));
+		triForce.setMaximumSize(new Dimension(10,10));
+    	labelGrid[x][y] = triForce;
         for(int i=0; i < height; i++){
         	for(int j=0; j < length; j++){
         			this.add(labelGrid[i][j]);
-        		}
         	}
-        
+        }
         
 	}
 	
@@ -154,7 +163,6 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
     			blank.setPreferredSize(new Dimension(10,10));
     			blank.setMaximumSize(new Dimension(10,10));
 				labelGrid[i][j] = blank;
-				refreshMaze();
 			}
 		}
 		
@@ -173,8 +181,7 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
     			blank.setPreferredSize(new Dimension(10,10));
     			blank.setMaximumSize(new Dimension(10,10));
 				labelGrid[i][j] = blank;
-				
-				refreshMaze();
+			
 			}
 		}
 		
@@ -193,8 +200,6 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
     			blank.setPreferredSize(new Dimension(10,10));
     			blank.setMaximumSize(new Dimension(10,10));
 				labelGrid[i][j] = blank;
-				
-				refreshMaze();
 			}
 		}
 		
@@ -214,13 +219,29 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
     			blank.setMaximumSize(new Dimension(10,10));
 				labelGrid[i][j] = blank;
 				
-				refreshMaze();
 
 			}
 		}
 		if(e.getKeyCode() == KeyEvent.VK_Q){
 			System.exit(0);
 		}
+		
+		//Blank
+		JLabel blank = new JLabel();
+		blank.setBackground(Color.white);
+		blank.setOpaque(true);
+		blank.setMinimumSize(new Dimension(10,10));
+		blank.setPreferredSize(new Dimension(10,10));
+		blank.setMaximumSize(new Dimension(10,10));
+		//Make it blank
+		labelGrid[predator.getRow()][predator.getCol()] = blank;
+		//Move predator
+		predator.makeMove(player.getILocation(), player.getJLocation());
+		//Put him in the new spot
+		predPlayer.setILocation(predator.getRow());
+		predPlayer.setJLocation(predator.getCol());
+		labelGrid[predator.getRow()][predator.getCol()] = predPlayer;
+		refreshMaze();
 		
 	}
 	
