@@ -26,7 +26,7 @@ public class ItemGenerator {
 	
 	public int randomItemType (){
 		Random Rand = new Random();
-		return (Rand.nextInt(6)+1);
+		return (Rand.nextInt(7)+1);
 		
 	}
 	
