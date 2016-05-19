@@ -283,6 +283,9 @@ public class AlphaMaze {
 	
 	
 	public boolean isEmpty(int height, int width){
+		if (height<0 || height >this.height-1 || width < 0 || width>this.width-1){
+			return false;
+		}
 		if (mazemtx[height][width] == 1){
 			return true;
 		}
