@@ -30,6 +30,9 @@ public class Player extends JLabel {
 			if(character == 1){
 				img = ImageIO.read(new File("src/triforce.jpg"));
 			}
+			if (character == 2){
+				img = ImageIO.read(new File("src/mario_stationary.png"));
+			}
 		} catch (IOException e) {
 		    e.printStackTrace();
 		}
