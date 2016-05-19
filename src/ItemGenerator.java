@@ -2,18 +2,25 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class ItemGenerator {
-	private int numItems;
+
 	private ArrayList<ItemLoc> ItemLocations;
 	/*
-	 * 1. fireballs
-	 * 2. freeze
-	 * 3. mini mario
-	 * 4. big mario destroy the map
-	 * 5. star- invisicibility
-	 * 6. speed boost
+	 * item limits for the different difficulty
+	 * 
+	 *  
+	 *  
+	 * 1. fireballs- shoot a fire ball in the direction on which the player is facing
+	 * and it travels for 3,5,7 or breaks if it hits a wall
+	 * 2. freeze- freezes mario or the other player
+	 * 3. mini mario- slow mario down
+	 * 4. big mario destroy the map- if timer is end, mario turns big and stream 
+	 * 	  rolls the player
+	 * 5. star- invisicibility, increase player speed
+	 * 6. speed boost squares- boost the speed the player for a number of squares
+	 * 7. drop bombs- and make the whole line on go on fire
+	 * 
 	 */
 	public ItemGenerator (int numItems, AlphaMaze m){
-		this.numItems = numItems;
 		generateCoordinates(m, numItems);
 	} 
 	
@@ -28,7 +35,6 @@ public class ItemGenerator {
 		
 		int i = 0;
 		while (i != numItems){
-			//fix here
 			Random Rand = new Random();
 			int x_coordinate = Rand.nextInt(m.getWidth());
 			int y_coordinate = Rand.nextInt(m.getHeight());
