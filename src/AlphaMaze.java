@@ -315,5 +315,12 @@ public class AlphaMaze {
 			System.out.println();
 		}
 	}
+	
+	public int getHeight (){
+		return this.height;
+	}
+	public int getWidth (){
+		return this.width;
+	}
 }
 
