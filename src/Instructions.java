@@ -1,20 +1,43 @@
 import java.awt.AlphaComposite;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class Instructions extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-
+	//private MazePuzzleGame mainGame;
 	private Timer timer;
 	private float opacity = 0;
 
 	public Instructions() {
+		setLayout(new GridBagLayout());
+		GridBagConstraints gc = new GridBagConstraints();
+		gc.weightx = 0;
+		gc.weighty = 0;
+		gc.fill = GridBagConstraints.BOTH;
+
+		// user name input
+
+		gc.gridx = 0;
+		gc.gridy = 0;
+		JLabel firstLine = new JLabel("Hello!!!");
+		JLabel secondLine = new JLabel("Move through the maze with the arrow keys");
+		JLabel thirdLine = new JLabel("Try to reach the obelisc before Mario catches you");
+		add(firstLine, gc);
+		gc.gridx = 0;
+		gc.gridy = 1;
+		add(secondLine, gc);
+		gc.gridy = 2;
+		add(thirdLine, gc);
+		//add(startGame, gc);
 		timer = new Timer(15, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

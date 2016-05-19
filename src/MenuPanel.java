@@ -79,7 +79,12 @@ public class MenuPanel extends JPanel {
 		htpButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				mainGame.changeGlassPane(4);
+				//mainGame.changeGlassPane(4);
+				Instructions instruction = new Instructions();
+				JOptionPane.showOptionDialog(null, instruction,
+						"Instructions", JOptionPane.YES_NO_CANCEL_OPTION,
+						JOptionPane.PLAIN_MESSAGE, null,
+						new String[] { "Close" }, "default");
 			}
 		});
 
