@@ -3,12 +3,16 @@ import java.util.Collections;
 import java.util.Stack;
 
 /**
- * works for only odd dimensions odd x odd 
- * @author steve
+ * The "AlphaMaze" class generates a maze 
+ * for the player to move through. It accepts 
+ * a height and width for the maze dimensions.
+ * @author  Jack Holt
+ * 			Jesse Moses
+ * 			Nick Balnaves
+ * 			Jordan Jacobson
+ * 			Shiyuan Liang
  *
  */
-
-
 public class AlphaMaze {
 	private int height;
 	private int width;

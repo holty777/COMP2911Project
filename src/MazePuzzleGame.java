@@ -129,4 +129,5 @@ public class MazePuzzleGame implements Runnable {
 		}
 		
 	}
+	//public getGamePanel
 }

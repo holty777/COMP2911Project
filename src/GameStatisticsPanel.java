@@ -82,7 +82,7 @@ public class GameStatisticsPanel extends JPanel {
 		//uncommenting crashes 
 		//player1.setText(p1.getName());
 		//player2.setText(p2.getName());
-		player1.setText(" Player1");
+		player1.setText(" Player1" );
 		player2.setText(" Player2");
 		msg.setText("Game Started.");
 		msg.setForeground(Color.BLUE);

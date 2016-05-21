@@ -24,9 +24,10 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 	private AlphaMaze mainMaze;
 	private JLabel[][] labelGrid;
 	private Predator predator;
-	
+	private int movesMade;
 	
 	public MazePanel(int height, int length) {
+		this.movesMade = 0;
 		labelGrid = new JLabel[height][length];
 		this.height = height;
 		this.length = length;
@@ -150,6 +151,8 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
+		this.movesMade++;
+		System.out.println(this.movesMade);
 		if(e.getKeyCode() == KeyEvent.VK_RIGHT){
 			int i = player.getILocation();
 			int j = player.getJLocation();
@@ -263,4 +266,7 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 		
 	}
 
+	
+	
+	
 }
