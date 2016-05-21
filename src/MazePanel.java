@@ -4,11 +4,16 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import java.awt.GridLayout;
+import java.awt.Image;
 
 
 
@@ -64,6 +69,14 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
         				full.setMinimumSize(new Dimension(10,10));
         				full.setPreferredSize(new Dimension(10,10));
         				full.setMaximumSize(new Dimension(10,10));
+        				
+        				ImageIcon image = new ImageIcon("src/stone_path.png");
+            			JLabel imagelabel = new JLabel(image);
+            			imagelabel.setOpaque(true);
+            			imagelabel.setMinimumSize(new Dimension(10,10));
+            			imagelabel.setPreferredSize(new Dimension(10,10));
+            			imagelabel.setMaximumSize(new Dimension(10,10));
+        				
         				labelGrid[i][j] = full;
         				//this.add(full);
         				x = i;
@@ -78,7 +91,17 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
         			blank.setMinimumSize(new Dimension(10,10));
         			blank.setPreferredSize(new Dimension(10,10));
         			blank.setMaximumSize(new Dimension(10,10));
-    				labelGrid[i][j] = blank;
+        			
+        			ImageIcon image = new ImageIcon("src/hedge.png");
+        			JLabel imagelabel = new JLabel(image);
+        			imagelabel.setOpaque(true);
+        			imagelabel.setMinimumSize(new Dimension(10,10));
+        			imagelabel.setPreferredSize(new Dimension(10,10));
+        			imagelabel.setMaximumSize(new Dimension(10,10));
+        			
+        			
+        			
+        			labelGrid[i][j] = imagelabel;
         			//this.add(blank);
         			
         		}
