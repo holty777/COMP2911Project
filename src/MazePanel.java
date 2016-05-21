@@ -20,10 +20,11 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 	private Player player;
 	private Player triForce;
 	private Player predPlayer;
-	GridLayout grid;
-	AlphaMaze mainMaze;
-	JLabel[][] labelGrid;
-	Predator predator;
+	private GridLayout grid;
+	private AlphaMaze mainMaze;
+	private JLabel[][] labelGrid;
+	private Predator predator;
+	
 	
 	public MazePanel(int height, int length) {
 		labelGrid = new JLabel[height][length];
