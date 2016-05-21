@@ -9,6 +9,7 @@ import java.io.File;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -17,20 +18,45 @@ import java.awt.Image;
 
 
 
-
+/**
+ * The "MazePanel" class creates a handles the input/output for the maze.
+ * @author  Jack Holt
+ * 			Jesse Moses
+ * 			Nick Balnaves
+ * 			Jordan Jacobson
+ * 			Shiyuan Liang
+ *
+ */
 public class MazePanel extends JPanel implements MouseListener, KeyListener {
 	
+	private JPanel homeGlassPane;
+	private JFrame mainFrame;
+	// The height of the maze.
 	private int height;
+	// The length of the maze
 	private int length;
+	// The player
 	private Player player;
+	// The target 
 	private Player triForce;
+	
 	private Player predPlayer;
+	// The game layout
 	private GridLayout grid;
+	// The maze
 	private AlphaMaze mainMaze;
+	// What is being displayed at each point of the maze.
 	private JLabel[][] labelGrid;
+	// The predator
 	private Predator predator;
+	// The count of moves.
 	private int movesMade;
 	
+	/**
+	 * The "MazePanel" constructor.
+	 * @param height	The height of the maze.
+	 * @param length	The length/width of the maze.
+	 */
 	public MazePanel(int height, int length) {
 		height --;
 		length --;
@@ -46,6 +72,10 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 
 	}
 
+	/**
+	 * Load a matrix with what to display, 
+	 * to represent the maze.
+	 */
 	public void initMaze(){
 		boolean check = false;
 		int x = 0;
@@ -170,7 +200,19 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
+		if (e.getKeyChar() == 'h'){
+			System.out.println("in");
+			if (homeGlassPane != null) {
+				mainFrame.setGlassPane(homeGlassPane);
+				homeGlassPane.setOpaque(false);
+				homeGlassPane.setVisible(true);
+			}
+			if (homeGlassPane instanceof Instructions)
+				homeGlassPane.repaint();
+			else
+				homeGlassPane = new Instructions();
+			
+		}
 		
 	}
 
