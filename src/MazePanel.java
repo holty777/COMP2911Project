@@ -27,12 +27,14 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 	private int movesMade;
 	
 	public MazePanel(int height, int length) {
+		height --;
+		length --;
 		this.movesMade = 0;
 		labelGrid = new JLabel[height][length];
 		this.height = height;
 		this.length = length;
-		mainMaze = new AlphaMaze(height,length);
-		grid = new GridLayout(height,length);
+		mainMaze = new AlphaMaze(height ,length );
+		grid = new GridLayout(height ,length);
 		this.setLayout(grid);
 		this.predator = new Predator(mainMaze);
 		initMaze();
