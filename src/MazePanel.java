@@ -68,6 +68,11 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 		grid = new GridLayout(height ,length);
 		this.setLayout(grid);
 		this.predator = new Predator(mainMaze);
+		homeGlassPane = new JPanel();
+		homeGlassPane.setPreferredSize(new Dimension(700, 700));
+		
+		
+		
 		initMaze();
 
 	}
@@ -202,20 +207,23 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 	public void keyTyped(KeyEvent e) {
 		if (e.getKeyChar() == 'h'){
 			System.out.println("in");
-			if (homeGlassPane != null) {
-				mainFrame.setGlassPane(homeGlassPane);
-				homeGlassPane.setOpaque(false);
-				homeGlassPane.setVisible(true);
-			}
+			
 			if (homeGlassPane instanceof Instructions)
 				homeGlassPane.repaint();
 			else
 				homeGlassPane = new Instructions();
-			
+			if (homeGlassPane != null) {
+				//mainFrame.setGlassPane(homeGlassPane);
+				
+				homeGlassPane.setOpaque(false);
+				homeGlassPane.setVisible(true);
+			}
 		}
-		
+		//display();
 	}
 
+	
+	
 	@Override
 	public void keyPressed(KeyEvent e) {
 		this.movesMade++;

@@ -9,6 +9,16 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * The "GameStatisticsPanel" class extend JPanel and 
+ * handles the statistics panel on the left of the maze.
+ * @author  Jack Holt
+ * 			Jesse Moses
+ * 			Nick Balnaves
+ * 			Jordan Jacobson
+ * 			Shiyuan Liang 
+ *
+ */
 public class GameStatisticsPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -23,7 +33,13 @@ public class GameStatisticsPanel extends JPanel {
 	private JLabel modeLabel;
 	private JLabel modeDescription;
 
-
+	/**
+	 * The "GameStatisticsPanel" constructor.
+	 * @param gw	The GameWindow, a class containing information 
+	 * 				about the display of the whole screen.
+	 * @param mg	The MazePuzzelGame, a class containing information
+	 * 				about the display of the maze.
+	 */
 	public GameStatisticsPanel(GameWindow gw, MazePuzzleGame mg) {
 
 		mainGame = mg;
@@ -78,6 +94,11 @@ public class GameStatisticsPanel extends JPanel {
 
 	}
 
+	/**
+	 * Set the player names in the statistics panel.
+	 * @param p1	Player 1
+	 * @param p2	Player 2
+	 */
 	public void setPlayerNames(Player p1, Player p2) {
 		//uncommenting crashes 
 		//player1.setText(p1.getName());
@@ -87,7 +108,9 @@ public class GameStatisticsPanel extends JPanel {
 		msg.setText("Game Started.");
 		msg.setForeground(Color.BLUE);
 	}
-
+	/**
+	 * Set whose turn it is.
+	 */
 	public void setWhosTurn() {
 		try {
 			Thread.sleep(100);
@@ -97,6 +120,10 @@ public class GameStatisticsPanel extends JPanel {
 
 	}
 
+	/**
+	 * Display the winner at the end of the game.
+	 * @param winner	The winner.
+	 */
 	public void displayEndGame(Player winner) {
 		if (winner == null) {
 			msg.setText("Board Full. Drew.");

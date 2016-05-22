@@ -41,6 +41,7 @@ public class Player extends JLabel {
 		BufferedImage dimg = toBufferedImage(bimg);
 		
 		ImageIcon link = new ImageIcon(dimg);
+		
 		this.setIcon(link);
 	}
 	

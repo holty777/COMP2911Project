@@ -25,7 +25,7 @@ public class User {
 		this.nextMove = nextMove;
 	}
 
-	public int decideMove(GameState currState) {
+	public int decideMove() {
 		isReady = false;// get ready to receive input
 		return modeGUI();
 	}
