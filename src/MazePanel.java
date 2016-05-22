@@ -223,7 +223,10 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 	}
 
 	
-	
+	/**
+	 * If the user enders an arrow key, 
+	 * move the player if possible
+	 */
 	@Override
 	public void keyPressed(KeyEvent e) {
 		this.movesMade++;
@@ -301,6 +304,7 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 
 			}
 		}
+		// If the user presses "q", quit
 		if(e.getKeyCode() == KeyEvent.VK_Q){
 			System.exit(0);
 		}
@@ -324,6 +328,9 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 		
 	}
 	
+	/**
+	 * Re-draw the maze.
+	 */
 	public void refreshMaze(){
 		this.removeAll();
 		for(int a=0; a < height; a++){
