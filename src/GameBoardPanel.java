@@ -4,10 +4,21 @@ import java.util.Random;
 
 import javax.swing.JPanel;
 
+/**
+ * The "GameBoardPanel" class handles all operations 
+ * regarding the displaying of the game 
+ * including the statistics panel.
+ * @author  Jack Holt
+ * 			Jesse Moses
+ * 			Nick Balnaves
+ * 			Jordan Jacobson
+ * 			Shiyuan Liang
+ *
+ */
 public class GameBoardPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-
+	
 	private GameWindow gameWindow;
 	private MazePuzzleGame mainGame;
 	private GameEngine gameEngine;
@@ -18,6 +29,11 @@ public class GameBoardPanel extends JPanel {
 	private Player player2;
 	private int gameMode; // 0 for simulation, 1 for single player, 2 for double player
 
+	/**
+	 * The constructor for the "GameBoardPanel" class.
+	 * @param gameWindow	
+	 * @param mainGame
+	 */
 	public GameBoardPanel(GameWindow gameWindow, MazePuzzleGame mainGame) {
 
 		this.gameWindow = gameWindow;
@@ -32,17 +48,27 @@ public class GameBoardPanel extends JPanel {
 		
 	}
 	
+	/**
+	 * Update the statistics panel with the current information.
+	 */
 	public void updateStatisticsPanel() {
 		if (gameWindow != null && gameWindow.getStatisticsPanel() != null)
 			gameWindow.getStatisticsPanel().setWhosTurn();
 	}
 
+	/**
+	 * If the game has ended, display the winner.
+	 * @param winner The player who has won.
+	 */
 	public void displayEndGame(Player winner) {
 		if (gameMode == 0)
 			return; // stimulation
 		gameWindow.getStatisticsPanel().displayEndGame(winner);
 	}
 
+	/**
+	 * Create and randomly generate the data to create a new double player game.
+	 */
 	public void restartNewGame() {
 		mainGame.suspendGame();
 
@@ -60,17 +86,28 @@ public class GameBoardPanel extends JPanel {
 		updateStatisticsPanel();
 	}
 
+	/**
+	 * Start the new game.
+	 */
 	public void startNewGame() {
 
 		gameEngine.startNewGame(gameMode, player1, player2, this);
 
 	}
 
+	/**
+	 * Testing module.
+	 */
 	public void startSimulationGame() {
 		gameMode = 0;
 		startNewGame();
 	}
 
+	/**
+	 * Create a new single player game and determine the difficulty.
+	 * @param playerName	The player's name.
+	 * @param AIMode	The difficulty of the game.
+	 */
 	public void initSinglePlayerGame(String playerName, int AIMode) {
 		if (playerName == null || playerName.equals(""))
 			playerName = "YOU";
@@ -100,6 +137,11 @@ public class GameBoardPanel extends JPanel {
 		updateStatisticsPanel();
 	}
 
+	/**
+	 * Initiate a double player game.
+	 * @param name1	Name of player 1.
+	 * @param name2 Name of player 2.
+	 */
 	public void initDoublePlayersGame(String name1, String name2) {
 		// set default name if input is empty
 		if (name1 == null || name1.equals("")) {
@@ -124,15 +166,27 @@ public class GameBoardPanel extends JPanel {
 		updateStatisticsPanel();
 	}
 
+	/**
+	 * Generate a random number to determine which player moves first.
+	 * @return	A random number, either 0, 1.
+	 */
 	private int randPlayer() {
 		Random rand = new Random();
 		return rand.nextInt(2);
 	}
 	
+	/**
+	 * Return the maze.
+	 * @return The maze.
+	 */
 	public MazePanel getMaze(){
 		return this.testMaze;
 	}
 	
+	/**
+	 * Determine the size of the maze.
+	 * @param gameMode The difficulty of the maze. Number between 0-2.
+	 */
 	public void setMaze(int gameMode){
 		if(gameMode == 0){
 			testMaze = new MazePanel(20,20);
