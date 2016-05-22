@@ -1,4 +1,12 @@
-
+/**
+ * The "GameEngine" class handles all functionality 
+ * concerning the current state of the game.
+ * @author  Jack Holt
+ * 			Jesse Moses
+ * 			Nick Balnaves
+ * 			Jordan Jacobson
+ * 			Shiyuan Liang 
+ */
 public class GameState {
 	private final int MAX_TURN = 42;
 	private final int COL_MAX = 7;
@@ -10,13 +18,24 @@ public class GameState {
 	private Player winner;
 	private int turn;
 
+	/**
+	 * One of the "GameState" constructors.
+	 * @param firstPlayer	The first player
+	 * @param secondPlayer	The second player
+	 */
 	public GameState(Player firstPlayer, Player secondPlayer) {
 		board = new Player[COL_MAX][ROW_MAX];
 		currPlayer = firstPlayer;
 		nextPlayer = secondPlayer;
 		turn = 1;
 	}
-
+	
+	/**
+	 * One of the "GameState" constructors.
+	 * @param board	Which object is at each location on the maze.
+	 * @param currPlayer	The current player
+	 * @param nextPlayer	The next player
+	 */
 	public GameState(Player[][] board, Player currPlayer, Player nextPlayer,
 			Player winner, int turn) {
 		this.board = board;
@@ -27,9 +46,9 @@ public class GameState {
 	}
 
 	/**
-	 * 
-	 * @param col
-	 * @return
+	 * Run the next move by moving the current player
+	 * @param col The column to move the character. 
+	 * @return The row which the character move to, or -1 if column was out of range.
 	 */
 	public int runNextMove(int col) {
 		if (col >= 0 & col < COL_MAX) {
@@ -73,7 +92,7 @@ public class GameState {
 	 * Get a location given its coordinates.
 	 * @param col	The column in the grid. (int)
 	 * @param row	The row in the grid. (int)
-	 * @return		?
+	 * @return		Whatever is to be printer at the specified point on the map.
 	 */
 	public Player getLocation(int col, int row) {
 		if (col >= 0 && col < COL_MAX && row >= 0 && row < ROW_MAX)
@@ -101,9 +120,9 @@ public class GameState {
 	}
 
 	/**
-	 *
-	 * @param col
-	 * @return
+	 * Determine an available row to move to.
+	 * @param col	The column to look for the row in.
+	 * @return	The row number, or -1 if a row was not found.
 	 */
 	public int getAvailableRow(int col) {
 		if (col >= 0 && col < COL_MAX)
@@ -121,30 +140,53 @@ public class GameState {
 		return this.winner;
 	}
 
+	/**
+	 * Switch the current player with the player passed in.
+	 * @param p	The player to become the current player.
+	 */
 	public void setCurrPlayer(Player p) {
 		Player temp = currPlayer;
 		currPlayer = p;
 		nextPlayer = temp;
 	}
 
+	/**
+	 * Get the current player.
+	 * @return	The current player.
+	 */
 	public Player getCurrPlayer() {
 		return currPlayer;
 	}
 
+	/**
+	 * Get the current turn number.
+	 * @return	The current turn number
+	 */
 	public int getTurn() {
 		return turn;
 	}
 
+	/**
+	 * Increment the turn counter.
+	 */
 	public void incTurn() {
 		turn++;
 	}
 
+	/**
+	 * Determine whether it is a valid move.
+	 * @param col	The column to check whether it is a valid move.
+	 * @return	Whether it is a valid move.
+	 */
 	public boolean isValidMove(int col) {
 		if (col >= 0 && col < COL_MAX && board[col][5] == null)
 			return true;
 		return false;
 	}
 
+	/**
+	 * Create a clone of the GameState.
+	 */
 	@Override
 	public GameState clone() {
 		GameState cloneState = new GameState(getBoard(), currPlayer,
