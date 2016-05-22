@@ -10,6 +10,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+/**
+ * The "Instructions" class displays the instructions for the game.
+ * @author  Jack Holt
+ * 			Jesse Moses
+ * 			Nick Balnaves
+ * 			Jordan Jacobson
+ * 			Shiyuan Liang
+ *
+ */
 public class Instructions extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -17,6 +26,9 @@ public class Instructions extends JPanel {
 	private Timer timer;
 	private float opacity = 0;
 
+	/**
+	 * The "Instructions" constructor.
+	 */
 	public Instructions() {
 		setLayout(new GridBagLayout());
 		GridBagConstraints gc = new GridBagConstraints();
@@ -52,6 +64,9 @@ public class Instructions extends JPanel {
 		timer.start();
 	}
 
+	/**
+	 * Draw the components
+	 */
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
