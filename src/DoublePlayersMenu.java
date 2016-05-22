@@ -7,16 +7,32 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+
+/**
+ * The "DoublePlayersMenu" class handles all operations 
+ * regarding the double players menu. It allows each 
+ * player to enter their name and start the game.
+ * @author  Jack Holt
+ * 			Jesse Moses
+ * 			Nick Balnaves
+ * 			Jordan Jacobson
+ * 			Shiyuan Liang
+ *
+ */
 public class DoublePlayersMenu extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
 	private MazePuzzleGame mainGame;
 
+	/**
+	 * The constructor for the "DoublePlayersMenu" class.
+	 * @param mg	A high level overview of the current maze status.
+	 */
 	public DoublePlayersMenu(MazePuzzleGame mg) {
 		mainGame = mg;
 
-		// set button layout
+		// Set button layout.
 		setLayout(new GridBagLayout());
 		GridBagConstraints gc = new GridBagConstraints();
 		gc.weightx = 0;
