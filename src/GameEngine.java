@@ -3,6 +3,17 @@ import java.awt.event.ActionListener;
 
 import javax.swing.Timer;
 
+/**
+ * The "GameEngine" class handles all functionality 
+ * concerning the logic behind playing the maze game.
+ * Including assaigning whos turn it is.
+ * @author  Jack Holt
+ * 			Jesse Moses
+ * 			Nick Balnaves
+ * 			Jordan Jacobson
+ * 			Shiyuan Liang
+ *
+ */
 public class GameEngine implements Runnable {
 
 	private GameState currState;  // the current game state
@@ -11,6 +22,14 @@ public class GameEngine implements Runnable {
 	private boolean isInGame; // game is in run
 	private int totalGame;    // number of game started
 	
+	/**
+	 * Create a new game.
+	 * @param gameMode	The mode currently being utilized in the game 
+	 * 					(1 - Single player, 2 - Double player).
+	 * @param player1	The player 1.
+	 * @param player2	The player 2.
+	 * @param gameBoardPanel	A class responsible for displaying the board.
+	 */
 	public void startNewGame(int gameMode, Player player1, Player player2,
 			GameBoardPanel gameBoardPanel) {
 		this.gameMode = gameMode;
@@ -19,11 +38,14 @@ public class GameEngine implements Runnable {
 		gameBoardPanel.getMaze().setFocusable(true);
 		gameBoardPanel.getMaze().requestFocus();
 		gameBoardPanel.getMaze().addKeyListener(gameBoardPanel.getMaze());
-		currState = new GameState(player1, player2);
-		totalGame++;
-		isInGame = true;
+		this.currState = new GameState(player1, player2);
+		this.totalGame++;
+		this.isInGame = true;
 	}
 
+	/**
+	 * Run the game.
+	 */
 	@Override
 	public void run() {
 		// delay thread to wait game started
@@ -37,22 +59,26 @@ public class GameEngine implements Runnable {
 			});
 			SimpleTimer.start();
 			// start game run
-			int thisGame = totalGame;
-			while (isInGame && thisGame == totalGame) {
-				Player currPlayer = currState.getCurrPlayer();
+			int thisGame = this.totalGame;
+			/*
+			 * Run the game while the game is not over 
+			 * and it is the same game.
+			 */
+			while (isInGame && thisGame == this.totalGame) {
+				Player currPlayer = this.currState.getCurrPlayer();
 
 				// check isInGame to avoid AI delay while screen jumping
 				if (!Thread.interrupted() && isInGame && thisGame == totalGame) {
 
 					// increment turn
-					currState.incTurn();
-					currState.setCurrPlayer(currState.getOtherPlayer());
+					this.currState.incTurn();
+					this.currState.setCurrPlayer(this.currState.getOtherPlayer());
 
-					gameBoardPanel.updateStatisticsPanel();
+					this.gameBoardPanel.updateStatisticsPanel();
 
 					// check game end and winner
-					if (currState.checkGameEnd()) {
-						isInGame = false;
+					if (this.currState.checkGameEnd()) {
+						this.isInGame = false;
 					}
 				} else {
 					break;
@@ -61,6 +87,10 @@ public class GameEngine implements Runnable {
 		}
 	}
 
+	/**
+	 * Sleep for some time.
+	 * @param millis	The amount of time to sleep for.
+	 */
 	private void sleep(int millis) {
 		try {
 			Thread.sleep(millis);
@@ -74,35 +104,63 @@ public class GameEngine implements Runnable {
 	 * @return a copy of the current game state
 	 */
 	public GameState getCurrState() {
-		return currState.clone();
+		return this.currState.clone();
 	}
-
+	
+	/**
+	 * Getter function for the current player.
+	 * @return a copy of the current player.
+	 */
 	public Player getCurrPlayer() {
-		return currState.getCurrPlayer();
+		return this.currState.getCurrPlayer();
 	}
 
+	/**
+	 * Getter function for the non-current player.
+	 * @return a copy of the non-current player.
+	 */
 	public Player getOtherPlayer() {
-		return currState.getOtherPlayer();
+		return this.currState.getOtherPlayer();
 	}
 
+	/**
+	 * Determine whether the move is valid depending on the current state.
+	 * @param move The move to make.
+	 * @return	Whether or not the move was valid.
+	 */
 	public boolean isValidMove(int move) {
-		return currState.isValidMove(move);
+		return this.currState.isValidMove(move);
 	}
 
+	/**
+	 * Determine whether currently in a game.
+	 * @return
+	 */
 	public boolean isInGame() {
-		return isInGame;
+		return this.isInGame;
 	}
 
+	/**
+	 * Suspend the gameplay.
+	 */
 	public void suspendGame() {
-		isInGame = false;
+		this.isInGame = false;
 	}
 
+	/**
+	 * Get the current player number.
+	 * @return	The current player number.
+	 */
 	public int getCurrPlayerIndex() {
-		return currState.getTurn() % 2;
+		return this.currState.getTurn() % 2;
 	}
 
+	/**
+	 * Get the game mode
+	 * @return The game mode.
+	 */
 	public int getGameMode() {
-		return gameMode;
+		return this.gameMode;
 	}
 
 }
