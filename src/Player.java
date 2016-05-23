@@ -9,6 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 public class Player extends JLabel {
+	private int previousDirection;
 	private int id;
 	private String name;
 	private int score;
@@ -45,7 +46,7 @@ public class Player extends JLabel {
 		this.attribute = 0;
 		this.attributeRunTime = 0;
 		this.countattribute = 0;
-		
+		this.previousDirection = 0;
 		try {
 			if(character == 0){
 				img = ImageIO.read(new File("src/link_stationary.png"));
@@ -185,5 +186,12 @@ public class Player extends JLabel {
 	    // Return the buffered image
 	    return bimage;
 	}
+
+	public int getlastDIR() {
+		return this.previousDirection;
+	}
 	
+	public void setLastDirection(int key){
+		this.previousDirection = key;
+	}
 }

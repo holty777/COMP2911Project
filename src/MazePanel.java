@@ -235,6 +235,8 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 			int i = player.getILocation();
 			int j = player.getJLocation();
 			if(mainMaze.isEmpty(i, j+1) == false){
+				//set the last direction to east
+				player.setLastDirection(4);
 				player.setILocation(i);
 				player.setJLocation(j+1);
 				labelGrid[i][j+1] = player;
@@ -253,6 +255,8 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 			int i = player.getILocation();
 			int j = player.getJLocation();
 			if(mainMaze.isEmpty(i, j-1) == false){
+				//set the last direction to west
+				player.setLastDirection(4);
 				player.setILocation(i);
 				player.setJLocation(j-1);
 				labelGrid[i][j-1] = player;
@@ -272,6 +276,8 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 			int i = player.getILocation();
 			int j = player.getJLocation();
 			if(mainMaze.isEmpty(i-1, j) == false){
+				//set last direction
+				player.setLastDirection(1);
 				player.setILocation(i-1);
 				player.setJLocation(j);
 				labelGrid[i-1][j] = player;
@@ -290,6 +296,8 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 			int i = player.getILocation();
 			int j = player.getJLocation();
 			if(mainMaze.isEmpty(i+1, j) == false){
+				//set last direction
+				player.setLastDirection(3);
 				player.setILocation(i+1);
 				player.setJLocation(j);
 				labelGrid[i+1][j] = player;
@@ -304,10 +312,26 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 
 			}
 		}
+		//if the user presses space, they shoot stuff
+		if (e.getKeyCode() == KeyEvent.VK_SPACE){
+			int i = player.getILocation();
+			int j = player.getJLocation();
+			int direction = player.getlastDIR();
+			//check the last dirrection then print a object in that direction
+			//then print out the fireball
+			
+		}
+		
+		
+		
+		
+		
 		// If the user presses "q", quit
 		if(e.getKeyCode() == KeyEvent.VK_Q){
 			System.exit(0);
 		}
+		
+		
 		
 		//Blank
 		JLabel blank = new JLabel();
