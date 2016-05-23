@@ -235,6 +235,8 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 			int i = player.getILocation();
 			int j = player.getJLocation();
 			if(mainMaze.isEmpty(i, j+1) == false){
+				//change graphics
+				player.changeGraphicMovement();
 				//set the last direction to east
 				player.setLastDirection(4);
 				player.setILocation(i);
@@ -255,6 +257,8 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 			int i = player.getILocation();
 			int j = player.getJLocation();
 			if(mainMaze.isEmpty(i, j-1) == false){
+				//change graphics
+				player.changeGraphicMovement();
 				//set the last direction to west
 				player.setLastDirection(4);
 				player.setILocation(i);
@@ -276,6 +280,8 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 			int i = player.getILocation();
 			int j = player.getJLocation();
 			if(mainMaze.isEmpty(i-1, j) == false){
+				//change graphics
+				player.changeGraphicMovement();
 				//set last direction
 				player.setLastDirection(1);
 				player.setILocation(i-1);
@@ -295,7 +301,10 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 
 			int i = player.getILocation();
 			int j = player.getJLocation();
+	
 			if(mainMaze.isEmpty(i+1, j) == false){
+				//change graphics
+				player.changeGraphicMovement();
 				//set last direction
 				player.setLastDirection(3);
 				player.setILocation(i+1);
@@ -317,8 +326,24 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 			int i = player.getILocation();
 			int j = player.getJLocation();
 			int direction = player.getlastDIR();
-			//check the last dirrection then print a object in that direction
-			//then print out the fireball
+			
+			if (direction == 1){
+				if(mainMaze.isEmpty(i-1, j) == false){
+					//draw a fire ball/object
+				}
+			}else if (direction == 2){
+				if(mainMaze.isEmpty(i, j-1) == false){
+					//draw a fire ball/object
+				}
+			}else if (direction == 3){
+				if(mainMaze.isEmpty(i+1, j) == false){
+					//draw a fire ball or object
+				}
+			}else if (direction == 4){
+				if(mainMaze.isEmpty(i, j+1) == false){
+					//draw a fire ball/object
+				}
+			}
 			
 		}
 		

@@ -47,6 +47,8 @@ public class Player extends JLabel {
 		this.attributeRunTime = 0;
 		this.countattribute = 0;
 		this.previousDirection = 0;
+		this.id = character;
+		
 		try {
 			if(character == 0){
 				img = ImageIO.read(new File("src/link_stationary.png"));
@@ -193,5 +195,59 @@ public class Player extends JLabel {
 	
 	public void setLastDirection(int key){
 		this.previousDirection = key;
+	}
+	
+	public void changeGraphicMovement (){
+		Image img = null;
+		
+		
+		if (this.id ==1){
+			//link
+			try {
+				//load north 
+				if (this.previousDirection == 1){
+					//need to fix
+					img = ImageIO.read(new File("src/link_stationary.png"));
+				}else if (this.previousDirection == 2){
+				//load east
+					img = ImageIO.read(new File("src/link_right.png"));
+				}else if (this.previousDirection == 3){
+				//load south
+					img = ImageIO.read(new File("src/link_stationary.png"));
+				}else if (this.previousDirection == 4){
+				//load west
+					img = ImageIO.read(new File("src/link_left.png"));
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}else{
+			//mario
+			try {
+				//load north 
+				if (this.previousDirection == 1){
+					img = ImageIO.read(new File("src/link_stationary.png"));
+				}else if (this.previousDirection == 2){
+				//load east
+					img = ImageIO.read(new File("src/link_stationary.png"));
+				}else if (this.previousDirection == 3){
+				//load south
+					img = ImageIO.read(new File("src/link_stationary.png"));
+				}else if (this.previousDirection == 4){
+				//load west
+					img = ImageIO.read(new File("src/link_stationary.png"));
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}	
+		}	
+		
+		Image bimg = img.getScaledInstance(this.width, this.height,
+		        Image.SCALE_SMOOTH);
+		BufferedImage dimg = toBufferedImage(bimg);
+		
+		ImageIcon link = new ImageIcon(dimg);
+		
+		this.setIcon(link);
 	}
 }
