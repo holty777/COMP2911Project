@@ -17,8 +17,23 @@ public class Player extends JLabel {
 	private int iLocation;
 	private int jLocation;
 	
-	//the player attribute file
-	private PlayerAttribute Pattribute;
+	//player attribute
+	/*
+	 * if the player attribute is:
+	 * 0- no special ability
+	 * 1. fireballs- shoot a fire ball in the direction on which the player is facing
+	 * and it travels for 3,5,7 or breaks if it hits a wall
+	 * 2. freeze- freezes mario or the other player
+	 * 3. mini mario- slow mario down
+	 * 4. big mario destroy the map- if timer is end, mario turns big and stream 
+	 * 	  rolls the player
+	 * 5. star- invisicibility, increase player speed
+	 * 6. speed boost squares- boost the speed the player for a number of squares
+	 * 7. drop bombs- and make the whole line on go on fire
+	 */
+	private int attribute;
+	private int attributeRunTime;
+	
 	
 	public Player(int i, int j, int height, int width, int character) {
 		this.height = height;
@@ -26,7 +41,9 @@ public class Player extends JLabel {
 		this.iLocation = i;
 		this.jLocation = j;
 		Image img = null;
-		this.Pattrib = new Pattribute(null);
+		this.attribute = 0;
+		this.attributeRunTime = 0;
+		
 		try {
 			if(character == 0){
 				img = ImageIO.read(new File("src/link_stationary.png"));
