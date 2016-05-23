@@ -46,7 +46,8 @@ public class Player extends JLabel {
 		this.attribute = 0;
 		this.attributeRunTime = 0;
 		this.countattribute = 0;
-		this.previousDirection = 0;
+		this.previousDirection = 1;
+		System.out.println("the character id:" +character);
 		this.id = character;
 		
 		try {
@@ -200,10 +201,13 @@ public class Player extends JLabel {
 	public void changeGraphicMovement (){
 		Image img = null;
 		
-		
-		if (this.id ==1){
+		System.out.println("shut up throws character id:"+this.id);
+		if (this.id == 0){
 			//link
 			try {
+				System.out.println("knees weak directio is :"+this.previousDirection);
+
+				
 				//load north 
 				if (this.previousDirection == 1){
 					//need to fix
@@ -218,10 +222,27 @@ public class Player extends JLabel {
 				//load west
 					img = ImageIO.read(new File("src/link_left.png"));
 				}
+				if (img == null){
+					System.out.println("mom spaghetti~");
+				}
+				Image bimg = img.getScaledInstance(this.width, this.height,
+				        Image.SCALE_SMOOTH);
+				BufferedImage dimg = toBufferedImage(bimg);
+				
+				ImageIcon link = new ImageIcon(dimg);
+				
+				this.setIcon(link);
+				Image bimg1 = img.getScaledInstance(this.width, this.height,
+				        Image.SCALE_SMOOTH);
+				BufferedImage dimg1 = toBufferedImage(bimg1);
+				
+				ImageIcon link1 = new ImageIcon(dimg);
+				
+				this.setIcon(link1);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		}else{
+		}else if (this.id == 2){
 			//mario
 			try {
 				//load north 
@@ -237,17 +258,25 @@ public class Player extends JLabel {
 				//load west
 					img = ImageIO.read(new File("src/link_stationary.png"));
 				}
+				
+				Image bimg = img.getScaledInstance(this.width, this.height,
+				        Image.SCALE_SMOOTH);
+				BufferedImage dimg = toBufferedImage(bimg);
+				
+				ImageIcon link = new ImageIcon(dimg);
+				
+				this.setIcon(link);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}	
-		}	
+		}else{
+			try{
+				img = ImageIO.read(new File("src/triforce.jpg"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 		
-		Image bimg = img.getScaledInstance(this.width, this.height,
-		        Image.SCALE_SMOOTH);
-		BufferedImage dimg = toBufferedImage(bimg);
-		
-		ImageIcon link = new ImageIcon(dimg);
-		
-		this.setIcon(link);
 	}
+	
 }

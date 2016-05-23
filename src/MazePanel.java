@@ -234,11 +234,13 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 		if(e.getKeyCode() == KeyEvent.VK_RIGHT){
 			int i = player.getILocation();
 			int j = player.getJLocation();
+			//set the last direction to east
+			player.setLastDirection(2);
+			
+			
 			if(mainMaze.isEmpty(i, j+1) == false){
 				//change graphics
 				player.changeGraphicMovement();
-				//set the last direction to east
-				player.setLastDirection(4);
 				player.setILocation(i);
 				player.setJLocation(j+1);
 				labelGrid[i][j+1] = player;
@@ -253,14 +255,14 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 		}
 		
 		if(e.getKeyCode() == KeyEvent.VK_LEFT){
-
+			//set the last direction to west
+			player.setLastDirection(4);
+			
 			int i = player.getILocation();
 			int j = player.getJLocation();
 			if(mainMaze.isEmpty(i, j-1) == false){
 				//change graphics
 				player.changeGraphicMovement();
-				//set the last direction to west
-				player.setLastDirection(4);
 				player.setILocation(i);
 				player.setJLocation(j-1);
 				labelGrid[i][j-1] = player;
@@ -279,11 +281,12 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 
 			int i = player.getILocation();
 			int j = player.getJLocation();
+			//set last direction
+			player.setLastDirection(1);
+			
 			if(mainMaze.isEmpty(i-1, j) == false){
 				//change graphics
 				player.changeGraphicMovement();
-				//set last direction
-				player.setLastDirection(1);
 				player.setILocation(i-1);
 				player.setJLocation(j);
 				labelGrid[i-1][j] = player;
@@ -302,11 +305,12 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 			int i = player.getILocation();
 			int j = player.getJLocation();
 	
+			//set last direction
+			player.setLastDirection(3);
+			
 			if(mainMaze.isEmpty(i+1, j) == false){
 				//change graphics
 				player.changeGraphicMovement();
-				//set last direction
-				player.setLastDirection(3);
 				player.setILocation(i+1);
 				player.setJLocation(j);
 				labelGrid[i+1][j] = player;
