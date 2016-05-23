@@ -17,12 +17,16 @@ public class Player extends JLabel {
 	private int iLocation;
 	private int jLocation;
 	
+	//the player attribute file
+	private PlayerAttribute Pattribute;
+	
 	public Player(int i, int j, int height, int width, int character) {
 		this.height = height;
 		this.width = width;
 		this.iLocation = i;
 		this.jLocation = j;
 		Image img = null;
+		this.Pattrib = new Pattribute(null);
 		try {
 			if(character == 0){
 				img = ImageIO.read(new File("src/link_stationary.png"));
