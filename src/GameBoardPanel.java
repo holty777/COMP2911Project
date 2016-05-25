@@ -1,7 +1,10 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.util.Random;
 
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -40,9 +43,26 @@ public class GameBoardPanel extends JPanel {
 		this.mainGame = mainGame;
 		gameEngine = mainGame.getGameEngine();
 
-		setOpaque(true);
-		setBackground(new Color(27, 120, 236));
+		//setOpaque(true);
+		
+		//setBackground(new Color(27, 120, 236));
+		
+		ImageIcon image = new ImageIcon("src/hedge.png");
+		JLabel imagelabel = new JLabel(image);
+		imagelabel.setOpaque(true);
+		imagelabel.setMinimumSize(new Dimension(700,700));
+		imagelabel.setPreferredSize(new Dimension(700,700));
+		imagelabel.setMaximumSize(new Dimension(700,700));
+		
+		//imagelabel.pac
+		
+		//Image image = GenerateImage.toImage(true);  //this generates an image file
+		//ImageIcon icon = new ImageIcon(image); 
+		JLabel thumb = new JLabel();
+		System.out.println(imagelabel);
+		thumb.setIcon(image);
 		//setLayout(new GridLayout(6, 7));
+		
 		setLayout(new BorderLayout());
 		
 		
