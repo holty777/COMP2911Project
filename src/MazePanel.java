@@ -58,13 +58,18 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 	private Boolean timerCheck;
 	private Timer timer;
 	private int enemySpeed;
+	private JPanel notification;
+	private GameBoardPanel parentPanel;
 	
 	/**
 	 * The "MazePanel" constructor.
 	 * @param height	The height of the maze.
 	 * @param length	The length/width of the maze.
+	 * @param notification 
+	 * @param gameBoardPanel 
 	 */
-	public MazePanel(int height, int length, int iconSize) {
+	public MazePanel(int height, int length, int iconSize, JPanel notification, GameBoardPanel gameBoardPanel){
+		this.notification = notification;
 		height --;
 		length --;
 		this.movesMade = 0;
@@ -89,6 +94,7 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 		} else {
 			enemySpeed = 250;
 		}
+		this.parentPanel = gameBoardPanel;
 		
 		initMaze();
 
@@ -112,6 +118,11 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
         				player.setPreferredSize(new Dimension(10,10));
         				player.setMaximumSize(new Dimension(10,10));
         				labelGrid[i][j] = player;
+        				predator.setStart(i, j);
+        		        predPlayer = new Player(i, j, iconWidth, iconWidth, 2);
+        				predPlayer.setMinimumSize(new Dimension(10,10));
+        				predPlayer.setPreferredSize(new Dimension(10,10));
+        				predPlayer.setMaximumSize(new Dimension(10,10));
         				//this.add(player);
         				check = true;
         			}
@@ -163,12 +174,8 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
         	}
         	
         }
-        predator.setStart(x, 1);
-        predPlayer = new Player(x, 0, iconWidth, iconWidth, 2);
-		predPlayer.setMinimumSize(new Dimension(10,10));
-		predPlayer.setPreferredSize(new Dimension(10,10));
-		predPlayer.setMaximumSize(new Dimension(10,10));
-    	labelGrid[x][1] = predPlayer;
+        
+    	//labelGrid[x][1] = predPlayer;
     	
         triForce = new Player(x, y, iconWidth, iconWidth, 1);
 		triForce.setMinimumSize(new Dimension(10,10));
@@ -379,9 +386,7 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 			refreshMaze();
 			
 		}
-		
-		
-		
+
 		
 		
 		// If the user presses "q", quit
@@ -391,26 +396,26 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 		
 		
 		
-		//Blank
-		JLabel blank = new JLabel();
-		blank.setBackground(Color.white);
-		blank.setOpaque(true);
-		blank.setMinimumSize(new Dimension(10,10));
-		blank.setPreferredSize(new Dimension(10,10));
-		blank.setMaximumSize(new Dimension(10,10));
-		//This is an edit, all of this is now done in the MyTimerTask class
-		
-//		//Make it blank
-//		labelGrid[predator.getRow()][predator.getCol()] = blank;
-//		//Move predator
-//	//	predator.makeMove(player.getILocation(), player.getJLocation());
-//		//Put him in the new spot
-//		predPlayer.setILocation(predator.getRow());
-//		predPlayer.setJLocation(predator.getCol());
-//		labelGrid[predator.getRow()][predator.getCol()] = predPlayer;
-		
+//		//Blank
+//		JLabel blank = new JLabel();
+//		blank.setBackground(Color.white);
+//		blank.setOpaque(true);
+//		blank.setMinimumSize(new Dimension(10,10));
+//		blank.setPreferredSize(new Dimension(10,10));
+//		blank.setMaximumSize(new Dimension(10,10));
+//		//This is an edit, all of this is now done in the MyTimerTask class
+//		
+////		//Make it blank
+////		labelGrid[predator.getRow()][predator.getCol()] = blank;
+////		//Move predator
+////	//	predator.makeMove(player.getILocation(), player.getJLocation());
+////		//Put him in the new spot
+////		predPlayer.setILocation(predator.getRow());
+////		predPlayer.setJLocation(predator.getCol());
+////		labelGrid[predator.getRow()][predator.getCol()] = predPlayer;
+//		
 		if(player.getILocation() == goalX && player.getJLocation() == goalY){
-			System.out.println("YOU WIN");
+			parentPanel.displayEndGame(player);
 		}
 		refreshMaze();
 		
@@ -439,9 +444,9 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 	}
 
 	public void startTimer(){
-        timer.schedule(new MyTimerTask(predator, player, predPlayer, labelGrid, this), 1000, enemySpeed);
+        timer.schedule(new MyTimerTask(predator, player, predPlayer, labelGrid, this, enemySpeed), 0, enemySpeed);
+        
 	}
-	
 	
 	
 }

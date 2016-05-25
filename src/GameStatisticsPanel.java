@@ -99,12 +99,12 @@ public class GameStatisticsPanel extends JPanel {
 	 * @param p1	Player 1
 	 * @param p2	Player 2
 	 */
-	public void setPlayerNames(Player p1, Player p2) {
+	public void setPlayerNames(String p1, String p2) {
 		//uncommenting crashes 
-		//player1.setText(p1.getName());
-		//player2.setText(p2.getName());
-		player1.setText(" Player1" );
-		player2.setText(" Player2");
+		player1.setText(p1);
+		player1.setName(p1);
+		player2.setText(p2);
+		player2.setName(p2);
 		msg.setText("Game Started.");
 		msg.setForeground(Color.BLUE);
 	}
@@ -128,7 +128,7 @@ public class GameStatisticsPanel extends JPanel {
 		if (winner == null) {
 			msg.setText("Board Full. Drew.");
 		} else {
-			msg.setText(winner.getName() + " won.");
+			msg.setText(winner.getName() + " wins!");
 			if (gameEngine.getCurrPlayerIndex() == 0) {
 				msg.setForeground(new Color(255, 211, 2));
 			} else {

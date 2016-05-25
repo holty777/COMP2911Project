@@ -25,20 +25,20 @@ public class GameBoardPanel extends JPanel {
 	private GameWindow gameWindow;
 	private MazePuzzleGame mainGame;
 	private GameEngine gameEngine;
-	private MazePanel testMaze;
+	private MazePanel mainMaze;
 
 	// game data
 	private Player player1;
 	private Player player2;
 	private int gameMode; // 0 for simulation, 1 for single player, 2 for double player
-
+	private JPanel notification;
 	/**
 	 * The constructor for the "GameBoardPanel" class.
 	 * @param gameWindow	
 	 * @param mainGame
+	 * @param homeGlassPane 
 	 */
 	public GameBoardPanel(GameWindow gameWindow, MazePuzzleGame mainGame) {
-
 		this.gameWindow = gameWindow;
 		this.mainGame = mainGame;
 		gameEngine = mainGame.getGameEngine();
@@ -67,7 +67,6 @@ public class GameBoardPanel extends JPanel {
 		
 		
 	}
-	
 	/**
 	 * Update the statistics panel with the current information.
 	 */
@@ -81,8 +80,8 @@ public class GameBoardPanel extends JPanel {
 	 * @param winner The player who has won.
 	 */
 	public void displayEndGame(Player winner) {
-		if (gameMode == 0)
-			return; // stimulation
+		//if (gameMode == 0)
+			//return; // stimulation
 		gameWindow.getStatisticsPanel().displayEndGame(winner);
 	}
 
@@ -99,7 +98,7 @@ public class GameBoardPanel extends JPanel {
 				player1 = player2;
 				player2 = temp;
 			}
-			gameWindow.getStatisticsPanel().setPlayerNames(player1, player2);
+			gameWindow.getStatisticsPanel().setPlayerNames(player1.getName(), player2.getName());
 		}
 		
 		startNewGame();
@@ -152,7 +151,7 @@ public class GameBoardPanel extends JPanel {
 			player2 = new User(playerName);
 		}*/
 		//gameMode = 1;
-		gameWindow.getStatisticsPanel().setPlayerNames(player1, player2);
+		gameWindow.getStatisticsPanel().setPlayerNames(playerName, "AI");
 		startNewGame();
 		updateStatisticsPanel();
 	}
@@ -181,7 +180,7 @@ public class GameBoardPanel extends JPanel {
 		}*/
 
 		gameMode = 2;
-		gameWindow.getStatisticsPanel().setPlayerNames(player1, player2);
+		gameWindow.getStatisticsPanel().setPlayerNames(name1, name2);
 		startNewGame();
 		updateStatisticsPanel();
 	}
@@ -200,7 +199,7 @@ public class GameBoardPanel extends JPanel {
 	 * @return The maze.
 	 */
 	public MazePanel getMaze(){
-		return this.testMaze;
+		return this.mainMaze;
 	}
 	
 	/**
@@ -209,16 +208,16 @@ public class GameBoardPanel extends JPanel {
 	 */
 	public void setMaze(int gameMode){
 		if(gameMode == 0){
-			testMaze = new MazePanel(20,20,35);
+			mainMaze = new MazePanel(20,20,35,notification, this);
 		} else if(gameMode == 1){
-			testMaze = new MazePanel(30,30,25);
+			mainMaze = new MazePanel(30,30,25,notification, this);
 		} else if(gameMode == 2){
-			testMaze = new MazePanel(40,40,20);
+			mainMaze = new MazePanel(40,40,20,notification, this);
 		} else {
-			testMaze = new MazePanel(100,100,10);
+			mainMaze = new MazePanel(100,100,10,notification, this);
 		}
 			
-		this.add(testMaze, BorderLayout.CENTER);
+		this.add(mainMaze, BorderLayout.CENTER);
 	}
 
 		
