@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JSlider;
 import javax.swing.JTextField;
 
 public class SinglePlayerMenu extends JPanel {
@@ -24,6 +25,8 @@ public class SinglePlayerMenu extends JPanel {
 	private JRadioButton AIButton1;
 	private JRadioButton AIButton2;
 
+	private JSlider mazeSize;
+	private JSlider enemySpeed;
 	public SinglePlayerMenu(MazePuzzleGame mg) {
 		mainGame = mg;
 
@@ -48,8 +51,13 @@ public class SinglePlayerMenu extends JPanel {
 
 		gc.gridx = 0;
 		gc.gridy = 1;
-		JLabel modeText = new JLabel("Difficulty:");
+		JLabel modeText = new JLabel("Maze Size:");
 		add(modeText, gc);
+		
+		gc.gridx = 0;
+		gc.gridy = 2;
+		JLabel speedText = new JLabel("Enemy Speed:");
+		add(speedText, gc);
 
 		// Easy button
 		gc.gridx = 1;
@@ -61,7 +69,12 @@ public class SinglePlayerMenu extends JPanel {
 				AIMode = 0;
 			}
 		});
-		add(AIButton0, gc);
+		mazeSize = new JSlider(JSlider.HORIZONTAL, 10, 50, 30);
+		mazeSize.setMinorTickSpacing(2);
+	    mazeSize.setMajorTickSpacing(10);
+	    mazeSize.setPaintTicks(true);
+	    mazeSize.setPaintLabels(true);
+		add(mazeSize, gc);
 
 		// Medium button
 		gc.gridx = 1;
@@ -73,7 +86,14 @@ public class SinglePlayerMenu extends JPanel {
 				AIMode = 1;
 			}
 		});
-		add(AIButton1, gc);
+		
+		enemySpeed = new JSlider(JSlider.HORIZONTAL, 0, 50, 25);
+		enemySpeed.setMinorTickSpacing(2);
+		enemySpeed.setMajorTickSpacing(10);
+		enemySpeed.setPaintTicks(true);
+		enemySpeed.setPaintLabels(true);
+		add(enemySpeed, gc);
+		
 
 		// Hard button
 		gc.gridx = 1;
@@ -85,7 +105,6 @@ public class SinglePlayerMenu extends JPanel {
 				AIMode = 2;
 			}
 		});
-		add(AIButton2, gc);
 
 		group = new ButtonGroup();
 		group.add(AIButton0);
@@ -105,7 +124,7 @@ public class SinglePlayerMenu extends JPanel {
 							"Single Player Game");
 				
 				singlePlayerWindow.startSinglePlayerGame(
-						playerNameField.getText(), AIMode);
+						playerNameField.getText(), mazeSize.getValue(), enemySpeed.getValue(), 1);
 
 				singlePlayerWindow.setVisible(true);
 				mainGame.setVisibility(false);

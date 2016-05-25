@@ -21,7 +21,7 @@ public class MazePuzzleGame implements Runnable {
 		this.gameEngine = ge;
 		
 		mainFrame = new JFrame("Mario's Maze");
-		mainFrame.setSize(1000, 700);
+		mainFrame.setSize(300, 700);
 		mainFrame.setLocationRelativeTo(null);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		

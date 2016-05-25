@@ -40,11 +40,11 @@ public class GameWindow extends JFrame {
 		setBounds(mainGame.getMainFrame().getBounds());
 
 		gameStatisticsPanel = new GameStatisticsPanel(this, mainGame);
-		gameStatisticsPanel.setPreferredSize(new Dimension(250, 700));
+		gameStatisticsPanel.setPreferredSize(new Dimension(300, 700));
 		getContentPane().add(gameStatisticsPanel, BorderLayout.WEST);
 		
 		gameBoardPanel = new GameBoardPanel(this, mainGame);
-		gameBoardPanel.setPreferredSize(new Dimension(750, 700));
+		gameBoardPanel.setPreferredSize(new Dimension(700, 700));
 		getContentPane().add(gameBoardPanel, BorderLayout.EAST);
 
 		pack();
@@ -69,10 +69,12 @@ public class GameWindow extends JFrame {
 	/**
 	 * Start a single player game.
 	 * @param playerName	The name of the player.
+	 * @param enemySpeed 
+	 * @param i 
 	 * @param modeAI	The mode being played.
 	 */
-	public void startSinglePlayerGame(String playerName, int modeAI) {
-		gameBoardPanel.initSinglePlayerGame(playerName, modeAI);
+	public void startSinglePlayerGame(String playerName, int mazeSize, int enemySpeed, int i) {
+		gameBoardPanel.initSinglePlayerGame(playerName, mazeSize, enemySpeed, i);
 	}
 	
 	/**

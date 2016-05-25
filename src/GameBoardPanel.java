@@ -32,6 +32,8 @@ public class GameBoardPanel extends JPanel {
 	private Player player2;
 	private int gameMode; // 0 for simulation, 1 for single player, 2 for double player
 	private JPanel notification;
+	private int enemySpeed;
+	private int gameStartCheck;
 	/**
 	 * The constructor for the "GameBoardPanel" class.
 	 * @param gameWindow	
@@ -42,6 +44,7 @@ public class GameBoardPanel extends JPanel {
 		this.gameWindow = gameWindow;
 		this.mainGame = mainGame;
 		gameEngine = mainGame.getGameEngine();
+		gameStartCheck = 0;
 
 		//setOpaque(true);
 		
@@ -119,29 +122,32 @@ public class GameBoardPanel extends JPanel {
 	 */
 	public void startSimulationGame() {
 		gameMode = 0;
-		startNewGame();
+		//startNewGame();
 	}
 
 	/**
 	 * Create a new single player game and determine the difficulty.
 	 * @param playerName	The player's name.
+	 * @param enemySpeed 
+	 * @param i 
 	 * @param AIMode	The difficulty of the game.
 	 */
-	public void initSinglePlayerGame(String playerName, int AIMode) {
+	public void initSinglePlayerGame(String playerName, int mazeSize, int enemySpeed, int i) {
 		if (playerName == null || playerName.equals(""))
 			playerName = "YOU";
-
+		gameMode = mazeSize;
+		this.enemySpeed = enemySpeed;
 		String nameAI = "AI";
-		switch (AIMode) {
-		case 0:
-			gameMode = 0;
-			break;
-		case 1:
-			gameMode = 1;
-			break;
-		case 2:
-			gameMode = 2;
-		}
+//		switch (AIMode) {
+//		case 0:
+//			gameMode = 0;
+//			break;
+//		case 1:
+//			gameMode = 1;
+//			break;
+//		case 2:
+//			gameMode = 2;
+//		}
 
 		/*if (randPlayer() == 0) {
 			player1 = new User(playerName);
@@ -152,6 +158,8 @@ public class GameBoardPanel extends JPanel {
 		}*/
 		//gameMode = 1;
 		gameWindow.getStatisticsPanel().setPlayerNames(playerName, "AI");
+		gameStartCheck = i;
+		if(gameStartCheck == 1)
 		startNewGame();
 		updateStatisticsPanel();
 	}
@@ -206,17 +214,8 @@ public class GameBoardPanel extends JPanel {
 	 * Determine the size of the maze.
 	 * @param gameMode The difficulty of the maze. Number between 0-2.
 	 */
-	public void setMaze(int gameMode){
-		if(gameMode == 0){
-			mainMaze = new MazePanel(20,20,35,notification, this);
-		} else if(gameMode == 1){
-			mainMaze = new MazePanel(30,30,25,notification, this);
-		} else if(gameMode == 2){
-			mainMaze = new MazePanel(40,40,20,notification, this);
-		} else {
-			mainMaze = new MazePanel(100,100,10,notification, this);
-		}
-			
+	public void setMaze(int mazeSize){
+		mainMaze = new MazePanel(mazeSize,mazeSize,this, enemySpeed);	
 		this.add(mainMaze, BorderLayout.CENTER);
 	}
 

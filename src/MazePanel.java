@@ -58,7 +58,6 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 	private Boolean timerCheck;
 	private Timer timer;
 	private int enemySpeed;
-	private JPanel notification;
 	private GameBoardPanel parentPanel;
 	
 	/**
@@ -67,14 +66,19 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 	 * @param length	The length/width of the maze.
 	 * @param notification 
 	 * @param gameBoardPanel 
+	 * @param enemySpeed2 
 	 */
-	public MazePanel(int height, int length, int iconSize, JPanel notification, GameBoardPanel gameBoardPanel){
-		this.notification = notification;
-		height --;
-		length --;
+	public MazePanel(int height, int length, GameBoardPanel gameBoardPanel, int enemySpeed2){
+		if(height > 5){
+			height --;
+		}
+		if(length > 5){
+			length --;
+		}
 		this.movesMade = 0;
 		goalX = 0;
 		goalY = 0;
+		
 		labelGrid = new JLabel[height][length];
 		this.height = height;
 		this.length = length;
@@ -84,18 +88,19 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 		this.predator = new Predator(mainMaze);
 		homeGlassPane = new JPanel();
 		homeGlassPane.setPreferredSize(new Dimension(700, 700));		
-		this.iconWidth = iconSize;
 		timerCheck = false;
 		timer = new Timer();
-		if(iconSize == 35){
-			enemySpeed = 500;
-		} else if(iconSize == 25){
-			enemySpeed = 350;
-		} else {
-			enemySpeed = 250;
-		}
+		this.enemySpeed = 500 - enemySpeed2 * 7;
 		this.parentPanel = gameBoardPanel;
-		
+		if(height <= 10){
+			iconWidth = 70;
+		} else if(height <= 20){
+			iconWidth = 35;
+		} else if(height <= 30){
+			iconWidth = 25;
+		} else if(height <= 40){
+			iconWidth = 15;
+		} else iconWidth = 5;
 		initMaze();
 
 	}
