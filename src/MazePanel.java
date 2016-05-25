@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.Timer;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -52,6 +53,10 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 	private Predator predator;
 	// The count of moves.
 	private int movesMade;
+	private int goalX;
+	private int goalY;
+	private Boolean timerCheck;
+	private Timer timer;
 	
 	/**
 	 * The "MazePanel" constructor.
@@ -62,6 +67,8 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 		height --;
 		length --;
 		this.movesMade = 0;
+		goalX = 0;
+		goalY = 0;
 		labelGrid = new JLabel[height][length];
 		this.height = height;
 		this.length = length;
@@ -72,7 +79,8 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 		homeGlassPane = new JPanel();
 		homeGlassPane.setPreferredSize(new Dimension(700, 700));		
 		this.iconWidth = iconSize;
-		
+		timerCheck = false;
+		timer = new Timer();
 		initMaze();
 
 	}
@@ -85,6 +93,7 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 		boolean check = false;
 		int x = 0;
 		int y = 0;
+		player = new Player(0, 0, iconWidth, iconWidth, 0);
         for(int i=0; i < height; i++){
         	for(int j=0; j < length; j++){
         		if(mainMaze.isEmpty(i,j) == false){
@@ -157,11 +166,14 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 		triForce.setPreferredSize(new Dimension(10,10));
 		triForce.setMaximumSize(new Dimension(10,10));
     	labelGrid[x][y] = triForce;
+    	goalX = x;
+    	goalY = y;
         for(int i=0; i < height; i++){
         	for(int j=0; j < length; j++){
         			this.add(labelGrid[i][j]);
         	}
         }
+		
         
 	}
 	
@@ -229,6 +241,10 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 	 */
 	@Override
 	public void keyPressed(KeyEvent e) {
+		if(timerCheck == false){
+			startTimer();
+			timerCheck = true;
+		}
 		this.movesMade++;
 		System.out.println(this.movesMade);
 		if(e.getKeyCode() == KeyEvent.VK_RIGHT){
@@ -275,6 +291,7 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 				labelGrid[i][j] = blank;
 			
 			}
+			refreshMaze();
 		}
 		
 		if(e.getKeyCode() == KeyEvent.VK_UP){
@@ -298,6 +315,7 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
     			blank.setMaximumSize(new Dimension(10,10));
 				labelGrid[i][j] = blank;
 			}
+			refreshMaze();
 		}
 		
 		if(e.getKeyCode() == KeyEvent.VK_DOWN){
@@ -324,6 +342,7 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 				
 
 			}
+			refreshMaze();
 		}
 		//if the user presses space, they shoot stuff
 		if (e.getKeyCode() == KeyEvent.VK_SPACE){
@@ -348,6 +367,7 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 					//draw a fire ball/object
 				}
 			}
+			refreshMaze();
 			
 		}
 		
@@ -369,14 +389,20 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 		blank.setMinimumSize(new Dimension(10,10));
 		blank.setPreferredSize(new Dimension(10,10));
 		blank.setMaximumSize(new Dimension(10,10));
-		//Make it blank
-		labelGrid[predator.getRow()][predator.getCol()] = blank;
-		//Move predator
-		predator.makeMove(player.getILocation(), player.getJLocation());
-		//Put him in the new spot
-		predPlayer.setILocation(predator.getRow());
-		predPlayer.setJLocation(predator.getCol());
-		labelGrid[predator.getRow()][predator.getCol()] = predPlayer;
+		//This is an edit, all of this is now done in the MyTimerTask class
+		
+//		//Make it blank
+//		labelGrid[predator.getRow()][predator.getCol()] = blank;
+//		//Move predator
+//	//	predator.makeMove(player.getILocation(), player.getJLocation());
+//		//Put him in the new spot
+//		predPlayer.setILocation(predator.getRow());
+//		predPlayer.setJLocation(predator.getCol());
+//		labelGrid[predator.getRow()][predator.getCol()] = predPlayer;
+		
+		if(player.getILocation() == goalX && player.getJLocation() == goalY){
+			System.out.println("YOU WIN");
+		}
 		refreshMaze();
 		
 	}
@@ -389,9 +415,11 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 		for(int a=0; a < height; a++){
         	for(int b=0; b < length; b++){
 				//System.out.println(a + " " + b);
-        			this.add(labelGrid[a][b]);
+        			this.add(labelGrid[a][b]);        	
+
         		}
         	}
+    	labelGrid[goalX][goalY] = triForce;
 		revalidate();
 		repaint();
 	}
@@ -406,6 +434,9 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 		
 	}
 
+	public void startTimer(){
+        timer.schedule(new MyTimerTask(predator, player, predPlayer, labelGrid, this), 1000, 500);
+	}
 	
 	
 	
