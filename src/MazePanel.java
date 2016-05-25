@@ -428,7 +428,7 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 	}
 
 	public void startTimer(){
-        timer.schedule(new MyTimerTask(predator, player, predPlayer, labelGrid, this, enemySpeed), 0, enemySpeed);
+        timer.schedule(new MyTimerTask(predator, player, predPlayer, labelGrid, this, enemySpeed, parentPanel), 0, enemySpeed);
         
 	}
 	

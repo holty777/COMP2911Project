@@ -38,6 +38,7 @@ public class GameStatisticsPanel extends JPanel {
 	private JLabel msg;
 	private JLabel modeLabel;
 	private JLabel modeDescription;
+	private JLabel timeLabel;
 
 	/**
 	 * The "GameStatisticsPanel" constructor.
@@ -84,9 +85,11 @@ public class GameStatisticsPanel extends JPanel {
 		gc.gridy = 3;
 		add(msg, gc);
 
-		modeLabel = new JLabel();
+		timeLabel = new JLabel("Time Elapsed: ");
+		timeLabel.setFont(new Font("Arial", Font.BOLD, 20));
+
 		gc.gridy = 4;
-		add(modeLabel, gc);
+		add(timeLabel, gc);
 
 		modeDescription = new JLabel();
 		gc.gridy = 5;
@@ -160,4 +163,7 @@ public class GameStatisticsPanel extends JPanel {
 		else msg.setText(player2.getName() + " wins!");
 	}
 
+	public void setTimeLabel(int i){
+		timeLabel.setText("Time Elapsed: " + i);
+	}
 }

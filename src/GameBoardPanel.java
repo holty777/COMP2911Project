@@ -221,6 +221,9 @@ public class GameBoardPanel extends JPanel {
 		this.add(mainMaze, BorderLayout.CENTER);
 	}
 
+	public GameWindow getGameWindow(){
+		return gameWindow;
+	}
 		
 	
 }
