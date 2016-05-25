@@ -39,7 +39,8 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 	private Player player;
 	// The target 
 	private Player triForce;
-	
+	// Icon Width
+	private int iconWidth;
 	private Player predPlayer;
 	// The game layout
 	private GridLayout grid;
@@ -57,7 +58,7 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 	 * @param height	The height of the maze.
 	 * @param length	The length/width of the maze.
 	 */
-	public MazePanel(int height, int length) {
+	public MazePanel(int height, int length, int iconSize) {
 		height --;
 		length --;
 		this.movesMade = 0;
@@ -69,9 +70,8 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 		this.setLayout(grid);
 		this.predator = new Predator(mainMaze);
 		homeGlassPane = new JPanel();
-		homeGlassPane.setPreferredSize(new Dimension(700, 700));
-		
-		
+		homeGlassPane.setPreferredSize(new Dimension(700, 700));		
+		this.iconWidth = iconSize;
 		
 		initMaze();
 
@@ -89,7 +89,7 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
         	for(int j=0; j < length; j++){
         		if(mainMaze.isEmpty(i,j) == false){
         			if(check == false){
-        				player = new Player(i, j, 25, 25, 0);
+        				player = new Player(i, j, iconWidth, iconWidth, 0);
         				player.setMinimumSize(new Dimension(10,10));
         				player.setPreferredSize(new Dimension(10,10));
         				player.setMaximumSize(new Dimension(10,10));
@@ -146,13 +146,13 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
         	
         }
         predator.setStart(x, 1);
-        predPlayer = new Player(x, 0, 25, 25, 2);
+        predPlayer = new Player(x, 0, iconWidth, iconWidth, 2);
 		predPlayer.setMinimumSize(new Dimension(10,10));
 		predPlayer.setPreferredSize(new Dimension(10,10));
 		predPlayer.setMaximumSize(new Dimension(10,10));
     	labelGrid[x][1] = predPlayer;
     	
-        triForce = new Player(x, y, 25, 25, 1);
+        triForce = new Player(x, y, iconWidth, iconWidth, 1);
 		triForce.setMinimumSize(new Dimension(10,10));
 		triForce.setPreferredSize(new Dimension(10,10));
 		triForce.setMaximumSize(new Dimension(10,10));
@@ -398,6 +398,11 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
+		
+	}
+
+	public void setIconSize(int i) {
+		iconWidth = i;
 		
 	}
 

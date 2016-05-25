@@ -32,6 +32,7 @@ public class GameEngine implements Runnable {
 	 */
 	public void startNewGame(int gameMode, Player player1, Player player2,
 			GameBoardPanel gameBoardPanel) {
+
 		this.gameMode = gameMode;
 		this.gameBoardPanel = gameBoardPanel;
 		gameBoardPanel.setMaze(gameMode);

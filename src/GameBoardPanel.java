@@ -209,15 +209,18 @@ public class GameBoardPanel extends JPanel {
 	 */
 	public void setMaze(int gameMode){
 		if(gameMode == 0){
-			testMaze = new MazePanel(20,20);
+			testMaze = new MazePanel(20,20,35);
 		} else if(gameMode == 1){
-			testMaze = new MazePanel(30,30);
+			testMaze = new MazePanel(30,30,25);
 		} else if(gameMode == 2){
-			testMaze = new MazePanel(40,40);
+			testMaze = new MazePanel(40,40,20);
 		} else {
-			testMaze = new MazePanel(100,100);
+			testMaze = new MazePanel(100,100,10);
 		}
 			
 		this.add(testMaze, BorderLayout.CENTER);
 	}
+
+		
+	
 }
