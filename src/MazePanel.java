@@ -57,6 +57,7 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 	private int goalY;
 	private Boolean timerCheck;
 	private Timer timer;
+	private int enemySpeed;
 	
 	/**
 	 * The "MazePanel" constructor.
@@ -81,6 +82,14 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 		this.iconWidth = iconSize;
 		timerCheck = false;
 		timer = new Timer();
+		if(iconSize == 35){
+			enemySpeed = 500;
+		} else if(iconSize == 25){
+			enemySpeed = 350;
+		} else {
+			enemySpeed = 250;
+		}
+		
 		initMaze();
 
 	}
@@ -429,13 +438,8 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 		
 	}
 
-	public void setIconSize(int i) {
-		iconWidth = i;
-		
-	}
-
 	public void startTimer(){
-        timer.schedule(new MyTimerTask(predator, player, predPlayer, labelGrid, this), 1000, 500);
+        timer.schedule(new MyTimerTask(predator, player, predPlayer, labelGrid, this), 1000, enemySpeed);
 	}
 	
 	
