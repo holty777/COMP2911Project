@@ -1,5 +1,7 @@
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.io.IOException;
+
 import javax.swing.JFrame;
 
 /**
@@ -25,8 +27,9 @@ public class GameWindow extends JFrame {
 	 * @param mg	The MazePuzzelGame, a class containing information
 	 * 				about the display of the maze.
 	 * @param title
+	 * @throws IOException 
 	 */
-	public GameWindow(MazePuzzleGame mg, String title) {
+	public GameWindow(MazePuzzleGame mg, String title) throws IOException {
 		super(title);
 		mainGame = mg;
 

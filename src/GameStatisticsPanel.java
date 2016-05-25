@@ -2,9 +2,14 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -39,9 +44,9 @@ public class GameStatisticsPanel extends JPanel {
 	 * 				about the display of the whole screen.
 	 * @param mg	The MazePuzzelGame, a class containing information
 	 * 				about the display of the maze.
+	 * @throws IOException 
 	 */
-	public GameStatisticsPanel(GameWindow gw, MazePuzzleGame mg) {
-
+	public GameStatisticsPanel(GameWindow gw, MazePuzzleGame mg) throws IOException {
 		mainGame = mg;
 		gameWindow = gw;
 		gameEngine = mainGame.getGameEngine();
@@ -56,7 +61,15 @@ public class GameStatisticsPanel extends JPanel {
 		gc.gridx = 0;
 		gc.gridy = 0;
 		gc.anchor = GridBagConstraints.WEST;
-
+		Image img = ImageIO.read(new File("src/MenuPic.png"));
+		ImageIcon imgI = new ImageIcon(img);
+		JLabel menu = new JLabel();
+		menu.setIcon(imgI);
+//		// Button for Single Player
+		gc.gridx = 0;
+		gc.gridy = 0;
+		add(menu);
+		gc.gridy = 1;
 		// who's turn
 		player1 = new JLabel();
 		add(player1, gc);

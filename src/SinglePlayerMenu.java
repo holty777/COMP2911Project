@@ -3,6 +3,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -98,14 +99,21 @@ public class SinglePlayerMenu extends JPanel {
 		startGame.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 
-				GameWindow singlePlayerWindow = new GameWindow(mainGame,
-						"Single Player Game");
+				GameWindow singlePlayerWindow;
+				try {
+					singlePlayerWindow = new GameWindow(mainGame,
+							"Single Player Game");
+				
 				singlePlayerWindow.startSinglePlayerGame(
 						playerNameField.getText(), AIMode);
 
 				singlePlayerWindow.setVisible(true);
 				mainGame.setVisibility(false);
 				MenuPanel.closeJOptionPanel();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		add(startGame, gc);

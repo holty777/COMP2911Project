@@ -1,9 +1,15 @@
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -15,7 +21,7 @@ public class MenuPanel extends JPanel {
 	
 	private MazePuzzleGame mainGame;
 	
-	public MenuPanel(MazePuzzleGame mg) {
+	public MenuPanel(MazePuzzleGame mg) throws IOException {
 		mainGame = mg;
 		
 		setLayout(new GridBagLayout());
@@ -28,18 +34,23 @@ public class MenuPanel extends JPanel {
 		gc.weighty = 10;
 		gc.fill = GridBagConstraints.BOTH;
 
-		// Button for Single Player
-		gc.gridx = 0;
+		Image img = ImageIO.read(new File("src/MenuPic.png"));
+		ImageIcon imgI = new ImageIcon(img);
+		JLabel menu = new JLabel();
+		menu.setIcon(imgI);
+//		// Button for Single Player
+	gc.gridx = 0;
 		gc.gridy = 0;
-		JLabel currentHighScore = new JLabel(" Current High Score: ");
-		add(currentHighScore, gc);
+		add(menu);
+//		JLabel currentHighScore = new JLabel(" Current High Score: ");
+//		add(currentHighScore, gc);
 		gc.gridy = 1;
-		JLabel singlePlayerHighScores = new JLabel(" Single Player High Scores:");
-		add(singlePlayerHighScores, gc);
-		gc.gridy = 2;
-		JLabel doublePlayerHighScores = new JLabel(" Double Player High Scores:");
-		add(doublePlayerHighScores, gc);
-		gc.gridy = 3;
+//		JLabel singlePlayerHighScores = new JLabel(" Single Player High Scores:");
+//		add(singlePlayerHighScores, gc);
+//		gc.gridy = 2;
+//		JLabel doublePlayerHighScores = new JLabel(" Double Player High Scores:");
+//		add(doublePlayerHighScores, gc);
+//		gc.gridy = 3;
 
 		JButton singlePlayerButton = new JButton("Single Player");
 

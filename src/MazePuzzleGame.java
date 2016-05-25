@@ -20,7 +20,7 @@ public class MazePuzzleGame implements Runnable {
 	public MazePuzzleGame(GameEngine ge) throws IOException {
 		this.gameEngine = ge;
 		
-		mainFrame = new JFrame("Maze Puzzle Game");
+		mainFrame = new JFrame("Mario's Maze");
 		mainFrame.setSize(1000, 700);
 		mainFrame.setLocationRelativeTo(null);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -29,7 +29,7 @@ public class MazePuzzleGame implements Runnable {
 		menuPanel.setPreferredSize(new Dimension(300, 700));
 
 		homeGlassPane = new JPanel();
-		homeGlassPane.setPreferredSize(new Dimension(700, 700));
+		homeGlassPane.setPreferredSize(new Dimension(100, 100));
 		
 		gamePanel = new GameBoardPanel(null, this);
 		gamePanel.setPreferredSize(new Dimension(700, 700));
@@ -52,7 +52,7 @@ public class MazePuzzleGame implements Runnable {
 			homeGlassPane.setVisible(true);
 		}
 		mainFrame.getContentPane().add(menuPanel, BorderLayout.WEST);
-		mainFrame.getContentPane().add(gamePanel, BorderLayout.EAST);
+		//mainFrame.getContentPane().add(gamePanel, BorderLayout.EAST);
 		mainFrame.setResizable(false);
 		mainFrame.pack();
 		mainFrame.setVisible(true);

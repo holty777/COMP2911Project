@@ -2,6 +2,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -20,7 +22,6 @@ import javax.swing.JTextField;
  *
  */
 public class DoublePlayersMenu extends JPanel {
-
 	private static final long serialVersionUID = 1L;
 
 	private MazePuzzleGame mainGame;
@@ -36,7 +37,7 @@ public class DoublePlayersMenu extends JPanel {
 		setLayout(new GridBagLayout());
 		GridBagConstraints gc = new GridBagConstraints();
 		gc.weightx = 0;
-		gc.weighty = 0;
+		gc.weighty = 1;
 		gc.fill = GridBagConstraints.BOTH;
 
 		// user name input
@@ -64,14 +65,21 @@ public class DoublePlayersMenu extends JPanel {
 		JButton startGame = new JButton("Start Game");
 		startGame.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				GameWindow doublePlayersWindow = new GameWindow(mainGame,
-						"Double Players Game");
+				GameWindow doublePlayersWindow;
+				try {
+					doublePlayersWindow = new GameWindow(mainGame,
+							"Double Players Game");
+				
 				doublePlayersWindow.startDoublePlayersGame(
 						player1NameField.getText(), player2NameField.getText());
 				mainGame.changeGlassPane(-1);
 				doublePlayersWindow.setVisible(true);
 				mainGame.setVisibility(false);
 				MenuPanel.closeJOptionPanel();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		add(startGame, gc);
