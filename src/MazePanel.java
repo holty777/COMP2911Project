@@ -31,7 +31,6 @@ import java.awt.Image;
 public class MazePanel extends JPanel implements MouseListener, KeyListener {
 	
 	private JPanel homeGlassPane;
-	private JFrame mainFrame;
 	// The height of the maze.
 	private int height;
 	// The length of the maze
@@ -133,7 +132,7 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
         			}
         			else{
         				JLabel full = new JLabel();
-        				full.setBackground(Color.white);
+        				//full.setBackground(Color.white);
         				full.setOpaque(true);
         				full.setMinimumSize(new Dimension(10,10));
         				full.setPreferredSize(new Dimension(10,10));
@@ -282,7 +281,7 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 				player.setJLocation(j+1);
 				labelGrid[i][j+1] = player;
 				JLabel blank = new JLabel();
-				blank.setBackground(Color.white);
+			//	blank.setBackground(Color.white);
     			blank.setOpaque(true);
     			blank.setMinimumSize(new Dimension(10,10));
     			blank.setPreferredSize(new Dimension(10,10));
@@ -304,7 +303,7 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 				player.setJLocation(j-1);
 				labelGrid[i][j-1] = player;
 				JLabel blank = new JLabel();
-				blank.setBackground(Color.white);
+				//blank.setBackground(Color.white);
     			blank.setOpaque(true);
     			blank.setMinimumSize(new Dimension(10,10));
     			blank.setPreferredSize(new Dimension(10,10));
@@ -329,7 +328,7 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 				player.setJLocation(j);
 				labelGrid[i-1][j] = player;
 				JLabel blank = new JLabel();
-				blank.setBackground(Color.white);
+				//blank.setBackground(Color.white);
     			blank.setOpaque(true);
     			blank.setMinimumSize(new Dimension(10,10));
     			blank.setPreferredSize(new Dimension(10,10));
@@ -354,7 +353,7 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 				player.setJLocation(j);
 				labelGrid[i+1][j] = player;
 				JLabel blank = new JLabel();
-				blank.setBackground(Color.white);
+				//blank.setBackground(Color.white);
     			blank.setOpaque(true);
     			blank.setMinimumSize(new Dimension(10,10));
     			blank.setPreferredSize(new Dimension(10,10));
@@ -398,29 +397,9 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 		if(e.getKeyCode() == KeyEvent.VK_Q){
 			System.exit(0);
 		}
-		
-		
-		
-//		//Blank
-//		JLabel blank = new JLabel();
-//		blank.setBackground(Color.white);
-//		blank.setOpaque(true);
-//		blank.setMinimumSize(new Dimension(10,10));
-//		blank.setPreferredSize(new Dimension(10,10));
-//		blank.setMaximumSize(new Dimension(10,10));
-//		//This is an edit, all of this is now done in the MyTimerTask class
-//		
-////		//Make it blank
-////		labelGrid[predator.getRow()][predator.getCol()] = blank;
-////		//Move predator
-////	//	predator.makeMove(player.getILocation(), player.getJLocation());
-////		//Put him in the new spot
-////		predPlayer.setILocation(predator.getRow());
-////		predPlayer.setJLocation(predator.getCol());
-////		labelGrid[predator.getRow()][predator.getCol()] = predPlayer;
-//		
+
 		if(player.getILocation() == goalX && player.getJLocation() == goalY){
-			parentPanel.displayEndGame(player);
+			parentPanel.displayEndGame(1);
 		}
 		refreshMaze();
 		

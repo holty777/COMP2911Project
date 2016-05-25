@@ -31,7 +31,6 @@ public class GameBoardPanel extends JPanel {
 	private Player player1;
 	private Player player2;
 	private int gameMode; // 0 for simulation, 1 for single player, 2 for double player
-	private JPanel notification;
 	private int enemySpeed;
 	private int gameStartCheck;
 	/**
@@ -82,10 +81,13 @@ public class GameBoardPanel extends JPanel {
 	 * If the game has ended, display the winner.
 	 * @param winner The player who has won.
 	 */
-	public void displayEndGame(Player winner) {
+	public void displayEndGame(int i) {
 		//if (gameMode == 0)
 			//return; // stimulation
-		gameWindow.getStatisticsPanel().displayEndGame(winner);
+		if(i== 1){
+			gameEngine.suspendGame();
+			gameWindow.getStatisticsPanel().displayEndGame(i);
+		}
 	}
 
 	/**
@@ -97,9 +99,9 @@ public class GameBoardPanel extends JPanel {
 		// randomize first player for single player mode
 		if (gameMode != 0) {
 			if (randPlayer() == 0) {
-				Player temp = player1;
-				player1 = player2;
-				player2 = temp;
+				//Player temp = player1;
+				//player1 = player2;
+				//player2 = temp;
 			}
 			gameWindow.getStatisticsPanel().setPlayerNames(player1.getName(), player2.getName());
 		}

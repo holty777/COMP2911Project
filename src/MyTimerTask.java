@@ -29,7 +29,7 @@ public class MyTimerTask extends TimerTask {
 	public void run() {
 		if(timeElapsed > 2000){
 			JLabel blank = new JLabel();
-			blank.setBackground(Color.white);
+			//blank.setBackground(Color.white);
 			blank.setOpaque(true);
 			blank.setMinimumSize(new Dimension(10,10));
 			blank.setPreferredSize(new Dimension(10,10));

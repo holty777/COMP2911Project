@@ -13,6 +13,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 /**
  * The "GameStatisticsPanel" class extend JPanel and 
@@ -51,7 +52,7 @@ public class GameStatisticsPanel extends JPanel {
 		gameWindow = gw;
 		gameEngine = mainGame.getGameEngine();
 
-		setBackground(Color.WHITE);
+		//setBackground(Color.WHITE);
 
 		setLayout(new GridBagLayout());
 		GridBagConstraints gc = new GridBagConstraints();
@@ -71,10 +72,10 @@ public class GameStatisticsPanel extends JPanel {
 		add(menu);
 		gc.gridy = 1;
 		// who's turn
-		player1 = new JLabel();
+		player1 = new JLabel("Player 1: ");
 		add(player1, gc);
 		gc.gridy = 2;
-		player2 = new JLabel();
+		player2 = new JLabel("Player 2: ");
 		add(player2, gc);
 
 		gc.anchor = GridBagConstraints.SOUTH;
@@ -114,9 +115,11 @@ public class GameStatisticsPanel extends JPanel {
 	 */
 	public void setPlayerNames(String p1, String p2) {
 		//uncommenting crashes 
-		player1.setText(p1);
+		player1.setFont(new Font("Arial", Font.BOLD, 20));
+		player1.setText("Player 1 : " + p1);
 		player1.setName(p1);
-		player2.setText(p2);
+		player2.setFont(new Font("Arial", Font.BOLD, 20));
+		player2.setText("Player 2 : " + p2);
 		player2.setName(p2);
 		msg.setText("Game Started.");
 		msg.setForeground(Color.BLUE);
@@ -139,7 +142,7 @@ public class GameStatisticsPanel extends JPanel {
 	 */
 	public void displayEndGame(Player winner) {
 		if (winner == null) {
-			msg.setText("Board Full. Drew.");
+			msg.setText("Null wins");
 		} else {
 			msg.setText(winner.getName() + " wins!");
 			if (gameEngine.getCurrPlayerIndex() == 0) {
@@ -149,6 +152,12 @@ public class GameStatisticsPanel extends JPanel {
 			}
 		}
 		repaint();
+	}
+
+	public void displayEndGame(int i) {
+		if(i == 1)
+		msg.setText(player1.getName() + " wins!");
+		else msg.setText(player2.getName() + " wins!");
 	}
 
 }
