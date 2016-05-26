@@ -3,7 +3,6 @@ import java.awt.Dimension;
 import java.io.IOException;
 import javax.swing.JFrame;
 
-
 public class MazePuzzleGame implements Runnable {
 
 	private static Thread mazeGameThread;
