@@ -68,7 +68,7 @@ public class DoublePlayersMenu extends JPanel {
 				GameWindow doublePlayersWindow;
 				try {
 					doublePlayersWindow = new GameWindow(mainGame, "Double Players Game");
-					doublePlayersWindow.startDoublePlayersGame(player1NameField.getText(), player2NameField.getText());
+					doublePlayersWindow.startDoublePlayersGame(player1NameField.getText(), player2NameField.getText(), 30);
 					doublePlayersWindow.setVisible(true);
 					mainGame.setVisibility(false);
 					MenuPanel.closeJOptionPanel();
