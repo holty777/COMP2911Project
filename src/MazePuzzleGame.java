@@ -15,7 +15,7 @@ public class MazePuzzleGame implements Runnable {
 	private MenuPanel menuPanel;
 	private GameBoardPanel gamePanel;
 	private GameEngine gameEngine;
-	private JPanel homeGlassPane;
+	private JPanel glassPane;
 	
 	public MazePuzzleGame(GameEngine ge) throws IOException {
 		this.gameEngine = ge;
@@ -28,8 +28,8 @@ public class MazePuzzleGame implements Runnable {
 		menuPanel = new MenuPanel(this);
 		menuPanel.setPreferredSize(new Dimension(300, 700));
 
-		homeGlassPane = new JPanel();
-		homeGlassPane.setPreferredSize(new Dimension(100, 100));
+		glassPane = new JPanel();
+		glassPane.setPreferredSize(new Dimension(100, 100));
 		
 		gamePanel = new GameBoardPanel(null, this);
 		gamePanel.setPreferredSize(new Dimension(700, 700));
@@ -46,10 +46,10 @@ public class MazePuzzleGame implements Runnable {
 	}
 	
 	private void display() {
-		if (homeGlassPane != null) {
-			mainFrame.setGlassPane(homeGlassPane);
-			homeGlassPane.setOpaque(false);
-			homeGlassPane.setVisible(true);
+		if (glassPane != null) {
+			mainFrame.setGlassPane(glassPane);
+			glassPane.setOpaque(false);
+			glassPane.setVisible(true);
 		}
 		mainFrame.getContentPane().add(menuPanel, BorderLayout.WEST);
 		mainFrame.setResizable(false);
