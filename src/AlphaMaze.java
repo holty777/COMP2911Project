@@ -52,6 +52,8 @@ public class AlphaMaze {
 		//print();
 		//exit - win game
 		mazemtx[width-2][height-1] = 0;
+		//triforce location
+		mazemtx[width/2][height/2] = 0;
 	}
 	
 	/**
