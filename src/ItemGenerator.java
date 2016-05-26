@@ -21,6 +21,7 @@ public class ItemGenerator {
 	 * 
 	 */
 	public ItemGenerator (int numItems, AlphaMaze m){
+		this.ItemLocations = new ArrayList<ItemLoc>();
 		generateCoordinates(m, numItems);
 	} 
 

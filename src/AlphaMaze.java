@@ -26,6 +26,8 @@ public class AlphaMaze {
 	private int [][] mazemtx;
 	//private int [][] start;
 	//private int [][] end;
+	
+	private ArrayList<ItemLoc> ItemList;
 
 	/**
 	 * The constructor for the AlphaMaze class.
@@ -39,6 +41,11 @@ public class AlphaMaze {
 		//this.start = new int [1][1];
 		//this.end = new int [1][1];
 		contruct();
+		
+		//get a list of items
+		//get the number of items here
+		ItemGenerator newMazeItems = new ItemGenerator(6, this);
+		ItemList = newMazeItems.ArraygetItemLoc();
 	}
 
 	/**
@@ -401,6 +408,23 @@ public class AlphaMaze {
 	 */
 	public int getWidth (){
 		return this.width;
+	}
+
+	public boolean ItemLocCheck(int i, int j) {
+		//scan through the arraylist and check if there is an item in that arraylist
+		for (ItemLoc k: ItemList){
+			if (k.getX() == i && k.getY() == j) return true;
+		}
+		return false;
+	}
+	
+	public int getItemID(int i, int j){
+		for (ItemLoc k: ItemList){
+			if (k.getX() == i && k.getY() == j) return k.getItemType();
+		}
+		
+		//return -1 if there is no such item 
+		return -1;
 	}
 }
 
