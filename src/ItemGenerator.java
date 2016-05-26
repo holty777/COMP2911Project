@@ -13,11 +13,9 @@ public class ItemGenerator {
 	 * and it travels for 3,5,7 or breaks if it hits a wall
 	 * 2. freeze- freezes mario or the other player
 	 * 3. mini mario- slow mario down
-	 * 4. big mario destroy the map- if timer is end, mario turns big and stream 
-	 * 	  rolls the player
-	 * 5. star- invisicibility, increase player speed
-	 * 6. speed boost squares- boost the speed the player for a number of squares
-	 * 7. drop bombs- and make the whole line on go on fire
+	 * 4. speed boost- increase the speed of the player	
+	 * 5. drop bomb- drop a bomb and if the player walks over it, he respawn at the starting point
+	 * 6. star- invisicibility, increase player speed
 	 * 
 	 */
 	public ItemGenerator (int numItems, AlphaMaze m){
@@ -27,7 +25,7 @@ public class ItemGenerator {
 
 	public int randomItemType (){
 		Random Rand = new Random();
-		return (Rand.nextInt(7)+1);
+		return (Rand.nextInt(6)+1);
 
 	}
 
@@ -79,5 +77,14 @@ public class ItemGenerator {
 		//return -1 if there is no such item 
 		return -1;
 	}
-
+	
+	//remove the item from the array list 
+	public void popItem (int i, int j){
+		for (ItemLoc k: ItemLocations){
+			if (k.getX() == i && k.getY() == j){
+				ItemLocations.remove(k);
+				break;
+			}
+		}
+	}
 }

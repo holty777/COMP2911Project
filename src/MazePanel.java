@@ -4,7 +4,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Timer;
 import javax.swing.ImageIcon;
@@ -58,6 +57,10 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 	private GameBoardPanel parentPanel;
 	private Boolean enemyOff;
 	private Boolean pause = false;
+	
+	//arraylist of maze
+	private ItemGenerator newMazeItems;
+	
 	/**
 	 * The "MazePanel" constructor.
 	 * @param height	The height of the maze.
@@ -113,9 +116,8 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 	public void initMaze(){
 		
 		//some items here
-		ItemGenerator newMazeItems = new ItemGenerator(6, this.mainMaze);
-		//ArrayList <ItemLoc> ItemList = newMazeItems.ArraygetItemLoc();
-		
+		this.newMazeItems = new ItemGenerator(6, this.mainMaze);
+	
 		
 		
 		boolean check = false;
@@ -221,19 +223,9 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 		
 		for(int i=0; i < height; i++){
 			for(int j=0; j < length; j++){
-				if (newMazeItems.ItemLocCheck (i, j) == true && mainMaze.isEmpty(i, j) == false){
-					// print items here
-					//the type of item here 
-					/* 1. fireballs- shoot a fire ball in the direction on which the player is facing
-					* and it travels for 3,5,7 or breaks if it hits a wall
-					* 2. freeze- freezes mario or the other player
-					* 3. mini mario- slow mario down
-					* 4. big mario destroy the map- if timer is end, mario turns big and stream 
-					*   rolls the player
-					* 5. star- invisicibility, increase player speed
-					* 6. speed boost squares- boost the speed the player for a number of squares
-					* 7. drop bombs- and make the whole line on go on fire
-					* */
+				if (this.newMazeItems.ItemLocCheck (i, j) == true 
+						&& mainMaze.isEmpty(i, j) == false){
+					
 
 
 					//declare image
@@ -248,18 +240,18 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 					}else if (newMazeItems.getItemID(i, j) == 3){
 						image = new ImageIcon("src/item_mini.png");
 					}else if (newMazeItems.getItemID(i, j) == 4) {
-						image = new ImageIcon("src/item_big.png");
-					}else if (newMazeItems.getItemID(i, j) == 5){
-						image = new ImageIcon("src/item_star.png");
-					}else if (newMazeItems.getItemID (i, j) == 6){	
 						image = new ImageIcon("src/item_speed.png");
-					}else if (newMazeItems.getItemID(i, j) == 7){
+					}else if (newMazeItems.getItemID(i, j) == 5){
 						image = new ImageIcon("src/item_bomb.png");
+					}else if (newMazeItems.getItemID(i, j) == 6){
+						image = new ImageIcon("src/item_star.png");
 					}
+					//System.out.println("it broke at: "+i+"  "+j);
+					//System.out.println("the item id is "+newMazeItems.getItemID(i, j));
 					
 					Image image1 = image.getImage(); // transform it
 					//rescale it to the maze
-					Image newimg = image1.getScaledInstance(length, height,  
+					Image newimg = image1.getScaledInstance(length-1, height-1,  
 							java.awt.Image.SCALE_SMOOTH); 
 					image = new ImageIcon(newimg);
 
@@ -355,6 +347,10 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 			}
 			this.movesMade++;
 			System.out.println(this.movesMade);
+			
+			
+			
+			
 			if(e.getKeyCode() == KeyEvent.VK_RIGHT){
 				int i = player.getILocation();
 				int j = player.getJLocation();
@@ -363,6 +359,21 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 
 
 				if(mainMaze.isEmpty(i, j+1) == false){
+					
+					//check if the next square is an item
+					if (this.newMazeItems.ItemLocCheck(i,j+1)){
+						//set attribute to the player and remove from maze
+						System.out.println("*******************");
+						System.out.println("found a item to pickup");
+						System.out.println("*******************");
+						//remove and add attribute
+						player.setAttribute(this.newMazeItems.getItemID(i, j+1));
+						System.out.println("the attribute set: "+this.newMazeItems.getItemID(i, j+1));
+						System.out.println("********************");
+						this.newMazeItems.popItem(i, j+1);	
+					}
+
+					
 					//change graphics
 					player.changeGraphicMovement();
 					player.setILocation(i);
@@ -377,6 +388,9 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 					blank.setPreferredSize(new Dimension(10,10));
 					blank.setMaximumSize(new Dimension(10,10));
 					labelGrid[i][j] = blank;
+					
+					//set the last post
+					player.setLastLoc(i,j);
 				}
 			}
 
@@ -387,6 +401,24 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 				int i = player.getILocation();
 				int j = player.getJLocation();
 				if(mainMaze.isEmpty(i, j-1) == false){
+					
+					
+					//check if the next square is an item
+					if (this.newMazeItems.ItemLocCheck(i,j-1)){
+						//set attribute to the player and remove from maze
+						System.out.println("*******************");
+						System.out.println("found a item to pickup");
+						System.out.println("*******************");
+						//remove and add attribute
+						player.setAttribute(this.newMazeItems.getItemID(i, j-1));
+						System.out.println("the attribute set: "+this.newMazeItems.getItemID(i, j-1));
+						System.out.println("********************");
+						this.newMazeItems.popItem(i, j-1);	
+					}
+					
+					
+					
+					
 					//change graphics
 					player.changeGraphicMovement();
 					player.setILocation(i);
@@ -399,7 +431,9 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 					blank.setPreferredSize(new Dimension(10,10));
 					blank.setMaximumSize(new Dimension(10,10));
 					labelGrid[i][j] = blank;
-
+					
+					//set the last post
+					player.setLastLoc(i,j);
 				}
 				refreshMaze();
 			}
@@ -412,6 +446,21 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 				player.setLastDirection(1);
 
 				if(mainMaze.isEmpty(i-1, j) == false){
+					
+					//check if the next square is an item
+					if (this.newMazeItems.ItemLocCheck(i-1,j)){
+						//set attribute to the player and remove from maze
+						System.out.println("*******************");
+						System.out.println("found a item to pickup");
+						System.out.println("*******************");
+						//remove and add attribute
+						player.setAttribute(this.newMazeItems.getItemID(i-1, j));
+						System.out.println("the attribute set: "+this.newMazeItems.getItemID(i-1, j));
+						System.out.println("********************");
+						this.newMazeItems.popItem(i-1, j);	
+					}
+					
+					
 					//change graphics
 					player.changeGraphicMovement();
 					player.setILocation(i-1);
@@ -424,6 +473,10 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 					blank.setPreferredSize(new Dimension(10,10));
 					blank.setMaximumSize(new Dimension(10,10));
 					labelGrid[i][j] = blank;
+					
+					//set the last post
+					player.setLastLoc(i,j);
+	
 				}
 				refreshMaze();
 			}
@@ -437,6 +490,20 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 				player.setLastDirection(3);
 
 				if(mainMaze.isEmpty(i+1, j) == false){
+					
+					//check if the next square is an item
+					if (this.newMazeItems.ItemLocCheck(i+1,j)){
+						//set attribute to the player and remove from maze
+						System.out.println("*******************");
+						System.out.println("found a item to pickup");
+						System.out.println("*******************");
+						//remove and add attribute
+						player.setAttribute(this.newMazeItems.getItemID(i+1, j));
+						System.out.println("the attribute set: "+this.newMazeItems.getItemID(i+1, j));
+						System.out.println("********************");
+						this.newMazeItems.popItem(i+1, j);	
+					}
+					
 					//change graphics
 					player.changeGraphicMovement();
 					player.setILocation(i+1);
@@ -450,7 +517,8 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 					blank.setMaximumSize(new Dimension(10,10));
 					labelGrid[i][j] = blank;
 
-
+					//set the last post
+					player.setLastLoc(i,j);
 				}
 				refreshMaze();
 			}
@@ -558,28 +626,60 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 			}
 
 
-			//if the user presses space, they shoot stuff
+			//if the user presses space, they shoot stuff and drop traps
 			if (e.getKeyCode() == KeyEvent.VK_SPACE){
-				int i = player.getILocation();
-				int j = player.getJLocation();
-				int direction = player.getlastDIR();
+				
+				ArrayList<Integer> lastPos = player.getLastLoc();	
+				
+				//create a new trap 
+				if (player.getAttribute() == 1){
+					//chuck a moving fire ball
+					//use the timer
+				}else if (player.getAttribute() == 2){
+					//decrement the attribute here
+					
+					
+					ImageIcon image = new ImageIcon("src/trap_freeze.png");
+					
+					//drawing the freeze trap
+					Image image1 = image.getImage(); // transform it
+					//rescale it to the maze
+					Image newimg = image1.getScaledInstance(length-1, height-1,  
+							java.awt.Image.SCALE_SMOOTH); 
+					image = new ImageIcon(newimg);
 
-				if (direction == 1){
-					if(mainMaze.isEmpty(i-1, j) == false){
-						//draw a fire ball/object
-					}
-				}else if (direction == 2){
-					if(mainMaze.isEmpty(i, j-1) == false){
-						//draw a fire ball/object
-					}
-				}else if (direction == 3){
-					if(mainMaze.isEmpty(i+1, j) == false){
-						//draw a fire ball or object
-					}
-				}else if (direction == 4){
-					if(mainMaze.isEmpty(i, j+1) == false){
-						//draw a fire ball/object
-					}
+					JLabel imageLabel = new JLabel(image);
+					imageLabel.setOpaque(true);
+					imageLabel.setMinimumSize(new Dimension(10,10));
+					imageLabel.setPreferredSize(new Dimension(10,10));
+					imageLabel.setMaximumSize(new Dimension(10,10));
+					labelGrid[lastPos.get(0)][lastPos.get(1)] = imageLabel;
+				}else if (player.getAttribute () == 4){
+					//jump two squares
+					System.out.println("the speed booster is in play");
+				}else if (player.getAttribute() == 5){
+					//add it to the trap list
+					
+					
+					//drop a trap bomb
+					
+					ImageIcon image = new ImageIcon("src/trap_bomb.png");
+					
+					//drawing the freeze trap
+					Image image1 = image.getImage(); // transform it
+					//rescale it to the maze
+					Image newimg = image1.getScaledInstance(length-1, height-1,  
+							java.awt.Image.SCALE_SMOOTH); 
+					image = new ImageIcon(newimg);
+
+					JLabel imageLabel = new JLabel(image);
+					imageLabel.setOpaque(true);
+					imageLabel.setMinimumSize(new Dimension(10,10));
+					imageLabel.setPreferredSize(new Dimension(10,10));
+					imageLabel.setMaximumSize(new Dimension(10,10));
+					labelGrid[lastPos.get(0)][lastPos.get(1)] = imageLabel;
+					
+					
 				}
 				refreshMaze();
 

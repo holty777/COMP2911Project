@@ -3,6 +3,7 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -35,10 +36,12 @@ public class Player extends JLabel {
 	private int attribute;
 	private int attributeRunTime;
 	//used to counter the number of fire ball
-	private int countattribute; 
+	private int countattribute;
+	private ArrayList<Integer> LastLoc; 
 
 
 	public Player(int i, int j, int height, int width, int character) {
+		this.LastLoc = new ArrayList <Integer>();
 		this.height = height;
 		this.width = width;
 		this.iLocation = i;
@@ -102,7 +105,8 @@ public class Player extends JLabel {
 	public void setJLocation(int j){
 		this.jLocation = j;
 	}
-
+	
+	//decrement the ability counter
 	public void decAttribute (){
 		if (this.attributeRunTime != 0){
 			this.attributeRunTime --;
@@ -114,7 +118,8 @@ public class Player extends JLabel {
 		}
 
 	}
-
+	
+	//decrement the playable ability counter ie amount of fire balls it have left to shoot
 	public void decCountAttribute (){
 		if (this.countattribute != 0){
 			this.countattribute --;
@@ -123,7 +128,8 @@ public class Player extends JLabel {
 			}
 		}
 	}
-
+	
+	//get the int attribute(ability the current player holds)
 	public int getAttribute(){
 		return this.attribute;
 	}
@@ -131,19 +137,21 @@ public class Player extends JLabel {
 	//set the player attribute
 	public void setAttribute (int attr){
 		/*
-		fireball : 1
-		freeze: 2
-		mini: 3
-		big: 4
-		star: 5
-		speed: 6
+		attribute directory
+		1. fireball
+		2. freeze trap
+		3. mini
+		4. speed/jump
+		5. bomb
+		6. star
+		
 		 */
 		//set attribute and set turns
 		this.attribute = attr;
 		switch (attr){
 		case(1): 
-			//the player gets to shoot 3xfire ball 
-			this.countattribute = 3;
+			//the player gets to shoot 2xfire ball 
+			this.countattribute = 2;
 		break;
 		case(2): 
 			//the enemy is frozen for 2 turns
@@ -154,14 +162,16 @@ public class Player extends JLabel {
 			this.attributeRunTime = 2;
 		break;
 		case(4):
-			//the run time will be till the game ends
-			this.attributeRunTime = -1;
+			//speed of the character 
+			this.countattribute = 1;
 		break;	
 		case(5):
-			this.attributeRunTime =  4;
+			//bomb
+			this.countattribute = 1;
 		break;
 		case(6):
-			this.attributeRunTime = 5;
+			//star attribute
+			this.attributeRunTime = 3;
 		break;
 		}
 
@@ -193,15 +203,28 @@ public class Player extends JLabel {
 	public void setLastDirection(int key){
 		this.previousDirection = key;
 	}
-
+	
+	//set the last location
+	public void setLastLoc(int i, int j){
+		this.LastLoc.clear();
+		this.LastLoc.add(i);
+		this.LastLoc.add(j);
+	}
+	
+	//get the last location
+	public ArrayList<Integer> getLastLoc (){
+		return this.LastLoc;
+	}
+	
+	
 	public void changeGraphicMovement (){
 		Image img = null;
 
-		System.out.println("shut up throws character id:"+this.id);
+		//System.out.println("shut up throws character id:"+this.id);
 		if (this.id == 0){
 			//link
 			try {
-				System.out.println("knees weak directio is :"+this.previousDirection);
+				//System.out.println("knees weak directio is :"+this.previousDirection);
 				//load north 
 				if (this.previousDirection == 1){
 					img = ImageIO.read(new File("src/link_back.png"));
@@ -216,7 +239,7 @@ public class Player extends JLabel {
 					img = ImageIO.read(new File("src/link_left.png"));
 				}
 				if (img == null){
-					System.out.println("mom spaghetti~");
+					//System.out.println("mom spaghetti~");
 				}
 				Image bimg = img.getScaledInstance(this.width, this.height-1,
 						Image.SCALE_SMOOTH);
@@ -229,7 +252,7 @@ public class Player extends JLabel {
 						Image.SCALE_SMOOTH);
 				BufferedImage dimg1 = toBufferedImage(bimg1);
 
-				ImageIcon link1 = new ImageIcon(dimg);
+				ImageIcon link1 = new ImageIcon(dimg1);
 
 				this.setIcon(link1);
 			} catch (IOException e) {
