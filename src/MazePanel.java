@@ -54,7 +54,7 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 	private int enemySpeed;
 	private GameBoardPanel parentPanel;
 	private Boolean enemyOff;
-
+	
 	/**
 	 * The "MazePanel" constructor.
 	 * @param height	The height of the maze.
@@ -509,6 +509,7 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 
 		if(player.getILocation() == goalX && player.getJLocation() == goalY){
 			parentPanel.displayEndGame();
+			
 		}
 		if(enemyOff == true){
 			if(player2.getILocation() == goalX && player2.getJLocation() == goalY){
