@@ -30,7 +30,6 @@ public class GameStatisticsPanel extends JPanel {
 
 	private GameWindow gameWindow;
 	private MazePuzzleGame mainGame;
-	private GameEngine gameEngine;
 
 	private JLabel player1;
 	private JLabel player2;
@@ -50,7 +49,6 @@ public class GameStatisticsPanel extends JPanel {
 	public GameStatisticsPanel(GameWindow gw, MazePuzzleGame mg) throws IOException {
 		mainGame = mg;
 		gameWindow = gw;
-		gameEngine = mainGame.getGameEngine();
 
 		//setBackground(Color.WHITE);
 
@@ -158,16 +156,12 @@ public class GameStatisticsPanel extends JPanel {
 	 * Display the winner at the end of the game.
 	 * @param winner	The winner.
 	 */
-	public void displayEndGame(Player winner) {
+	public void displayEndGame(String winner) {
 		if (winner == null) {
 			msg.setText("Null wins");
 		} else {
-			msg.setText(winner.getName() + " wins!");
-			if (gameEngine.getCurrPlayerIndex() == 0) {
-				msg.setForeground(new Color(255, 211, 2));
-			} else {
-				msg.setForeground(Color.RED);
-			}
+			msg.setText(winner + " wins!");
+			msg.setForeground(Color.RED);
 		}
 		repaint();
 	}
@@ -180,5 +174,13 @@ public class GameStatisticsPanel extends JPanel {
 
 	public void setTimeLabel(int i){
 		timeLabel.setText("Time Elapsed: " + i);
+	}
+	
+	public String getPlayer1(){
+		return player1.getText();
+	}
+	
+	public String getPlayer2(){
+		return player2.getText();
 	}
 }

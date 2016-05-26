@@ -3,7 +3,12 @@ import java.util.TimerTask;
 
 import javax.swing.JLabel;
 
-
+/**
+ * This class is a timer which keeps track of the time of the game elapsed
+ * and also the speed at which the predator (Mario) moves around the maze
+ * @author jhol149
+ *
+ */
 public class MyTimerTask extends TimerTask {
 
 	private Predator predator;
@@ -15,9 +20,21 @@ public class MyTimerTask extends TimerTask {
 	private int timeElapsed;
 	private boolean finished = false;
 	GameBoardPanel parentPanel;
+	private boolean enemyOff = false;
 
+	/**
+	 * 
+	 * @param predator		Mario
+	 * @param player 		The drawn position of our main character
+	 * @param predPlayer	The drawn position of Mario
+	 * @param labelGrid		An array with all the maze pictures
+	 * @param mazePanel		The JPanel which holds the maze
+	 * @param speed			Speed at which Mario chases us
+	 * @param parentPanel	The JPanel which holds the mazePanel
+	 * @param enemyOff 
+	 */
 	public MyTimerTask(Predator predator, Player player, Player predPlayer, JLabel[][] labelGrid, MazePanel mazePanel, int speed, 
-			GameBoardPanel parentPanel) {
+			GameBoardPanel parentPanel, Boolean enemyOff) {
 		this.predator = predator;
 		this.player = player;
 		this.mazePanel = mazePanel;
@@ -26,13 +43,17 @@ public class MyTimerTask extends TimerTask {
 		this.speed = speed;
 		timeElapsed = 0;
 		this.parentPanel = parentPanel;
+		this.enemyOff = enemyOff;
 	}
-
+	
+	/**
+	 * Updates the predators position as well as the timer.
+	 */
 	@Override
 	public void run() {
 		if (this.finished) return;
 		parentPanel.getGameWindow().getStatisticsPanel().setTimeLabel(timeElapsed/1000);
-		if(timeElapsed > 2000){
+		if(timeElapsed > 2000 && enemyOff == false){
 			JLabel blank = new JLabel();
 			//blank.setBackground(Color.white);
 			blank.setOpaque(true);

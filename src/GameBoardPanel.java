@@ -18,13 +18,12 @@ import javax.swing.JPanel;
  * 			Shiyuan Liang
  *
  */
-public class GameBoardPanel extends JPanel {
+public class GameBoardPanel extends JPanel implements Runnable {
 
 	private static final long serialVersionUID = 1L;
 
 	private GameWindow gameWindow;
 	private MazePuzzleGame mainGame;
-	private GameEngine gameEngine;
 	private MazePanel mainMaze;
 
 	// game data
@@ -33,6 +32,7 @@ public class GameBoardPanel extends JPanel {
 	private int gameMode; // 1 for single player, 2 for double player
 	private int enemySpeed;
 	private int gameStartCheck;
+	private int singleDouble;
 	/**
 	 * The constructor for the "GameBoardPanel" class.
 	 * @param gameWindow	
@@ -42,9 +42,8 @@ public class GameBoardPanel extends JPanel {
 	public GameBoardPanel(GameWindow gameWindow, MazePuzzleGame mainGame) {
 		this.gameWindow = gameWindow;
 		this.mainGame = mainGame;
-		gameEngine = mainGame.getGameEngine();
 		gameStartCheck = 0;
-
+		singleDouble = 1;
 		ImageIcon image = new ImageIcon("src/hedge.png");
 		JLabel imagelabel = new JLabel(image);
 		imagelabel.setOpaque(true);
@@ -53,7 +52,7 @@ public class GameBoardPanel extends JPanel {
 		imagelabel.setMaximumSize(new Dimension(700,700));
 
 		JLabel thumb = new JLabel();
-		System.out.println(imagelabel);
+		//System.out.println(imagelabel);
 		thumb.setIcon(image);
 		//setLayout(new GridLayout(6, 7));
 
@@ -71,11 +70,11 @@ public class GameBoardPanel extends JPanel {
 
 	/**
 	 * If the game has ended, display the winner.
+	 * @param string 
 	 * @param winner The player who has won.
 	 */
 	public void displayEndGame() {
 		int i = 1;
-		gameEngine.suspendGame();
 		gameWindow.getStatisticsPanel().displayEndGame(i);
 	}
 
@@ -98,14 +97,15 @@ public class GameBoardPanel extends JPanel {
 	 */
 	public void pauseGame() {
 		mainGame.suspendGame();
-		gameEngine.suspendGame();
 	}
 	/**
 	 * Start the new game.
 	 */
 	public void startNewGame() {
-
-		gameEngine.startNewGame(gameMode, player1, player2, this);
+		setMaze(gameMode, singleDouble);
+		getMaze().setFocusable(true);
+		getMaze().requestFocus();
+		getMaze().addKeyListener(getMaze());
 
 	}
 
@@ -153,7 +153,7 @@ public class GameBoardPanel extends JPanel {
 	 * @param name1	Name of player 1.
 	 * @param name2 Name of player 2.
 	 */
-	public void initDoublePlayersGame(String name1, String name2) {
+	public void initDoublePlayersGame(String name1, String name2, int mazeSize) {
 		// set default name if input is empty
 		if (name1 == null || name1.equals("")) {
 			name1 = "Player 1";
@@ -161,7 +161,7 @@ public class GameBoardPanel extends JPanel {
 		if (name2 == null || name2.equals("")) {
 			name2 = "Player 2";
 		}
-
+		gameMode = mazeSize;
 		// randomize user play order
 		/*if (randPlayer() == 0) {
 			player1 = new User(name1);
@@ -173,6 +173,7 @@ public class GameBoardPanel extends JPanel {
 
 		gameMode = 2;
 		gameWindow.getStatisticsPanel().setPlayerNames(name1, name2);
+		singleDouble = 2;
 		startNewGame();
 		updateStatisticsPanel();
 	}
@@ -198,13 +199,22 @@ public class GameBoardPanel extends JPanel {
 	 * Determine the size of the maze.
 	 * @param gameMode The difficulty of the maze. Number between 0-2.
 	 */
-	public void setMaze(int mazeSize){
-		mainMaze = new MazePanel(mazeSize,mazeSize,this, enemySpeed);	
+	public void setMaze(int mazeSize, int singleDouble){
+		if(singleDouble == 1){
+			mainMaze = new MazePanel(mazeSize,mazeSize,this, enemySpeed);
+		} else {
+			mainMaze = new MazePanel(30,30,this, 0);
+		}
 		this.add(mainMaze, BorderLayout.CENTER);
 	}
 
 	public GameWindow getGameWindow(){
 		return gameWindow;
+	}
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
 	}
 
 

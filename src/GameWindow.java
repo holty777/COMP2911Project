@@ -42,6 +42,7 @@ public class GameWindow extends JFrame {
 		gameStatisticsPanel.setPreferredSize(new Dimension(300, 700));
 		getContentPane().add(gameStatisticsPanel, BorderLayout.WEST);
 
+		
 		gameBoardPanel = new GameBoardPanel(this, mainGame);
 		gameBoardPanel.setPreferredSize(new Dimension(700, 700));
 		getContentPane().add(gameBoardPanel, BorderLayout.EAST);
@@ -81,8 +82,8 @@ public class GameWindow extends JFrame {
 	 * @param playerName	The name of player 1.
 	 * @param playerName2	The name of player 2.
 	 */
-	public void startDoublePlayersGame(String playerName, String playerName2) {
-		gameBoardPanel.initDoublePlayersGame(playerName, playerName2);
+	public void startDoublePlayersGame(String playerName, String playerName2, int mazeSize) {
+		gameBoardPanel.initDoublePlayersGame(playerName, playerName2, mazeSize);
 	}
 
 }
