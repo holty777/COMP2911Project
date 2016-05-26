@@ -7,12 +7,8 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 public class MazePuzzleGame implements Runnable {
 
-	private static Thread mazeGameThread;
-	private static Thread guiThread;
-
 	private JFrame mainFrame;
 	private MenuPanel menuPanel;
-	private GameBoardPanel gamePanel;
 
 	public MazePuzzleGame() throws IOException {
 
@@ -26,12 +22,14 @@ public class MazePuzzleGame implements Runnable {
 	}
 
 	public static void main(String[] args) throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
-
-		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		guiThread = new Thread(new MazePuzzleGame());
+		Thread guiThread = new Thread(new MazePuzzleGame());
 
 		guiThread.start();
 	}
+//	public static void main(String[] args) throws IOException {
+//		MazePuzzleGame game = new MazePuzzleGame();
+//
+//	}
 
 	private void display() {
 		mainFrame.getContentPane().add(menuPanel, BorderLayout.WEST);
@@ -50,11 +48,6 @@ public class MazePuzzleGame implements Runnable {
 
 	public JFrame getMainFrame() {
 		return mainFrame;
-	}
-
-	public void suspendGame() {
-		guiThread.interrupt();
-		mazeGameThread.interrupt();
 	}
 
 	@Override
