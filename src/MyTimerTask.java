@@ -44,6 +44,8 @@ public class MyTimerTask extends TimerTask {
 			labelGrid[predator.getRow()][predator.getCol()] = blank;
 			//Move predator
 			predator.makeMove(player.getILocation(), player.getJLocation());
+			predPlayer.setLastDirection(predator.getPreviousDirection());
+			predPlayer.changeGraphicMovement();
 			//Put him in the new spot
 			predPlayer.setILocation(predator.getRow());
 			predPlayer.setJLocation(predator.getCol());

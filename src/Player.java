@@ -250,7 +250,7 @@ public class Player extends JLabel {
 					img = ImageIO.read(new File("src/mario_run_right.png"));
 				}else if (this.previousDirection == 3){
 				//load south
-					img = ImageIO.read(new File("src/mario_run_right.png"));
+					img = ImageIO.read(new File("src/mario_stationary.png"));
 				}else if (this.previousDirection == 4){
 				//load west
 					img = ImageIO.read(new File("src/mario_run_left.png"));
@@ -260,9 +260,9 @@ public class Player extends JLabel {
 				        Image.SCALE_SMOOTH);
 				BufferedImage dimg = toBufferedImage(bimg);
 				
-				ImageIcon link = new ImageIcon(dimg);
+				ImageIcon mario = new ImageIcon(dimg);
 				
-				this.setIcon(link);
+				this.setIcon(mario);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}	

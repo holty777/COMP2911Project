@@ -9,7 +9,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-public class Predator extends JLabel{
+public class Predator{
 	private String name = null;
 	private int difficulty;
 	private AlphaMaze maze;
@@ -19,7 +19,6 @@ public class Predator extends JLabel{
 	private int mediumTime = 1;
 	private int headTime = 1;
 	
-	Image img = null;
 	private int width;
 	private int height;
 	
@@ -27,18 +26,12 @@ public class Predator extends JLabel{
 	
 	private int colValue = 0;
 	private int rowValue = 0;
+	
+	private int previousDirection = 3;
 
-	//Currently the AI moves when the player moves.
 	
 	public Predator(AlphaMaze m, int iconWidth, int iconHeight) {
 		this.maze = m;
-		try {
-			this.img = ImageIO.read(new File("src/mario_stationary.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		this.width = iconWidth;
-		this.height = iconHeight;
 	}
 	
 	public String getName() {
@@ -52,7 +45,11 @@ public class Predator extends JLabel{
 	public boolean won(){
 		return this.won;
 	}
-
+	
+	public int getPreviousDirection(){
+		System.out.println(this.previousDirection);
+		return this.previousDirection;
+	}
 	public void setStart(int row, int col){
 		this.colValue = col;
 		this.rowValue = row;
@@ -151,55 +148,28 @@ public class Predator extends JLabel{
 				end = end.getPreviousState();
 			}
 		}
-		setNewDirection(this.rowValue, this.colValue, end.getRow(), end.getCol());
+		changePreviousMovement(this.rowValue, this.colValue, end.getRow(), end.getCol());
 		this.rowValue = end.getRow();
 		this.colValue = end.getCol();
 		
-		
 	}
-
-	private void setNewDirection(int oldRow, int oldCol, int newRow, int newCol) {
+	
+	private void changePreviousMovement(int lastRow, int lastCol, int newRow, int newCol){
 		//Check up
-		if (oldRow+1 == newRow){
-			try {
-				this.img = ImageIO.read(new File("src/mario_run_back.png"));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+		if (lastRow+1 == newRow){
+			this.previousDirection = 3;
 		}
 		//Check down
-		else if (oldRow-1 == newRow){
-			try {
-				this.img = ImageIO.read(new File("src/mario_stationary.png"));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+		else if (lastRow-1 == newRow){
+			this.previousDirection = 1;
 		}
 		//check left
-		else if (oldCol+1 == newCol){
-			try {
-				this.img = ImageIO.read(new File("src/mario__run_left.png"));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+		else if (lastCol-1 == newCol){
+			this.previousDirection = 4;
 		}
 		//check right
-		else if (oldCol-1 == newCol){
-			try {
-				this.img = ImageIO.read(new File("src/mario_run_right.png"));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+		else if (lastCol+1 == newCol){
+			this.previousDirection = 2;
 		}
-		
-		Image bimg = img.getScaledInstance(this.width, this.height,
-		        Image.SCALE_SMOOTH);
-		BufferedImage dimg = toBufferedImage(bimg);
-		
-		ImageIcon link = new ImageIcon(dimg);
-		
-		this.setIcon(link);
-		//Didn't move, do nothing
-		
 	}
 }
