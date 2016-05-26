@@ -247,16 +247,16 @@ public class Player extends JLabel {
 			try {
 				//load north 
 				if (this.previousDirection == 1){
-					img = ImageIO.read(new File("src/link_stationary.png"));
+					img = ImageIO.read(new File("src/mario_run_back.png"));
 				}else if (this.previousDirection == 2){
 				//load east
-					img = ImageIO.read(new File("src/link_stationary.png"));
+					img = ImageIO.read(new File("src/mario_run_right.png"));
 				}else if (this.previousDirection == 3){
 				//load south
-					img = ImageIO.read(new File("src/link_stationary.png"));
+					img = ImageIO.read(new File("src/mario_run_right.png"));
 				}else if (this.previousDirection == 4){
 				//load west
-					img = ImageIO.read(new File("src/link_stationary.png"));
+					img = ImageIO.read(new File("src/mario_run_left.png"));
 				}
 				
 				Image bimg = img.getScaledInstance(this.width, this.height,
