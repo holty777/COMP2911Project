@@ -102,7 +102,7 @@ public class GameBoardPanel extends JPanel {
 	 * Start the new game.
 	 */
 	public void startNewGame() {
-		setMaze(gameMode, 1);
+		setMaze(gameMode, singleDouble);
 		getMaze().setFocusable(true);
 		getMaze().requestFocus();
 		getMaze().addKeyListener(getMaze());
