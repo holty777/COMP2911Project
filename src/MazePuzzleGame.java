@@ -5,8 +5,6 @@ import javax.swing.JFrame;
 
 public class MazePuzzleGame implements Runnable {
 
-	private static Thread guiThread;
-
 	private JFrame mainFrame;
 	private MenuPanel menuPanel;
 
@@ -22,8 +20,7 @@ public class MazePuzzleGame implements Runnable {
 	}
 
 	public static void main(String[] args) throws IOException {
-		guiThread = new Thread(new MazePuzzleGame());
-		guiThread.start();
+		new MazePuzzleGame();
 	}
 
 	private void display() {
@@ -43,10 +40,6 @@ public class MazePuzzleGame implements Runnable {
 
 	public JFrame getMainFrame() {
 		return mainFrame;
-	}
-
-	public void suspendGame() {
-		guiThread.interrupt();
 	}
 
 	@Override

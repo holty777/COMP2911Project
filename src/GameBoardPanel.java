@@ -82,7 +82,6 @@ public class GameBoardPanel extends JPanel implements Runnable {
 	 * Create and randomly generate the data to create a new double player game.
 	 */
 	public void restartNewGame() {
-		mainGame.suspendGame();
 
 		if (gameMode != 0) {
 			gameWindow.getStatisticsPanel().setPlayerNames(player1.getName(), player2.getName());
@@ -96,7 +95,6 @@ public class GameBoardPanel extends JPanel implements Runnable {
 	 * Create and randomly generate the data to create a new double player game.
 	 */
 	public void pauseGame() {
-		mainGame.suspendGame();
 	}
 	/**
 	 * Start the new game.
