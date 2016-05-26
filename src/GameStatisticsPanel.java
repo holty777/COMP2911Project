@@ -156,11 +156,11 @@ public class GameStatisticsPanel extends JPanel {
 	 * Display the winner at the end of the game.
 	 * @param winner	The winner.
 	 */
-	public void displayEndGame(Player winner) {
+	public void displayEndGame(String winner) {
 		if (winner == null) {
 			msg.setText("Null wins");
 		} else {
-			msg.setText(winner.getName() + " wins!");
+			msg.setText(winner + " wins!");
 			msg.setForeground(Color.RED);
 		}
 		repaint();
@@ -174,5 +174,13 @@ public class GameStatisticsPanel extends JPanel {
 
 	public void setTimeLabel(int i){
 		timeLabel.setText("Time Elapsed: " + i);
+	}
+	
+	public String getPlayer1(){
+		return player1.getText();
+	}
+	
+	public String getPlayer2(){
+		return player2.getText();
 	}
 }
