@@ -40,12 +40,12 @@ public class ItemGenerator {
 			int x_coordinate = Rand.nextInt(m.getHeight());
 			int y_coordinate = Rand.nextInt(m.getWidth());
 			
-			System.out.println("the coordinate generated for the item is at "+x_coordinate+" "+
-			y_coordinate);
+			//System.out.println("the coordinate generated for the item is at "+x_coordinate+" "+
+			//y_coordinate);
 
 			if (!m.isEmpty(y_coordinate, x_coordinate)){
-				System.out.println("the coordinate generated for the item is at "+x_coordinate+" "+
-						y_coordinate+" true");
+				//System.out.println("the coordinate generated for the item is at "+x_coordinate+" "+
+					//	y_coordinate+" true");
 				//creating new object
 				ItemLoc newitem = new ItemLoc(y_coordinate, x_coordinate, randomItemType());
 

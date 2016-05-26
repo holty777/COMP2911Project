@@ -257,6 +257,11 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 						image = new ImageIcon("src/item_bomb.png");
 					}
 					
+					Image image1 = image.getImage(); // transform it
+					//rescale it to the maze
+					Image newimg = image1.getScaledInstance(length, height,  
+							java.awt.Image.SCALE_SMOOTH); 
+					image = new ImageIcon(newimg);
 
 					JLabel imageLabel = new JLabel(image);
 					imageLabel.setOpaque(true);
@@ -362,6 +367,8 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 					player.changeGraphicMovement();
 					player.setILocation(i);
 					player.setJLocation(j+1);
+					//debug statement here 
+					System.out.println("the player being printer @ x, y"+i+" "+(j+1));
 					labelGrid[i][j+1] = player;
 					JLabel blank = new JLabel();
 					//	blank.setBackground(Color.white);
