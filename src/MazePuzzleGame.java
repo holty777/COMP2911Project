@@ -11,10 +11,8 @@ public class MazePuzzleGame implements Runnable {
 	private JFrame mainFrame;
 	private MenuPanel menuPanel;
 	private GameBoardPanel gamePanel;
-	private GameEngine gameEngine;
 
-	public MazePuzzleGame(GameEngine ge) throws IOException {
-		this.gameEngine = ge;
+	public MazePuzzleGame() throws IOException {
 
 		mainFrame = new JFrame("Mario's Maze");
 		mainFrame.setSize(300, 700);
@@ -30,11 +28,11 @@ public class MazePuzzleGame implements Runnable {
 
 	public static void main(String[] args) throws IOException {
 
-		mazeGameThread = new Thread(new GameEngine());
+		//mazeGameThread = new Thread(new GameEngine());
 
-		guiThread = new Thread(new MazePuzzleGame(new GameEngine()));
+		guiThread = new Thread(new MazePuzzleGame());
 
-		mazeGameThread.start();
+		//mazeGameThread.start();
 		guiThread.start();
 	}
 
@@ -49,10 +47,6 @@ public class MazePuzzleGame implements Runnable {
 		mainFrame.setVisible(visible);
 	}
 
-	public GameEngine getGameEngine() {
-		return gameEngine;
-	}
-
 	public MenuPanel getMenuPanel() {
 		return menuPanel;
 	}
@@ -62,7 +56,6 @@ public class MazePuzzleGame implements Runnable {
 	}
 
 	public void suspendGame() {
-		gameEngine.suspendGame();
 		guiThread.interrupt();
 		mazeGameThread.interrupt();
 	}

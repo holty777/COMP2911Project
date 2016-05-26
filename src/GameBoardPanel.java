@@ -24,7 +24,6 @@ public class GameBoardPanel extends JPanel {
 
 	private GameWindow gameWindow;
 	private MazePuzzleGame mainGame;
-	private GameEngine gameEngine;
 	private MazePanel mainMaze;
 
 	// game data
@@ -42,7 +41,6 @@ public class GameBoardPanel extends JPanel {
 	public GameBoardPanel(GameWindow gameWindow, MazePuzzleGame mainGame) {
 		this.gameWindow = gameWindow;
 		this.mainGame = mainGame;
-		gameEngine = mainGame.getGameEngine();
 		gameStartCheck = 0;
 
 		ImageIcon image = new ImageIcon("src/hedge.png");
@@ -75,7 +73,6 @@ public class GameBoardPanel extends JPanel {
 	 */
 	public void displayEndGame() {
 		int i = 1;
-		gameEngine.suspendGame();
 		gameWindow.getStatisticsPanel().displayEndGame(i);
 	}
 
@@ -98,14 +95,15 @@ public class GameBoardPanel extends JPanel {
 	 */
 	public void pauseGame() {
 		mainGame.suspendGame();
-		gameEngine.suspendGame();
 	}
 	/**
 	 * Start the new game.
 	 */
 	public void startNewGame() {
-
-		gameEngine.startNewGame(gameMode, player1, player2, this);
+		setMaze(gameMode);
+		getMaze().setFocusable(true);
+		getMaze().requestFocus();
+		getMaze().addKeyListener(getMaze());
 
 	}
 
