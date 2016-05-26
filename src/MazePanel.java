@@ -190,14 +190,27 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 			labelGrid[x][y-1] = player2;
 			player2.setName(parentPanel.getGameWindow().getStatisticsPanel().getPlayer2()); 
 		}
-		
-		triForce = new Player(x/2-1, y/2-1, iconWidth, iconWidth, 1);
+		int xPos, yPos;
+		if (this.length%2==0){
+			System.out.println("HELLO!!");
+			System.out.println(length/2);
+			System.out.println(height/2);
+			xPos = length/2;
+			yPos = height/2;
+		}else{
+			System.out.println("HELLO");
+			System.out.println((length+1)/2);
+			System.out.println((height+1)/2);
+			xPos = (length-1)/2;
+			yPos = (height-1)/2;
+		}
+		triForce = new Player(xPos, yPos, iconWidth, iconWidth, 1);
 		triForce.setMinimumSize(new Dimension(10,10));
 		triForce.setPreferredSize(new Dimension(10,10));
 		triForce.setMaximumSize(new Dimension(10,10));
-		labelGrid[x/2-1][y/2-1] = triForce;
-		goalX = x/2-1;
-		goalY = y/2-1;
+		labelGrid[xPos][yPos] = triForce;
+		goalX = xPos;
+		goalY = yPos;
 		for(int i=0; i < height; i++){
 			for(int j=0; j < length; j++){
 				this.add(labelGrid[i][j]);
