@@ -18,9 +18,8 @@ public class GameEngine implements Runnable {
 
 	private GameState currState;  // the current game state
 	private GameBoardPanel gameBoardPanel;  // the game board panel
-	private int gameMode;     // 0 for simulation, 1 for single player, 2 for double player
+	private int gameMode;     // 1 for single player, 2 for double player
 	private boolean isInGame; // game is in run
-	private int totalGame;    // number of game started
 	
 	/**
 	 * Create a new game.
@@ -40,7 +39,6 @@ public class GameEngine implements Runnable {
 		gameBoardPanel.getMaze().requestFocus();
 		gameBoardPanel.getMaze().addKeyListener(gameBoardPanel.getMaze());
 		this.currState = new GameState(player1, player2);
-		this.totalGame++;
 		this.isInGame = true;
 	}
 
@@ -59,17 +57,15 @@ public class GameEngine implements Runnable {
 			    }
 			});
 			SimpleTimer.start();
-			// start game run
-			int thisGame = this.totalGame;
 			/*
 			 * Run the game while the game is not over 
 			 * and it is the same game.
 			 */
-			while (isInGame && thisGame == this.totalGame) {
+			while (isInGame) {
 				Player currPlayer = this.currState.getCurrPlayer();
 
 				// check isInGame to avoid AI delay while screen jumping
-				if (!Thread.interrupted() && isInGame && thisGame == totalGame) {
+				if (!Thread.interrupted() && isInGame) {
 
 					// increment turn
 					this.currState.incTurn();
