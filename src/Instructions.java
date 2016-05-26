@@ -42,7 +42,7 @@ public class Instructions extends JPanel {
 		gc.gridy = 0;
 		JLabel firstLine = new JLabel("Hello!!!");
 		JLabel secondLine = new JLabel("Move through the maze with the arrow keys");
-		JLabel thirdLine = new JLabel("Try to reach the obelisc before Mario catches you");
+		JLabel thirdLine = new JLabel("Try to reach the obelisc and then exit before Mario catches you");
 		add(firstLine, gc);
 		gc.gridx = 0;
 		gc.gridy = 1;
