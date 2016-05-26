@@ -91,9 +91,11 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 			iconWidth = 35;
 		} else if(height <= 30){
 			iconWidth = 25;
-		} else if(height <= 40){
-			iconWidth = 15;
-		} else iconWidth = 5;
+		} else if(height <= 35){
+			iconWidth = 20;
+		}else if(height <= 40){
+			iconWidth = 18;
+		}else iconWidth = 15;
 		
 		if(enemySpeed2 == 0){
 			enemyOff = true;
