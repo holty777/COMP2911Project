@@ -1,6 +1,15 @@
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
-public class Predator {
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+
+public class Predator extends JLabel{
 	private String name = null;
 	private int difficulty;
 	private AlphaMaze maze;
@@ -10,6 +19,10 @@ public class Predator {
 	private int mediumTime = 1;
 	private int headTime = 1;
 	
+	Image img = null;
+	private int width;
+	private int height;
+	
 	private boolean won = false;
 	
 	private int colValue = 0;
@@ -17,8 +30,15 @@ public class Predator {
 
 	//Currently the AI moves when the player moves.
 	
-	public Predator(AlphaMaze m) {
+	public Predator(AlphaMaze m, int iconWidth, int iconHeight) {
 		this.maze = m;
+		try {
+			this.img = ImageIO.read(new File("src/mario_stationary.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		this.width = iconWidth;
+		this.height = iconHeight;
 	}
 	
 	public String getName() {
@@ -44,6 +64,25 @@ public class Predator {
 	
 	public int getRow(){
 		return this.rowValue;
+	}
+	
+	public static BufferedImage toBufferedImage(Image img)
+	{
+	    if (img instanceof BufferedImage)
+	    {
+	        return (BufferedImage) img;
+	    }
+
+	    // Create a buffered image with transparency
+	    BufferedImage bimage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+
+	    // Draw the image on to the buffered image
+	    Graphics2D bGr = bimage.createGraphics();
+	    bGr.drawImage(img, 0, 0, null);
+	    bGr.dispose();
+
+	    // Return the buffered image
+	    return bimage;
 	}
 	
 	public void makeMove(int playerRow, int playerCol) {
@@ -112,9 +151,55 @@ public class Predator {
 				end = end.getPreviousState();
 			}
 		}
+		setNewDirection(this.rowValue, this.colValue, end.getRow(), end.getCol());
 		this.rowValue = end.getRow();
 		this.colValue = end.getCol();
 		
+		
+	}
+
+	private void setNewDirection(int oldRow, int oldCol, int newRow, int newCol) {
+		//Check up
+		if (oldRow+1 == newRow){
+			try {
+				this.img = ImageIO.read(new File("src/mario_run_back.png"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		//Check down
+		else if (oldRow-1 == newRow){
+			try {
+				this.img = ImageIO.read(new File("src/mario_stationary.png"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		//check left
+		else if (oldCol+1 == newCol){
+			try {
+				this.img = ImageIO.read(new File("src/mario__run_left.png"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		//check right
+		else if (oldCol-1 == newCol){
+			try {
+				this.img = ImageIO.read(new File("src/mario_run_right.png"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		Image bimg = img.getScaledInstance(this.width, this.height,
+		        Image.SCALE_SMOOTH);
+		BufferedImage dimg = toBufferedImage(bimg);
+		
+		ImageIcon link = new ImageIcon(dimg);
+		
+		this.setIcon(link);
+		//Didn't move, do nothing
 		
 	}
 }

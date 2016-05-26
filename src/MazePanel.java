@@ -84,7 +84,6 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 		mainMaze = new AlphaMaze(height ,length );
 		grid = new GridLayout(height ,length);
 		this.setLayout(grid);
-		this.predator = new Predator(mainMaze);
 		homeGlassPane = new JPanel();
 		homeGlassPane.setPreferredSize(new Dimension(700, 700));		
 		timerCheck = false;
@@ -113,6 +112,7 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 		int x = 0;
 		int y = 0;
 		player = new Player(0, 0, iconWidth, iconWidth, 0);
+		this.predator = new Predator(mainMaze, iconWidth, iconWidth);
         for(int i=0; i < height; i++){
         	for(int j=0; j < length; j++){
         		if(mainMaze.isEmpty(i,j) == false){

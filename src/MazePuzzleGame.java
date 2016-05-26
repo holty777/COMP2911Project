@@ -76,6 +76,7 @@ public class MazePuzzleGame implements Runnable {
 	public void suspendGame() {
 		gameEngine.suspendGame();
 		guiThread.interrupt();
+		mazeGameThread.interrupt();
 	}
 	
 	@Override

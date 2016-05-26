@@ -50,7 +50,9 @@ public class MyTimerTask extends TimerTask {
 			labelGrid[predator.getRow()][predator.getCol()] = predPlayer;
 			mazePanel.refreshMaze();
 		}
-		if (predator.won()) this.finished = true;
+		if (predator.won()){
+			this.finished = true;
+		};
 		timeElapsed = timeElapsed + speed;
 		System.out.println("Time Elapsed = " + timeElapsed/1000 );
 	}

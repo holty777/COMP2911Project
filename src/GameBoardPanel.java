@@ -111,6 +111,13 @@ public class GameBoardPanel extends JPanel {
 	}
 
 	/**
+	 * Create and randomly generate the data to create a new double player game.
+	 */
+	public void pauseGame() {
+		mainGame.suspendGame();
+		gameEngine.suspendGame();
+	}
+	/**
 	 * Start the new game.
 	 */
 	public void startNewGame() {

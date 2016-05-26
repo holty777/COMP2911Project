@@ -106,8 +106,24 @@ public class GameStatisticsPanel extends JPanel {
 				//need a refreshMaze from mazepanel
 			}
 		});
+		
 		gc.gridy = 6;
 		add(restartGameButton, gc);
+		
+		JButton pauseGameButton = new JButton("Pause");
+		pauseGameButton.setContentAreaFilled(false);
+		pauseGameButton.setFocusPainted(false);
+		pauseGameButton.setBorderPainted(false);
+		pauseGameButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				gameWindow.getGameBoardPanel().pauseGame();
+				//need a refreshMaze from mazepanel
+			}
+		});
+		
+		gc.gridy = 8;
+		add(pauseGameButton, gc);
 
 	}
 
