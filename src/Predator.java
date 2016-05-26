@@ -95,7 +95,7 @@ public class Predator{
 
 			//If it hasn't been found.
 			//Check Up
-			if (!maze.isEmpty(cur.getRow()+1, cur.getCol())){
+			if (!maze.isEmpty(cur.getRow()+1, cur.getCol()) && !outOfBounds(cur.getRow()+1, cur.getCol())){
 				//Only add if the previous state was null
 				//Or we didn't just come from that direction
 				if (cur.getPreviousState()==null || cur.getPreviousState().getRow() != cur.getRow()+1){
@@ -104,7 +104,7 @@ public class Predator{
 				}
 			}
 			//Check down
-			if (!maze.isEmpty(cur.getRow()-1, cur.getCol())){
+			if (!maze.isEmpty(cur.getRow()-1, cur.getCol()) && !outOfBounds(cur.getRow()-1, cur.getCol())){
 				//Only add if the previous state was null
 				//Or we didn't just come from that direction
 				if (cur.getPreviousState()==null || cur.getPreviousState().getRow() != cur.getRow()-1){
@@ -113,7 +113,7 @@ public class Predator{
 				}
 			}
 			//Check left
-			if (!maze.isEmpty(cur.getRow(), cur.getCol()+1)){
+			if (!maze.isEmpty(cur.getRow(), cur.getCol()+1) && !outOfBounds(cur.getRow(), cur.getCol()+1)){
 				//Only add if the previous state was null
 				//Or we didn't just come from that direction
 				if (cur.getPreviousState()==null || cur.getPreviousState().getCol() != cur.getCol()+1){
@@ -122,7 +122,7 @@ public class Predator{
 				}
 			}
 			//Check right
-			if (!maze.isEmpty(cur.getRow(), cur.getCol()-1)){
+			if (!maze.isEmpty(cur.getRow(), cur.getCol()-1) && !outOfBounds(cur.getRow()+1, cur.getCol()-1)){
 				//Only add if the previous state was null
 				//Or we didn't just come from that direction
 				if (cur.getPreviousState()==null || cur.getPreviousState().getCol() != cur.getCol()-1){
@@ -146,6 +146,11 @@ public class Predator{
 		this.rowValue = end.getRow();
 		this.colValue = end.getCol();
 
+	}
+	
+	private boolean outOfBounds(int row, int col){
+		if (row<0 || row>=maze.getHeight() || col<0 || col>=maze.getWidth()) return true; 
+		return false;
 	}
 
 	private void changePreviousMovement(int lastRow, int lastCol, int newRow, int newCol){
