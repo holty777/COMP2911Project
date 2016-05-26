@@ -21,7 +21,6 @@ public class MazePuzzleGame implements Runnable {
 
 		menuPanel = new MenuPanel(this);
 		menuPanel.setPreferredSize(new Dimension(300, 700));
-		
 	}
 
 	public static void main(String[] args) throws IOException {

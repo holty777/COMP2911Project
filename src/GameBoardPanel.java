@@ -52,7 +52,7 @@ public class GameBoardPanel extends JPanel implements Runnable {
 		imagelabel.setMaximumSize(new Dimension(700,700));
 
 		JLabel thumb = new JLabel();
-		System.out.println(imagelabel);
+		//System.out.println(imagelabel);
 		thumb.setIcon(image);
 		//setLayout(new GridLayout(6, 7));
 
