@@ -12,6 +12,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import java.awt.GridLayout;
@@ -240,16 +241,11 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 		if (e.getKeyChar() == 'h'){
 			System.out.println("in");
 
-			if (homeGlassPane instanceof Instructions)
-				homeGlassPane.repaint();
-			else
-				homeGlassPane = new Instructions();
-			if (homeGlassPane != null) {
-				//mainFrame.setGlassPane(homeGlassPane);
-
-				homeGlassPane.setOpaque(false);
-				homeGlassPane.setVisible(true);
-			}
+			Instructions instruction = new Instructions();
+			JOptionPane.showOptionDialog(null, instruction,
+					"Instructions", JOptionPane.YES_NO_CANCEL_OPTION,
+					JOptionPane.PLAIN_MESSAGE, null,
+					new String[] { "Close" }, "default");
 		}
 		//display();
 	}
