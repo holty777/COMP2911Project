@@ -635,7 +635,109 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 				
 				//create a new trap 
 				if (player.getAttribute() == 1){
-					//chuck a fire ball in a line for 3 squares
+
+					int k = 1;
+					switch (player.getlastDIR()){
+						case(1):
+							//shoot a chain of 3 fire balls in the last location
+							//while empty and less than 3
+							while (!mainMaze.isEmpty(i-k, j) && k<3){
+								
+
+								ImageIcon image = new ImageIcon("src/trap_fireballU.png");
+								//turn mario into a snowman
+								
+								//drawing the freeze trap
+								Image image1 = image.getImage(); // transform it
+								//rescale it to the maze
+								Image newimg = image1.getScaledInstance(length-1, height-1,  
+										java.awt.Image.SCALE_SMOOTH); 
+								image = new ImageIcon(newimg);
+
+								JLabel imageLabel = new JLabel(image);
+								imageLabel.setOpaque(true);
+								imageLabel.setMinimumSize(new Dimension(10,10));
+								imageLabel.setPreferredSize(new Dimension(10,10));
+								imageLabel.setMaximumSize(new Dimension(10,10));
+								labelGrid[i-k][j] = imageLabel	;
+								k++;
+							}
+							break;
+						case(2):
+							while (!mainMaze.isEmpty(i, j+k) && k<3){
+								
+
+								ImageIcon image = new ImageIcon("src/trap_fireballR.png");
+								//turn mario into a snowman
+								
+								//drawing the freeze trap
+								Image image1 = image.getImage(); // transform it
+								//rescale it to the maze
+								Image newimg = image1.getScaledInstance(length-1, height-1,  
+										java.awt.Image.SCALE_SMOOTH); 
+								image = new ImageIcon(newimg);
+
+								JLabel imageLabel = new JLabel(image);
+								imageLabel.setOpaque(true);
+								imageLabel.setMinimumSize(new Dimension(10,10));
+								imageLabel.setPreferredSize(new Dimension(10,10));
+								imageLabel.setMaximumSize(new Dimension(10,10));
+								labelGrid[i][j+k] = imageLabel	;
+								k++;
+							}
+							
+							break;
+						case(3):
+							
+							while (!mainMaze.isEmpty(i+k, j) && k<3){
+								
+
+								ImageIcon image = new ImageIcon("src/trap_fireballD.png");
+								//turn mario into a snowman
+								
+								//drawing the freeze trap
+								Image image1 = image.getImage(); // transform it
+								//rescale it to the maze
+								Image newimg = image1.getScaledInstance(length-1, height-1,  
+										java.awt.Image.SCALE_SMOOTH); 
+								image = new ImageIcon(newimg);
+
+								JLabel imageLabel = new JLabel(image);
+								imageLabel.setOpaque(true);
+								imageLabel.setMinimumSize(new Dimension(10,10));
+								imageLabel.setPreferredSize(new Dimension(10,10));
+								imageLabel.setMaximumSize(new Dimension(10,10));
+								labelGrid[i+k][j] = imageLabel;
+								k++;
+							}
+							break;
+						case(4):
+							
+							while (!mainMaze.isEmpty(i, j-k) && k<3){
+								
+
+								ImageIcon image = new ImageIcon("src/trap_fireballL.png");
+								//turn mario into a snowman
+								
+								//drawing the freeze trap
+								Image image1 = image.getImage(); // transform it
+								//rescale it to the maze
+								Image newimg = image1.getScaledInstance(length-1, height-1,  
+										java.awt.Image.SCALE_SMOOTH); 
+								image = new ImageIcon(newimg);
+
+								JLabel imageLabel = new JLabel(image);
+								imageLabel.setOpaque(true);
+								imageLabel.setMinimumSize(new Dimension(10,10));
+								imageLabel.setPreferredSize(new Dimension(10,10));
+								imageLabel.setMaximumSize(new Dimension(10,10));
+								labelGrid[i][j-k] = imageLabel	;
+								k++;
+							}
+							
+							
+							break;
+					}
 					
 				}else if (player.getAttribute() == 2){
 					//decrement the attribute here
@@ -683,7 +785,6 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 
 								//set the last post
 								player.setLastLoc(i-1,j);
-								refreshMaze();
 							}
 							break;
 						case(2): //east
@@ -704,7 +805,6 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 
 								//set the last post
 								player.setLastLoc(i,j+1);
-								refreshMaze();
 							}
 							break;
 						case(3): //south
@@ -725,7 +825,6 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 
 								//set the last post
 								player.setLastLoc(i+1,j);	
-								refreshMaze();
 							}
 							break;
 						case(4): //west
@@ -747,7 +846,6 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 
 								//set the last post
 								player.setLastLoc(i,j-1);
-								refreshMaze();
 							}
 							break;
 					}
