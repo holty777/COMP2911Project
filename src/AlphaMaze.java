@@ -122,7 +122,7 @@ public class AlphaMaze {
 		}
 		
 	}
-	//check if +1 square andd +2 square is taken
+	//check if +1 square and +2 square is taken
 	//if not add +1 square and +2 square to the stack
 	//and return random +2square
 	/**

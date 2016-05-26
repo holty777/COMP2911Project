@@ -1,9 +1,7 @@
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.io.IOException;
-
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 
 public class MazePuzzleGame implements Runnable {
@@ -15,7 +13,6 @@ public class MazePuzzleGame implements Runnable {
 	private MenuPanel menuPanel;
 	private GameBoardPanel gamePanel;
 	private GameEngine gameEngine;
-	private JPanel glassPane;
 	
 	public MazePuzzleGame(GameEngine ge) throws IOException {
 		this.gameEngine = ge;
@@ -28,9 +25,6 @@ public class MazePuzzleGame implements Runnable {
 		menuPanel = new MenuPanel(this);
 		menuPanel.setPreferredSize(new Dimension(300, 700));
 
-		glassPane = new JPanel();
-		glassPane.setPreferredSize(new Dimension(100, 100));
-		
 		gamePanel = new GameBoardPanel(null, this);
 		gamePanel.setPreferredSize(new Dimension(700, 700));
 	}
@@ -46,11 +40,6 @@ public class MazePuzzleGame implements Runnable {
 	}
 	
 	private void display() {
-		if (glassPane != null) {
-			mainFrame.setGlassPane(glassPane);
-			glassPane.setOpaque(false);
-			glassPane.setVisible(true);
-		}
 		mainFrame.getContentPane().add(menuPanel, BorderLayout.WEST);
 		mainFrame.setResizable(false);
 		mainFrame.pack();
@@ -82,18 +71,6 @@ public class MazePuzzleGame implements Runnable {
 	@Override
 	public void run() {
 		display();
-		
-		while (true) {
-			if (!gameEngine.isInGame() && mainFrame.isVisible()) {
-				gamePanel.startSimulationGame();
-			}
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException ex) {
-				Thread.currentThread().interrupt();
-			}
-		}
-		
 	}
 	//public getGamePanel
 }

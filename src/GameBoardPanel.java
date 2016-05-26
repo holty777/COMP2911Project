@@ -30,7 +30,7 @@ public class GameBoardPanel extends JPanel {
 	// game data
 	private Player player1;
 	private Player player2;
-	private int gameMode; // 0 for simulation, 1 for single player, 2 for double player
+	private int gameMode; // 1 for single player, 2 for double player
 	private int enemySpeed;
 	private int gameStartCheck;
 	/**
@@ -124,14 +124,6 @@ public class GameBoardPanel extends JPanel {
 
 		gameEngine.startNewGame(gameMode, player1, player2, this);
 
-	}
-
-	/**
-	 * Testing module.
-	 */
-	public void startSimulationGame() {
-		gameMode = 0;
-		//startNewGame();
 	}
 
 	/**
