@@ -29,7 +29,7 @@ public class GameState {
 		nextPlayer = secondPlayer;
 		turn = 1;
 	}
-	
+
 	/**
 	 * One of the "GameState" constructors.
 	 * @param board	Which object is at each location on the maze.

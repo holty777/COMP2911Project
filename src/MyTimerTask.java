@@ -16,7 +16,7 @@ public class MyTimerTask extends TimerTask {
 	private int timeElapsed;
 	private boolean finished = false;
 	GameBoardPanel parentPanel;
-	
+
 	public MyTimerTask(Predator predator, Player player, Player predPlayer, JLabel[][] labelGrid, MazePanel mazePanel, int speed, 
 			GameBoardPanel parentPanel) {
 		this.predator = predator;
@@ -27,7 +27,7 @@ public class MyTimerTask extends TimerTask {
 		this.speed = speed;
 		timeElapsed = 0;
 		this.parentPanel = parentPanel;
-		}
+	}
 
 	@Override
 	public void run() {

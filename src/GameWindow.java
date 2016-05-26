@@ -42,7 +42,7 @@ public class GameWindow extends JFrame {
 		gameStatisticsPanel = new GameStatisticsPanel(this, mainGame);
 		gameStatisticsPanel.setPreferredSize(new Dimension(300, 700));
 		getContentPane().add(gameStatisticsPanel, BorderLayout.WEST);
-		
+
 		gameBoardPanel = new GameBoardPanel(this, mainGame);
 		gameBoardPanel.setPreferredSize(new Dimension(700, 700));
 		getContentPane().add(gameBoardPanel, BorderLayout.EAST);
@@ -76,7 +76,7 @@ public class GameWindow extends JFrame {
 	public void startSinglePlayerGame(String playerName, int mazeSize, int enemySpeed, int i) {
 		gameBoardPanel.initSinglePlayerGame(playerName, mazeSize, enemySpeed, i);
 	}
-	
+
 	/**
 	 * Start a double player game.
 	 * @param playerName	The name of player 1.

@@ -67,7 +67,7 @@ public class GameStatisticsPanel extends JPanel {
 		ImageIcon imgI = new ImageIcon(img);
 		JLabel menu = new JLabel();
 		menu.setIcon(imgI);
-//		// Button for Single Player
+		//		// Button for Single Player
 		gc.gridx = 0;
 		gc.gridy = 0;
 		add(menu);
@@ -106,10 +106,10 @@ public class GameStatisticsPanel extends JPanel {
 				//need a refreshMaze from mazepanel
 			}
 		});
-		
+
 		gc.gridy = 6;
 		add(restartGameButton, gc);
-		
+
 		JButton pauseGameButton = new JButton("Pause");
 		pauseGameButton.setContentAreaFilled(false);
 		pauseGameButton.setFocusPainted(false);
@@ -121,7 +121,7 @@ public class GameStatisticsPanel extends JPanel {
 				//need a refreshMaze from mazepanel
 			}
 		});
-		
+
 		gc.gridy = 8;
 		add(pauseGameButton, gc);
 
@@ -175,7 +175,7 @@ public class GameStatisticsPanel extends JPanel {
 
 	public void displayEndGame(int i) {
 		if(i == 1)
-		msg.setText(player1.getName() + " wins!");
+			msg.setText(player1.getName() + " wins!");
 		else msg.setText(player2.getName() + " wins!");
 	}
 

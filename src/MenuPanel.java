@@ -18,12 +18,12 @@ import javax.swing.JPanel;
 public class MenuPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private MazePuzzleGame mainGame;
-	
+
 	public MenuPanel(MazePuzzleGame mg) throws IOException {
 		mainGame = mg;
-		
+
 		setLayout(new GridBagLayout());
 
 		setOpaque(true);
@@ -38,19 +38,19 @@ public class MenuPanel extends JPanel {
 		ImageIcon imgI = new ImageIcon(img);
 		JLabel menu = new JLabel();
 		menu.setIcon(imgI);
-//		// Button for Single Player
-	gc.gridx = 0;
+		// Button for Single Player
+		gc.gridx = 0;
 		gc.gridy = 0;
 		add(menu);
-//		JLabel currentHighScore = new JLabel(" Current High Score: ");
-//		add(currentHighScore, gc);
+		// JLabel currentHighScore = new JLabel(" Current High Score: ");
+		// add(currentHighScore, gc);
 		gc.gridy = 1;
-//		JLabel singlePlayerHighScores = new JLabel(" Single Player High Scores:");
-//		add(singlePlayerHighScores, gc);
-//		gc.gridy = 2;
-//		JLabel doublePlayerHighScores = new JLabel(" Double Player High Scores:");
-//		add(doublePlayerHighScores, gc);
-//		gc.gridy = 3;
+		// JLabel singlePlayerHighScores = new JLabel(" Single Player High Scores:");
+		// add(singlePlayerHighScores, gc);
+		// gc.gridy = 2;
+		// JLabel doublePlayerHighScores = new JLabel(" Double Player High Scores:");
+		// add(doublePlayerHighScores, gc);
+		// gc.gridy = 3;
 
 		JButton singlePlayerButton = new JButton("Single Player");
 
@@ -66,7 +66,7 @@ public class MenuPanel extends JPanel {
 
 			}
 		});
-		
+
 		// Button for Two Player
 		gc.gridy = 4;
 		JButton twoPlayersButton = new JButton("Double Player");
@@ -82,7 +82,7 @@ public class MenuPanel extends JPanel {
 			}
 
 		});
-		
+
 		// how to play button
 		gc.gridy = 5;
 		JButton htpButton = new JButton("Instructions");

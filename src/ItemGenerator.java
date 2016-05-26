@@ -23,26 +23,26 @@ public class ItemGenerator {
 	public ItemGenerator (int numItems, AlphaMaze m){
 		generateCoordinates(m, numItems);
 	} 
-	
+
 	public int randomItemType (){
 		Random Rand = new Random();
 		return (Rand.nextInt(7)+1);
-		
+
 	}
-	
+
 	public void generateCoordinates (AlphaMaze m, int numItems){
 		ArrayList <ItemLoc> existingLoc = new ArrayList <ItemLoc>();
-		
+
 		int i = 0;
 		while (i != numItems){
 			Random Rand = new Random();
 			int x_coordinate = Rand.nextInt(m.getWidth());
 			int y_coordinate = Rand.nextInt(m.getHeight());
-			
+
 			if (!m.isEmpty(y_coordinate, x_coordinate)){
 				//creating new object
 				ItemLoc newitem = new ItemLoc(x_coordinate, y_coordinate, randomItemType());
-				
+
 				//check if the that coordinate has that item already
 				if (!existingLoc.contains(newitem)){
 					existingLoc.add(newitem);
@@ -51,9 +51,9 @@ public class ItemGenerator {
 			}
 		}
 	}
-	
+
 	public ArrayList<ItemLoc> ArraygetItemLoc(){
 		return this.ItemLocations;
 	}
-	
+
 }

@@ -18,22 +18,22 @@ public class Predator{
 	private int easyTime = 1; 
 	private int mediumTime = 1;
 	private int headTime = 1;
-	
+
 	private int width;
 	private int height;
-	
+
 	private boolean won = false;
-	
+
 	private int colValue = 0;
 	private int rowValue = 0;
-	
+
 	private int previousDirection = 3;
 
-	
+
 	public Predator(AlphaMaze m, int iconWidth, int iconHeight) {
 		this.maze = m;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -41,11 +41,11 @@ public class Predator{
 	private int getDifficulty() { 
 		return difficulty;
 	}
-	
+
 	public boolean won(){
 		return this.won;
 	}
-	
+
 	public int getPreviousDirection(){
 		System.out.println(this.previousDirection);
 		return this.previousDirection;
@@ -54,34 +54,34 @@ public class Predator{
 		this.colValue = col;
 		this.rowValue = row;
 	}
-	
+
 	public int getCol(){
 		return this.colValue;
 	}
-	
+
 	public int getRow(){
 		return this.rowValue;
 	}
-	
+
 	public static BufferedImage toBufferedImage(Image img)
 	{
-	    if (img instanceof BufferedImage)
-	    {
-	        return (BufferedImage) img;
-	    }
+		if (img instanceof BufferedImage)
+		{
+			return (BufferedImage) img;
+		}
 
-	    // Create a buffered image with transparency
-	    BufferedImage bimage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+		// Create a buffered image with transparency
+		BufferedImage bimage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
 
-	    // Draw the image on to the buffered image
-	    Graphics2D bGr = bimage.createGraphics();
-	    bGr.drawImage(img, 0, 0, null);
-	    bGr.dispose();
+		// Draw the image on to the buffered image
+		Graphics2D bGr = bimage.createGraphics();
+		bGr.drawImage(img, 0, 0, null);
+		bGr.dispose();
 
-	    // Return the buffered image
-	    return bimage;
+		// Return the buffered image
+		return bimage;
 	}
-	
+
 	public void makeMove(int playerRow, int playerCol) {
 		//Run a BFS to find the player.
 		ArrayList<PredatorState> queue = new ArrayList<PredatorState>();
@@ -98,7 +98,7 @@ public class Predator{
 				end = cur;
 				break;
 			}
-			
+
 			//If it hasn't been found.
 			//Check Up
 			if (!maze.isEmpty(cur.getRow()+1, cur.getCol())){
@@ -136,9 +136,9 @@ public class Predator{
 					queue.add(pred);
 				}
 			}
-			
+
 		}
-		
+
 		//We have found the player, so now back track
 		if (end.getPreviousState() == null){
 			this.won = true;
@@ -151,9 +151,9 @@ public class Predator{
 		changePreviousMovement(this.rowValue, this.colValue, end.getRow(), end.getCol());
 		this.rowValue = end.getRow();
 		this.colValue = end.getCol();
-		
+
 	}
-	
+
 	private void changePreviousMovement(int lastRow, int lastCol, int newRow, int newCol){
 		//Check up
 		if (lastRow+1 == newRow){

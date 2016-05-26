@@ -53,7 +53,7 @@ public class SinglePlayerMenu extends JPanel {
 		gc.gridy = 1;
 		JLabel modeText = new JLabel("Maze Size:");
 		add(modeText, gc);
-		
+
 		gc.gridx = 0;
 		gc.gridy = 2;
 		JLabel speedText = new JLabel("Enemy Speed:");
@@ -71,9 +71,9 @@ public class SinglePlayerMenu extends JPanel {
 		});
 		mazeSize = new JSlider(JSlider.HORIZONTAL, 10, 50, 30);
 		mazeSize.setMinorTickSpacing(2);
-	    mazeSize.setMajorTickSpacing(10);
-	    mazeSize.setPaintTicks(true);
-	    mazeSize.setPaintLabels(true);
+		mazeSize.setMajorTickSpacing(10);
+		mazeSize.setPaintTicks(true);
+		mazeSize.setPaintLabels(true);
 		add(mazeSize, gc);
 
 		// Medium button
@@ -86,14 +86,14 @@ public class SinglePlayerMenu extends JPanel {
 				AIMode = 1;
 			}
 		});
-		
+
 		enemySpeed = new JSlider(JSlider.HORIZONTAL, 0, 50, 25);
 		enemySpeed.setMinorTickSpacing(2);
 		enemySpeed.setMajorTickSpacing(10);
 		enemySpeed.setPaintTicks(true);
 		enemySpeed.setPaintLabels(true);
 		add(enemySpeed, gc);
-		
+
 
 		// Hard button
 		gc.gridx = 1;
@@ -122,13 +122,13 @@ public class SinglePlayerMenu extends JPanel {
 				try {
 					singlePlayerWindow = new GameWindow(mainGame,
 							"Single Player Game");
-				
-				singlePlayerWindow.startSinglePlayerGame(
-						playerNameField.getText(), mazeSize.getValue(), enemySpeed.getValue(), 1);
 
-				singlePlayerWindow.setVisible(true);
-				mainGame.setVisibility(false);
-				MenuPanel.closeJOptionPanel();
+					singlePlayerWindow.startSinglePlayerGame(
+							playerNameField.getText(), mazeSize.getValue(), enemySpeed.getValue(), 1);
+
+					singlePlayerWindow.setVisible(true);
+					mainGame.setVisibility(false);
+					MenuPanel.closeJOptionPanel();
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

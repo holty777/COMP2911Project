@@ -21,7 +21,7 @@ import javax.swing.JPanel;
 public class GameBoardPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private GameWindow gameWindow;
 	private MazePuzzleGame mainGame;
 	private GameEngine gameEngine;
@@ -46,28 +46,28 @@ public class GameBoardPanel extends JPanel {
 		gameStartCheck = 0;
 
 		//setOpaque(true);
-		
+
 		//setBackground(new Color(27, 120, 236));
-		
+
 		ImageIcon image = new ImageIcon("src/hedge.png");
 		JLabel imagelabel = new JLabel(image);
 		imagelabel.setOpaque(true);
 		imagelabel.setMinimumSize(new Dimension(700,700));
 		imagelabel.setPreferredSize(new Dimension(700,700));
 		imagelabel.setMaximumSize(new Dimension(700,700));
-		
+
 		//imagelabel.pac
-		
+
 		//Image image = GenerateImage.toImage(true);  //this generates an image file
 		//ImageIcon icon = new ImageIcon(image); 
 		JLabel thumb = new JLabel();
 		System.out.println(imagelabel);
 		thumb.setIcon(image);
 		//setLayout(new GridLayout(6, 7));
-		
+
 		setLayout(new BorderLayout());
-		
-		
+
+
 	}
 	/**
 	 * Update the statistics panel with the current information.
@@ -83,7 +83,7 @@ public class GameBoardPanel extends JPanel {
 	 */
 	public void displayEndGame(int i) {
 		//if (gameMode == 0)
-			//return; // stimulation
+		//return; // stimulation
 		if(i== 1){
 			gameEngine.suspendGame();
 			gameWindow.getStatisticsPanel().displayEndGame(i);
@@ -105,7 +105,7 @@ public class GameBoardPanel extends JPanel {
 			}
 			gameWindow.getStatisticsPanel().setPlayerNames(player1.getName(), player2.getName());
 		}
-		
+
 		startNewGame();
 		updateStatisticsPanel();
 	}
@@ -139,16 +139,16 @@ public class GameBoardPanel extends JPanel {
 		gameMode = mazeSize;
 		this.enemySpeed = enemySpeed;
 		String nameAI = "AI";
-//		switch (AIMode) {
-//		case 0:
-//			gameMode = 0;
-//			break;
-//		case 1:
-//			gameMode = 1;
-//			break;
-//		case 2:
-//			gameMode = 2;
-//		}
+		//		switch (AIMode) {
+		//		case 0:
+		//			gameMode = 0;
+		//			break;
+		//		case 1:
+		//			gameMode = 1;
+		//			break;
+		//		case 2:
+		//			gameMode = 2;
+		//		}
 
 		/*if (randPlayer() == 0) {
 			player1 = new User(playerName);
@@ -161,7 +161,7 @@ public class GameBoardPanel extends JPanel {
 		gameWindow.getStatisticsPanel().setPlayerNames(playerName, "AI");
 		gameStartCheck = i;
 		if(gameStartCheck == 1)
-		startNewGame();
+			startNewGame();
 		updateStatisticsPanel();
 	}
 
@@ -202,7 +202,7 @@ public class GameBoardPanel extends JPanel {
 		Random rand = new Random();
 		return rand.nextInt(2);
 	}
-	
+
 	/**
 	 * Return the maze.
 	 * @return The maze.
@@ -210,7 +210,7 @@ public class GameBoardPanel extends JPanel {
 	public MazePanel getMaze(){
 		return this.mainMaze;
 	}
-	
+
 	/**
 	 * Determine the size of the maze.
 	 * @param gameMode The difficulty of the maze. Number between 0-2.
@@ -223,6 +223,6 @@ public class GameBoardPanel extends JPanel {
 	public GameWindow getGameWindow(){
 		return gameWindow;
 	}
-		
-	
+
+
 }

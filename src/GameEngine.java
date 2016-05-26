@@ -20,7 +20,7 @@ public class GameEngine implements Runnable {
 	private GameBoardPanel gameBoardPanel;  // the game board panel
 	private int gameMode;     // 1 for single player, 2 for double player
 	private boolean isInGame; // game is in run
-	
+
 	/**
 	 * Create a new game.
 	 * @param gameMode	The mode currently being utilized in the game 
@@ -51,10 +51,10 @@ public class GameEngine implements Runnable {
 		while (true) {
 			sleep(500);
 			Timer SimpleTimer = new Timer(1000, new ActionListener(){
-			    @Override
-			    public void actionPerformed(ActionEvent e) {
-			    //	System.out.println("Time =  " + SimpleTime.format(new Date()));
-			    }
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					//	System.out.println("Time =  " + SimpleTime.format(new Date()));
+				}
 			});
 			SimpleTimer.start();
 			/*
@@ -103,7 +103,7 @@ public class GameEngine implements Runnable {
 	public GameState getCurrState() {
 		return this.currState.clone();
 	}
-	
+
 	/**
 	 * Getter function for the current player.
 	 * @return a copy of the current player.

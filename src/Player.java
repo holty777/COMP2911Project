@@ -17,7 +17,7 @@ public class Player extends JLabel {
 	private int height;
 	private int iLocation;
 	private int jLocation;
-	
+
 	//player attribute
 	/*
 	 * if the player attribute is:
@@ -35,8 +35,8 @@ public class Player extends JLabel {
 	private int attributeRunTime;
 	//used to counter the number of fire ball
 	private int countattribute; 
-	
-	
+
+
 	public Player(int i, int j, int height, int width, int character) {
 		this.height = height;
 		this.width = width;
@@ -49,7 +49,7 @@ public class Player extends JLabel {
 		this.previousDirection = 1;
 		System.out.println("the character id:" +character);
 		this.id = character;
-		
+
 		try {
 			if(character == 0){
 				img = ImageIO.read(new File("src/link_stationary.png"));
@@ -61,17 +61,17 @@ public class Player extends JLabel {
 				img = ImageIO.read(new File("src/mario_stationary.png"));
 			}
 		} catch (IOException e) {
-		    e.printStackTrace();
+			e.printStackTrace();
 		}
 		Image bimg = img.getScaledInstance(this.width, this.height,
-		        Image.SCALE_SMOOTH);
+				Image.SCALE_SMOOTH);
 		BufferedImage dimg = toBufferedImage(bimg);
-		
+
 		ImageIcon link = new ImageIcon(dimg);
-		
+
 		this.setIcon(link);
 	}
-	
+
 	public int getID() {
 		return id;
 	}
@@ -79,19 +79,19 @@ public class Player extends JLabel {
 	public String getName() {
 		return name;
 	}
-	
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public void setScore(int score) {
 		this.score = score;
 	}
-	
+
 	public int getILocation(){
 		return this.iLocation;
 	}
-	
+
 	public int getJLocation(){
 		return this.jLocation;
 	}
@@ -106,7 +106,7 @@ public class Player extends JLabel {
 		Move move = null;
 		return move;
 	}
-	
+
 	public void decAttribute (){
 		if (this.attributeRunTime != 0){
 			this.attributeRunTime --;
@@ -116,9 +116,9 @@ public class Player extends JLabel {
 				this.attribute = 0;
 			}
 		}
-		
+
 	}
-	
+
 	public void decCountAttribute (){
 		if (this.countattribute != 0){
 			this.countattribute --;
@@ -127,11 +127,11 @@ public class Player extends JLabel {
 			}
 		}
 	}
-	
+
 	public int getAttribute(){
 		return this.attribute;
 	}
-	
+
 	//set the player attribute
 	public void setAttribute (int attr){
 		/*
@@ -141,66 +141,66 @@ public class Player extends JLabel {
 		big: 4
 		star: 5
 		speed: 6
-		*/
+		 */
 		//set attribute and set turns
 		this.attribute = attr;
 		switch (attr){
-			case(1): 
-				//the player gets to shoot 3xfire ball 
-				this.countattribute = 3;
-				break;
-			case(2): 
-				//the enemy is frozen for 2 turns
-				this.attributeRunTime = 2;
-				break;
-			case(3):
-				//the enemy is mini for 2 turns
-				this.attributeRunTime = 2;
-				break;
-			case(4):
-				//the run time will be till the game ends
-				this.attributeRunTime = -1;
-				break;	
-			case(5):
-				this.attributeRunTime =  4;
-				break;
-			case(6):
-				this.attributeRunTime = 5;
-				break;
+		case(1): 
+			//the player gets to shoot 3xfire ball 
+			this.countattribute = 3;
+		break;
+		case(2): 
+			//the enemy is frozen for 2 turns
+			this.attributeRunTime = 2;
+		break;
+		case(3):
+			//the enemy is mini for 2 turns
+			this.attributeRunTime = 2;
+		break;
+		case(4):
+			//the run time will be till the game ends
+			this.attributeRunTime = -1;
+		break;	
+		case(5):
+			this.attributeRunTime =  4;
+		break;
+		case(6):
+			this.attributeRunTime = 5;
+		break;
 		}
-	
+
 	}
-	
+
 	public static BufferedImage toBufferedImage(Image img)
 	{
-	    if (img instanceof BufferedImage)
-	    {
-	        return (BufferedImage) img;
-	    }
+		if (img instanceof BufferedImage)
+		{
+			return (BufferedImage) img;
+		}
 
-	    // Create a buffered image with transparency
-	    BufferedImage bimage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+		// Create a buffered image with transparency
+		BufferedImage bimage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
 
-	    // Draw the image on to the buffered image
-	    Graphics2D bGr = bimage.createGraphics();
-	    bGr.drawImage(img, 0, 0, null);
-	    bGr.dispose();
+		// Draw the image on to the buffered image
+		Graphics2D bGr = bimage.createGraphics();
+		bGr.drawImage(img, 0, 0, null);
+		bGr.dispose();
 
-	    // Return the buffered image
-	    return bimage;
+		// Return the buffered image
+		return bimage;
 	}
 
 	public int getlastDIR() {
 		return this.previousDirection;
 	}
-	
+
 	public void setLastDirection(int key){
 		this.previousDirection = key;
 	}
-	
+
 	public void changeGraphicMovement (){
 		Image img = null;
-		
+
 		System.out.println("shut up throws character id:"+this.id);
 		if (this.id == 0){
 			//link
@@ -210,31 +210,31 @@ public class Player extends JLabel {
 				if (this.previousDirection == 1){
 					img = ImageIO.read(new File("src/link_back.png"));
 				}else if (this.previousDirection == 2){
-				//load east
+					//load east
 					img = ImageIO.read(new File("src/link_right.png"));
 				}else if (this.previousDirection == 3){
-				//load south
+					//load south
 					img = ImageIO.read(new File("src/link_stationary.png"));
 				}else if (this.previousDirection == 4){
-				//load west
+					//load west
 					img = ImageIO.read(new File("src/link_left.png"));
 				}
 				if (img == null){
 					System.out.println("mom spaghetti~");
 				}
 				Image bimg = img.getScaledInstance(this.width, this.height,
-				        Image.SCALE_SMOOTH);
+						Image.SCALE_SMOOTH);
 				BufferedImage dimg = toBufferedImage(bimg);
-				
+
 				ImageIcon link = new ImageIcon(dimg);
-				
+
 				this.setIcon(link);
 				Image bimg1 = img.getScaledInstance(this.width, this.height,
-				        Image.SCALE_SMOOTH);
+						Image.SCALE_SMOOTH);
 				BufferedImage dimg1 = toBufferedImage(bimg1);
-				
+
 				ImageIcon link1 = new ImageIcon(dimg);
-				
+
 				this.setIcon(link1);
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -246,22 +246,22 @@ public class Player extends JLabel {
 				if (this.previousDirection == 1){
 					img = ImageIO.read(new File("src/mario_run_back.png"));
 				}else if (this.previousDirection == 2){
-				//load east
+					//load east
 					img = ImageIO.read(new File("src/mario_run_right.png"));
 				}else if (this.previousDirection == 3){
-				//load south
+					//load south
 					img = ImageIO.read(new File("src/mario_stationary.png"));
 				}else if (this.previousDirection == 4){
-				//load west
+					//load west
 					img = ImageIO.read(new File("src/mario_run_left.png"));
 				}
-				
+
 				Image bimg = img.getScaledInstance(this.width, this.height,
-				        Image.SCALE_SMOOTH);
+						Image.SCALE_SMOOTH);
 				BufferedImage dimg = toBufferedImage(bimg);
-				
+
 				ImageIcon mario = new ImageIcon(dimg);
-				
+
 				this.setIcon(mario);
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -273,7 +273,7 @@ public class Player extends JLabel {
 				e.printStackTrace();
 			}
 		}
-		
+
 	}
-	
+
 }

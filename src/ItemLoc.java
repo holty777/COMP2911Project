@@ -14,7 +14,7 @@ public class ItemLoc {
 	private int y;
 	// type of the item (See ItemGenerator.java)
 	private int itemType;
-	
+
 	/**
 	 * The constructor for the "ItemLoc" class.
 	 * @param x	The x coordinate of the item.
@@ -26,7 +26,7 @@ public class ItemLoc {
 		this.y = y;
 		this.itemType = item;
 	}
-	
+
 	/**
 	 * Get the x coordinate of the item.
 	 * @return x coordinate of the item.
@@ -34,7 +34,7 @@ public class ItemLoc {
 	public int getX (){
 		return this.x;
 	}	
-	
+
 	/**
 	 * Get the y coordinate of the item.
 	 * @return y coordinate of the item.
@@ -42,7 +42,7 @@ public class ItemLoc {
 	public int getY(){
 		return this.y;
 	}
-	
+
 	/**
 	 * Get the type of the item.
 	 * @return the type of the item.

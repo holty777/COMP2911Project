@@ -6,7 +6,7 @@ public class Move {
 		this.col = col;
 		this.row = row;
 	}
-	
+
 	public int getRow() {
 		return this.row;
 	}

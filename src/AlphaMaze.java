@@ -26,7 +26,7 @@ public class AlphaMaze {
 	private int [][] mazemtx;
 	//private int [][] start;
 	//private int [][] end;
-	
+
 	/**
 	 * The constructor for the AlphaMaze class.
 	 * @param height The height of the maze to be generated.
@@ -40,7 +40,7 @@ public class AlphaMaze {
 		//this.end = new int [1][1];
 		contruct();
 	}
-	
+
 	/**
 	 * Reset and generate the maze.
 	 */
@@ -55,7 +55,7 @@ public class AlphaMaze {
 		//triforce location
 		mazemtx[width/2][height/2] = 0;
 	}
-	
+
 	/**
 	 * Begin the maze generation process 
 	 * by setting all the elements of the 
@@ -68,7 +68,7 @@ public class AlphaMaze {
 			}
 		}
 	}
-	
+
 	/**
 	 * Generate the maze through a depth 
 	 * first search algorithm implemented with a stack.
@@ -82,12 +82,12 @@ public class AlphaMaze {
 		/*
 		Mark maze start as visited
 		Push start onto the stack
-		
+
 		while stack is not empty 
 			do
-			
+
 			Pop current cell off stack;
-			
+
 			if current cell has unvisited neighbors
 			then
 			Choose a random unvisited neighbor;
@@ -97,7 +97,7 @@ public class AlphaMaze {
 			Push neighbor on stack;
 			end
 		end
-		*/
+		 */
 		Stack<State> visited = new Stack<State>();
 		/*
 		 * Always start the maze generation process a 
@@ -107,20 +107,20 @@ public class AlphaMaze {
 		State start = new State(1,1, 1);
 		visited.add(start);
 		removeWall(start);
-	
+
 		//check if visited list is empty
 		while (!visited.isEmpty()){
 			State curr = visited.pop();
 			State moves = possibleMoves(curr, visited);
 			if (moves != null){
-				
+
 				removeWall(moves);
 				visited.push(curr);
 				visited.push(pushnextsq (moves));
 				visited.push(moves);
 			}
 		}
-		
+
 	}
 	//check if +1 square and +2 square is taken
 	//if not add +1 square and +2 square to the stack
@@ -134,7 +134,7 @@ public class AlphaMaze {
 	public State possibleMoves(State curr, Stack<State> visited){
 
 		ArrayList <State> possibleDIR = new ArrayList <State>();
-		
+
 		/*
 		 * Directory
 		 * 
@@ -143,20 +143,20 @@ public class AlphaMaze {
 		 * south - 3
 		 * west - 4
 		 */
-		
+
 		// Get the location of the current node.
 		int x = curr.getX(); 
 		int y = curr.getY();
-		
+
 
 		/*
 		System.out.println("**************");
 		System.out.println("the x and y coordinate @: "+x+" "+y);
 		System.out.println("**************");
-		*/
-		
+		 */
+
 		//Initialization of the possible moves
-		
+
 		//north move
 		State checkN2 = new State (x, y-2, 1);
 		//east move
@@ -165,7 +165,7 @@ public class AlphaMaze {
 		State checkS2 = new State (x, y+2, 3);
 		//west move
 		State checkW2 = new State (x-2, y, 4);
-		
+
 		//north
 		//edge cases to check out of bound
 		if (y-2 > 0){
@@ -178,7 +178,7 @@ public class AlphaMaze {
 				possibleDIR.add(checkN2);
 			}
 		}
-		
+
 		//south
 		//edge cases to check out of bound
 		//check if +2 ahead left and right is taken
@@ -191,7 +191,7 @@ public class AlphaMaze {
 				possibleDIR.add(checkS2);
 			}
 		}
-			
+
 		//east
 		//edge cases to check out of bound
 		//check if +2 north and south
@@ -204,7 +204,7 @@ public class AlphaMaze {
 				possibleDIR.add(checkE2);
 			}
 		}
-			
+
 		//west
 		//edge cases to check out of bound
 		//check if +2 north and south
@@ -217,11 +217,11 @@ public class AlphaMaze {
 				possibleDIR.add(checkW2);
 			}
 		}
-		
+
 		if (possibleDIR.size()>1){
 			Collections.shuffle(possibleDIR);
 		}	
-		
+
 
 		/*printing
 		for (int i=0; i<possibleDIR.size();i++){
@@ -229,15 +229,15 @@ public class AlphaMaze {
 					+"y:"+possibleDIR.get(i).getY());
 		}
 		System.out.println("------------------------------");
-		
+
 		System.out.println();
 		print();
 		System.out.println();
-		*/
-		
+		 */
+
 		if (!possibleDIR.isEmpty()){
 			//System.out.println("the next move is at x:"+possibleDIR.get(0).getX()+" "
-				//	+"y:"+possibleDIR.get(0).getY());
+			//	+"y:"+possibleDIR.get(0).getY());
 			/*System.out.println("the next move is at x:"+possibleDIR.get(0).getX()+" "
 					+"y:"+possibleDIR.get(0).getY());*/
 			return possibleDIR.get(0);
@@ -245,7 +245,7 @@ public class AlphaMaze {
 			return null;
 		}
 	}
-	
+
 	/**
 	 * Transform a cell from wall to pathway.
 	 * @param n	The cell to change from wall to pathway.
@@ -255,42 +255,42 @@ public class AlphaMaze {
 		 * use as a reference
 		State checkN = new State (x, y-1, 1);
 		State checkN2 = new State (x, y-2, 1);
-		
+
 		State checkE = new State (x+1, y, 2);
 		State checkE2 = new State (x+2, y, 2);
-		
+
 		State checkS = new State (x, y+1, 3);
 		State checkS2 = new State (x, y+2, 3);
-		
+
 		State checkW = new State (x-1, y, 4);
 		State checkW2 = new State (x-2, y, 4);
-		*/
-		
+		 */
+
 		if (n.getDIR() == 1){
 			//north case
 			mazemtx[n.getY()][n.getX()] = 0;
 			mazemtx[n.getY()+1][n.getX()] = 0;
 		}
-		
+
 		if (n.getDIR() == 2){
 			//east case
 			mazemtx[n.getY()][n.getX()] = 0;
 			mazemtx[n.getY()][n.getX()-1] = 0;
 		}
-			
+
 		if (n.getDIR() == 3){
 			//south case
 			mazemtx[n.getY()][n.getX()] = 0;
 			mazemtx[n.getY()-1][n.getX()] = 0;
 		}
-			
+
 		if (n.getDIR() == 4){
 			//west case
 			mazemtx[n.getY()][n.getX()] = 0;
 			mazemtx[n.getY()][n.getX()+1] = 0;
 		}
 	}
-	
+
 	/**
 	 * Create the next block to add to the stack.
 	 * @param p	The current node.
@@ -301,20 +301,20 @@ public class AlphaMaze {
 		 * use as a reference
 		State checkN = new State (x, y-1, 1);
 		State checkN2 = new State (x, y-2, 1);
-		
+
 		State checkE = new State (x+1, y, 2);
 		State checkE2 = new State (x+2, y, 2);
-		
+
 		State checkS = new State (x, y+1, 3);
 		State checkS2 = new State (x, y+2, 3);
-		
+
 		State checkW = new State (x-1, y, 4);
 		State checkW2 = new State (x-2, y, 4);
-		*/
-		
-		
+		 */
+
+
 		State nextblock = null;
-		
+
 		/*
 		 * If the direction of the current node is 1
 		 * then create a node from the position above.
@@ -336,11 +336,11 @@ public class AlphaMaze {
 			nextblock = 
 					new State (p.getX()+1, p.getY(), p.getDIR());
 		}
-		
+
 		return nextblock;
 	}
-	
-	
+
+
 	/**
 	 * Check whether a cell is empty of not.
 	 * A cell is empty if it is outside the 
@@ -362,13 +362,13 @@ public class AlphaMaze {
 	public int [][] getStart(){
 		return this.getStart();
 	}
-	
+
 	public int getEnd (){
 		return this.getEnd();
 	}
-	*/
-	
-	
+	 */
+
+
 	/**
 	 * Print out an ASCII maze.
 	 * 	- o: represents a wall
@@ -386,7 +386,7 @@ public class AlphaMaze {
 			System.out.println();
 		}
 	}
-	
+
 	/**
 	 * Get the height of the maze.
 	 * @return height of the maze.
@@ -394,7 +394,7 @@ public class AlphaMaze {
 	public int getHeight (){
 		return this.height;
 	}
-	
+
 	/**
 	 * Get the width of the maze.
 	 * @return width of the maze.

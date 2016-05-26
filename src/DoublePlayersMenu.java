@@ -68,10 +68,10 @@ public class DoublePlayersMenu extends JPanel {
 				GameWindow doublePlayersWindow;
 				try {
 					doublePlayersWindow = new GameWindow(mainGame, "Double Players Game");
-				doublePlayersWindow.startDoublePlayersGame(player1NameField.getText(), player2NameField.getText());
-				doublePlayersWindow.setVisible(true);
-				mainGame.setVisibility(false);
-				MenuPanel.closeJOptionPanel();
+					doublePlayersWindow.startDoublePlayersGame(player1NameField.getText(), player2NameField.getText());
+					doublePlayersWindow.setVisible(true);
+					mainGame.setVisibility(false);
+					MenuPanel.closeJOptionPanel();
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
