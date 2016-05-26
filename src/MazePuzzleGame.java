@@ -28,6 +28,7 @@ public class MazePuzzleGame implements Runnable {
 		mainFrame.getContentPane().add(menuPanel, BorderLayout.WEST);
 		mainFrame.setResizable(false);
 		mainFrame.pack();
+		mainFrame.setLocationRelativeTo(null);
 		mainFrame.setVisible(true);
 	}
 

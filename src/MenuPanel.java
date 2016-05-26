@@ -35,7 +35,7 @@ public class MenuPanel extends JPanel {
 		gc.weighty = 1;
 		gc.fill = GridBagConstraints.BOTH;
 
-		Image img = ImageIO.read(new File("src/MenuPic.png"));
+		Image img = ImageIO.read(new File("src/MenuPic2.png"));
 		ImageIcon imgI = new ImageIcon(img);
 		JLabel menu = new JLabel();
 		menu.setIcon(imgI);
