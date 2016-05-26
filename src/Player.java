@@ -17,6 +17,7 @@ public class Player extends JLabel {
 	private int height;
 	private int iLocation;
 	private int jLocation;
+	private boolean hasTriforce;
 
 	//player attribute
 	/*
@@ -217,7 +218,7 @@ public class Player extends JLabel {
 				if (img == null){
 					System.out.println("mom spaghetti~");
 				}
-				Image bimg = img.getScaledInstance(this.width, this.height,
+				Image bimg = img.getScaledInstance(this.width, this.height-1,
 						Image.SCALE_SMOOTH);
 				BufferedImage dimg = toBufferedImage(bimg);
 

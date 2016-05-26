@@ -56,7 +56,18 @@ public class AlphaMaze {
 		//exit - win game
 		mazemtx[width-2][height-1] = 0;
 		//triforce location
-		mazemtx[width/2][height/2] = 0;
+		if (this.width%2==0){
+			System.out.println("ALPHA!!");
+			System.out.println(width/2);
+			System.out.println(height/2);
+			mazemtx[(width+1)/2][(height+1)/2] = 0;
+		}else{
+			System.out.println("ALPHA");
+			System.out.println((width-1)/2);
+			System.out.println((height-1)/2);
+			mazemtx[(width)/2][(height)/2] = 0;
+		}
+		
 	}
 
 	/**
