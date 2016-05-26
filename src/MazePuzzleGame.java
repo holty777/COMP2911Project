@@ -21,15 +21,10 @@ public class MazePuzzleGame implements Runnable {
 		menuPanel.setPreferredSize(new Dimension(300, 700));
 	}
 
-	public static void main(String[] args) throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
-		Thread guiThread = new Thread(new MazePuzzleGame());
-
-		guiThread.start();
+	public static void main(String[] args) throws IOException {
+		MazePuzzleGame game = new MazePuzzleGame();
+		game.run();
 	}
-//	public static void main(String[] args) throws IOException {
-//		MazePuzzleGame game = new MazePuzzleGame();
-//
-//	}
 
 	private void display() {
 		mainFrame.getContentPane().add(menuPanel, BorderLayout.WEST);
