@@ -26,11 +26,7 @@ public class MazePuzzleGame implements Runnable {
 
 	public static void main(String[] args) throws IOException {
 
-		//mazeGameThread = new Thread(new GameEngine());
-
 		guiThread = new Thread(new MazePuzzleGame());
-
-		//mazeGameThread.start();
 		guiThread.start();
 	}
 
