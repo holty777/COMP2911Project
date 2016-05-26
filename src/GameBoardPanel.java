@@ -18,7 +18,7 @@ import javax.swing.JPanel;
  * 			Shiyuan Liang
  *
  */
-public class GameBoardPanel extends JPanel {
+public class GameBoardPanel extends JPanel implements Runnable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -52,7 +52,7 @@ public class GameBoardPanel extends JPanel {
 		imagelabel.setMaximumSize(new Dimension(700,700));
 
 		JLabel thumb = new JLabel();
-		System.out.println(imagelabel);
+		//System.out.println(imagelabel);
 		thumb.setIcon(image);
 		//setLayout(new GridLayout(6, 7));
 
@@ -82,7 +82,6 @@ public class GameBoardPanel extends JPanel {
 	 * Create and randomly generate the data to create a new double player game.
 	 */
 	public void restartNewGame() {
-		mainGame.suspendGame();
 
 		if (gameMode != 0) {
 			gameWindow.getStatisticsPanel().setPlayerNames(player1.getName(), player2.getName());
@@ -96,7 +95,6 @@ public class GameBoardPanel extends JPanel {
 	 * Create and randomly generate the data to create a new double player game.
 	 */
 	public void pauseGame() {
-		mainGame.suspendGame();
 	}
 	/**
 	 * Start the new game.
@@ -210,6 +208,11 @@ public class GameBoardPanel extends JPanel {
 
 	public GameWindow getGameWindow(){
 		return gameWindow;
+	}
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
 	}
 
 
