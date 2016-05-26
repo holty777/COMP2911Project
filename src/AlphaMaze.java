@@ -50,6 +50,8 @@ public class AlphaMaze {
 		//maze generator method
 		generate();
 		//print();
+		//exit - win game
+		mazemtx[width-2][height-1] = 0;
 	}
 	
 	/**
