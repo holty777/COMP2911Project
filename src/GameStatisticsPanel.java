@@ -1,5 +1,7 @@
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
@@ -37,6 +39,7 @@ public class GameStatisticsPanel extends JPanel {
 	private JLabel modeLabel;
 	private JLabel modeDescription;
 	private JLabel timeLabel;
+	Font customFont = null;
 
 	/**
 	 * The "GameStatisticsPanel" constructor.
@@ -49,47 +52,59 @@ public class GameStatisticsPanel extends JPanel {
 	public GameStatisticsPanel(GameWindow gw, MazePuzzleGame mg) throws IOException {
 		mainGame = mg;
 		gameWindow = gw;
-
-		//setBackground(Color.WHITE);
+		//SUPER MARIO FONT
+		try {
+		    //create the font to use. Specify the size!
+		    customFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/SuperMario256.ttf")).deriveFont(Font.ROMAN_BASELINE, 25f);
+		    GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		    //register the font
+		    ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("src/SuperMario256.ttf")));
+		    
+		} catch (IOException e) {
+		    e.printStackTrace();
+		} catch(FontFormatException e) {
+		    e.printStackTrace();
+		}
+		setBackground(Color.decode("#cccccc"));
 
 		setLayout(new GridBagLayout());
 		GridBagConstraints gc = new GridBagConstraints();
-		gc.weightx = 1;
+		gc.weightx = 0;
 		gc.weighty = 1;
 		gc.fill = GridBagConstraints.FIRST_LINE_START;
 		gc.gridx = 0;
 		gc.gridy = 0;
-		gc.anchor = GridBagConstraints.WEST;
+		gc.anchor = GridBagConstraints.CENTER;
+		
 		Image img = ImageIO.read(new File("src/MenuPic.png"));
 		ImageIcon imgI = new ImageIcon(img);
 		JLabel menu = new JLabel();
 		menu.setIcon(imgI);
 		//		// Button for Single Player
-		gc.gridx = 0;
-		gc.gridy = 0;
-		add(menu);
+		timeLabel = new JLabel("Time Elapsed: ");
+		timeLabel.setFont(customFont);
 		gc.gridy = 1;
-		// who's turn
-		player1 = new JLabel("Player 1: ");
-		add(player1, gc);
+		add(timeLabel, gc);
 		gc.gridy = 2;
-		player2 = new JLabel("Player 2: ");
+		add(menu);
+		// who's turn
+		player1 = new JLabel();
+		gc.gridy = 3;
+		add(player1, gc);
+		gc.gridy = 4;
+		player2 = new JLabel();
 		add(player2, gc);
 
 		gc.anchor = GridBagConstraints.SOUTH;
 		msg = new JLabel();
-		msg.setFont(new Font("Arial", Font.BOLD, 20));
-		gc.gridy = 3;
+		msg.setFont(customFont);
+		gc.gridy = 5;
 		add(msg, gc);
 
-		timeLabel = new JLabel("Time Elapsed: ");
-		timeLabel.setFont(new Font("Arial", Font.BOLD, 20));
-
-		gc.gridy = 4;
-		add(timeLabel, gc);
+		
 
 		modeDescription = new JLabel();
-		gc.gridy = 5;
+		gc.gridy = 6;
 		add(modeDescription, gc);
 
 		JButton restartGameButton = new JButton("Restart");
@@ -131,10 +146,13 @@ public class GameStatisticsPanel extends JPanel {
 	 */
 	public void setPlayerNames(String p1, String p2) {
 		//uncommenting crashes 
-		player1.setFont(new Font("Arial", Font.BOLD, 20));
+		player1.setHorizontalAlignment(JLabel.RIGHT);
+		player1.setFont(customFont);
 		player1.setText("Player 1 : " + p1);
 		player1.setName(p1);
-		player2.setFont(new Font("Arial", Font.BOLD, 20));
+		player1.setForeground(Color.decode("#055e05"));
+		player2.setForeground(Color.decode("#4ed504"));
+		player2.setFont(customFont);
 		player2.setText("Player 2 : " + p2);
 		player2.setName(p2);
 		msg.setText("Game Started.");
