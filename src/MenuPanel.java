@@ -53,12 +53,11 @@ public class MenuPanel extends JPanel {
 
 		JButton singlePlayerButton = new JButton();
 		
-		/*img = new ImageIO.read(new File("src/singleplayer.png"));
-		
+		img = ImageIO.read(new File("src/singleplayer.png"));
 		
 		ImageIcon imgI2 = new ImageIcon(img);
-		JLabel singlePlayerButton = new JLabel();
-		singlePlayerButton.setIcon(imgI2);*/
+		JLabel Img = new JLabel();
+		singlePlayerButton.setIcon(imgI2);
 
 		add(singlePlayerButton, gc);
 		singlePlayerButton.addActionListener(new ActionListener() {
