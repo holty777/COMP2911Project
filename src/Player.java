@@ -206,11 +206,8 @@ public class Player extends JLabel {
 			//link
 			try {
 				System.out.println("knees weak directio is :"+this.previousDirection);
-
-				
 				//load north 
 				if (this.previousDirection == 1){
-					//need to fix
 					img = ImageIO.read(new File("src/link_back.png"));
 				}else if (this.previousDirection == 2){
 				//load east
