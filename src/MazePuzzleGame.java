@@ -2,6 +2,8 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.io.IOException;
 import javax.swing.JFrame;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 public class MazePuzzleGame implements Runnable {
 
@@ -23,9 +25,9 @@ public class MazePuzzleGame implements Runnable {
 		menuPanel.setPreferredSize(new Dimension(300, 700));
 	}
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
 
-
+		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		guiThread = new Thread(new MazePuzzleGame());
 
 		guiThread.start();

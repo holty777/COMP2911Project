@@ -54,7 +54,7 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 	private int enemySpeed;
 	private GameBoardPanel parentPanel;
 	private Boolean enemyOff;
-	
+	private Boolean pause = false;
 	/**
 	 * The "MazePanel" constructor.
 	 * @param height	The height of the maze.
@@ -198,6 +198,10 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 		labelGrid[x/2-1][y/2-1] = triForce;
 		goalX = x/2-1;
 		goalY = y/2-1;
+		
+		
+		  
+		
 		for(int i=0; i < height; i++){
 			for(int j=0; j < length; j++){
 				this.add(labelGrid[i][j]);
@@ -268,126 +272,26 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 	 */
 	@Override
 	public void keyPressed(KeyEvent e) {
-		if(timerCheck == false){
-			startTimer();
-			timerCheck = true;
-		}
-		this.movesMade++;
-		System.out.println(this.movesMade);
-		if(e.getKeyCode() == KeyEvent.VK_RIGHT){
-			int i = player.getILocation();
-			int j = player.getJLocation();
-			//set the last direction to east
-			player.setLastDirection(2);
-
-
-			if(mainMaze.isEmpty(i, j+1) == false){
-				//change graphics
-				player.changeGraphicMovement();
-				player.setILocation(i);
-				player.setJLocation(j+1);
-				labelGrid[i][j+1] = player;
-				JLabel blank = new JLabel();
-				//	blank.setBackground(Color.white);
-				blank.setOpaque(true);
-				blank.setMinimumSize(new Dimension(10,10));
-				blank.setPreferredSize(new Dimension(10,10));
-				blank.setMaximumSize(new Dimension(10,10));
-				labelGrid[i][j] = blank;
+		if(pause == false){
+			if(timerCheck == false){
+				startTimer();
+				timerCheck = true;
 			}
-		}
-
-		if(e.getKeyCode() == KeyEvent.VK_LEFT){
-			//set the last direction to west
-			player.setLastDirection(4);
-
-			int i = player.getILocation();
-			int j = player.getJLocation();
-			if(mainMaze.isEmpty(i, j-1) == false){
-				//change graphics
-				player.changeGraphicMovement();
-				player.setILocation(i);
-				player.setJLocation(j-1);
-				labelGrid[i][j-1] = player;
-				JLabel blank = new JLabel();
-				//blank.setBackground(Color.white);
-				blank.setOpaque(true);
-				blank.setMinimumSize(new Dimension(10,10));
-				blank.setPreferredSize(new Dimension(10,10));
-				blank.setMaximumSize(new Dimension(10,10));
-				labelGrid[i][j] = blank;
-
-			}
-			refreshMaze();
-		}
-
-		if(e.getKeyCode() == KeyEvent.VK_UP){
-
-			int i = player.getILocation();
-			int j = player.getJLocation();
-			//set last direction
-			player.setLastDirection(1);
-
-			if(mainMaze.isEmpty(i-1, j) == false){
-				//change graphics
-				player.changeGraphicMovement();
-				player.setILocation(i-1);
-				player.setJLocation(j);
-				labelGrid[i-1][j] = player;
-				JLabel blank = new JLabel();
-				//blank.setBackground(Color.white);
-				blank.setOpaque(true);
-				blank.setMinimumSize(new Dimension(10,10));
-				blank.setPreferredSize(new Dimension(10,10));
-				blank.setMaximumSize(new Dimension(10,10));
-				labelGrid[i][j] = blank;
-			}
-			refreshMaze();
-		}
-
-		if(e.getKeyCode() == KeyEvent.VK_DOWN){
-
-			int i = player.getILocation();
-			int j = player.getJLocation();
-
-			//set last direction
-			player.setLastDirection(3);
-
-			if(mainMaze.isEmpty(i+1, j) == false){
-				//change graphics
-				player.changeGraphicMovement();
-				player.setILocation(i+1);
-				player.setJLocation(j);
-				labelGrid[i+1][j] = player;
-				JLabel blank = new JLabel();
-				//blank.setBackground(Color.white);
-				blank.setOpaque(true);
-				blank.setMinimumSize(new Dimension(10,10));
-				blank.setPreferredSize(new Dimension(10,10));
-				blank.setMaximumSize(new Dimension(10,10));
-				labelGrid[i][j] = blank;
-
-
-			}
-			refreshMaze();
-		}
-		
-		
-		//Options for 2 Players
-		if(enemyOff == true){
-			if(e.getKeyCode() == KeyEvent.VK_D){
-				int i = player2.getILocation();
-				int j = player2.getJLocation();
+			this.movesMade++;
+			System.out.println(this.movesMade);
+			if(e.getKeyCode() == KeyEvent.VK_RIGHT){
+				int i = player.getILocation();
+				int j = player.getJLocation();
 				//set the last direction to east
-				player2.setLastDirection(2);
+				player.setLastDirection(2);
 
 
 				if(mainMaze.isEmpty(i, j+1) == false){
 					//change graphics
-					player2.changeGraphicMovement();
-					player2.setILocation(i);
-					player2.setJLocation(j+1);
-					labelGrid[i][j+1] = player2;
+					player.changeGraphicMovement();
+					player.setILocation(i);
+					player.setJLocation(j+1);
+					labelGrid[i][j+1] = player;
 					JLabel blank = new JLabel();
 					//	blank.setBackground(Color.white);
 					blank.setOpaque(true);
@@ -398,18 +302,18 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 				}
 			}
 
-			if(e.getKeyCode() == KeyEvent.VK_A){
+			if(e.getKeyCode() == KeyEvent.VK_LEFT){
 				//set the last direction to west
-				player2.setLastDirection(4);
+				player.setLastDirection(4);
 
-				int i = player2.getILocation();
-				int j = player2.getJLocation();
+				int i = player.getILocation();
+				int j = player.getJLocation();
 				if(mainMaze.isEmpty(i, j-1) == false){
 					//change graphics
-					player2.changeGraphicMovement();
-					player2.setILocation(i);
-					player2.setJLocation(j-1);
-					labelGrid[i][j-1] = player2;
+					player.changeGraphicMovement();
+					player.setILocation(i);
+					player.setJLocation(j-1);
+					labelGrid[i][j-1] = player;
 					JLabel blank = new JLabel();
 					//blank.setBackground(Color.white);
 					blank.setOpaque(true);
@@ -422,19 +326,19 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 				refreshMaze();
 			}
 
-			if(e.getKeyCode() == KeyEvent.VK_W){
+			if(e.getKeyCode() == KeyEvent.VK_UP){
 
-				int i = player2.getILocation();
-				int j = player2.getJLocation();
+				int i = player.getILocation();
+				int j = player.getJLocation();
 				//set last direction
-				player2.setLastDirection(1);
+				player.setLastDirection(1);
 
 				if(mainMaze.isEmpty(i-1, j) == false){
 					//change graphics
-					player2.changeGraphicMovement();
-					player2.setILocation(i-1);
-					player2.setJLocation(j);
-					labelGrid[i-1][j] = player2;
+					player.changeGraphicMovement();
+					player.setILocation(i-1);
+					player.setJLocation(j);
+					labelGrid[i-1][j] = player;
 					JLabel blank = new JLabel();
 					//blank.setBackground(Color.white);
 					blank.setOpaque(true);
@@ -446,20 +350,20 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 				refreshMaze();
 			}
 
-			if(e.getKeyCode() == KeyEvent.VK_S){
+			if(e.getKeyCode() == KeyEvent.VK_DOWN){
 
-				int i = player2.getILocation();
-				int j = player2.getJLocation();
+				int i = player.getILocation();
+				int j = player.getJLocation();
 
 				//set last direction
-				player2.setLastDirection(3);
+				player.setLastDirection(3);
 
 				if(mainMaze.isEmpty(i+1, j) == false){
 					//change graphics
-					player2.changeGraphicMovement();
-					player2.setILocation(i+1);
-					player2.setJLocation(j);
-					labelGrid[i+1][j] = player2;
+					player.changeGraphicMovement();
+					player.setILocation(i+1);
+					player.setJLocation(j);
+					labelGrid[i+1][j] = player;
 					JLabel blank = new JLabel();
 					//blank.setBackground(Color.white);
 					blank.setOpaque(true);
@@ -472,54 +376,155 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 				}
 				refreshMaze();
 			}
-		}
-		
-		
-		//if the user presses space, they shoot stuff
-		if (e.getKeyCode() == KeyEvent.VK_SPACE){
-			int i = player.getILocation();
-			int j = player.getJLocation();
-			int direction = player.getlastDIR();
 
-			if (direction == 1){
-				if(mainMaze.isEmpty(i-1, j) == false){
-					//draw a fire ball/object
+
+			//Options for 2 Players
+			if(enemyOff == true){
+				if(e.getKeyCode() == KeyEvent.VK_D){
+					int i = player2.getILocation();
+					int j = player2.getJLocation();
+					//set the last direction to east
+					player2.setLastDirection(2);
+
+
+					if(mainMaze.isEmpty(i, j+1) == false){
+						//change graphics
+						player2.changeGraphicMovement();
+						player2.setILocation(i);
+						player2.setJLocation(j+1);
+						labelGrid[i][j+1] = player2;
+						JLabel blank = new JLabel();
+						//	blank.setBackground(Color.white);
+						blank.setOpaque(true);
+						blank.setMinimumSize(new Dimension(10,10));
+						blank.setPreferredSize(new Dimension(10,10));
+						blank.setMaximumSize(new Dimension(10,10));
+						labelGrid[i][j] = blank;
+					}
 				}
-			}else if (direction == 2){
-				if(mainMaze.isEmpty(i, j-1) == false){
-					//draw a fire ball/object
+
+				if(e.getKeyCode() == KeyEvent.VK_A){
+					//set the last direction to west
+					player2.setLastDirection(4);
+
+					int i = player2.getILocation();
+					int j = player2.getJLocation();
+					if(mainMaze.isEmpty(i, j-1) == false){
+						//change graphics
+						player2.changeGraphicMovement();
+						player2.setILocation(i);
+						player2.setJLocation(j-1);
+						labelGrid[i][j-1] = player2;
+						JLabel blank = new JLabel();
+						//blank.setBackground(Color.white);
+						blank.setOpaque(true);
+						blank.setMinimumSize(new Dimension(10,10));
+						blank.setPreferredSize(new Dimension(10,10));
+						blank.setMaximumSize(new Dimension(10,10));
+						labelGrid[i][j] = blank;
+
+					}
+					refreshMaze();
 				}
-			}else if (direction == 3){
-				if(mainMaze.isEmpty(i+1, j) == false){
-					//draw a fire ball or object
+
+				if(e.getKeyCode() == KeyEvent.VK_W){
+
+					int i = player2.getILocation();
+					int j = player2.getJLocation();
+					//set last direction
+					player2.setLastDirection(1);
+
+					if(mainMaze.isEmpty(i-1, j) == false){
+						//change graphics
+						player2.changeGraphicMovement();
+						player2.setILocation(i-1);
+						player2.setJLocation(j);
+						labelGrid[i-1][j] = player2;
+						JLabel blank = new JLabel();
+						//blank.setBackground(Color.white);
+						blank.setOpaque(true);
+						blank.setMinimumSize(new Dimension(10,10));
+						blank.setPreferredSize(new Dimension(10,10));
+						blank.setMaximumSize(new Dimension(10,10));
+						labelGrid[i][j] = blank;
+					}
+					refreshMaze();
 				}
-			}else if (direction == 4){
-				if(mainMaze.isEmpty(i, j+1) == false){
-					//draw a fire ball/object
+
+				if(e.getKeyCode() == KeyEvent.VK_S){
+
+					int i = player2.getILocation();
+					int j = player2.getJLocation();
+
+					//set last direction
+					player2.setLastDirection(3);
+
+					if(mainMaze.isEmpty(i+1, j) == false){
+						//change graphics
+						player2.changeGraphicMovement();
+						player2.setILocation(i+1);
+						player2.setJLocation(j);
+						labelGrid[i+1][j] = player2;
+						JLabel blank = new JLabel();
+						//blank.setBackground(Color.white);
+						blank.setOpaque(true);
+						blank.setMinimumSize(new Dimension(10,10));
+						blank.setPreferredSize(new Dimension(10,10));
+						blank.setMaximumSize(new Dimension(10,10));
+						labelGrid[i][j] = blank;
+
+
+					}
+					refreshMaze();
+				}
+			}
+
+
+			//if the user presses space, they shoot stuff
+			if (e.getKeyCode() == KeyEvent.VK_SPACE){
+				int i = player.getILocation();
+				int j = player.getJLocation();
+				int direction = player.getlastDIR();
+
+				if (direction == 1){
+					if(mainMaze.isEmpty(i-1, j) == false){
+						//draw a fire ball/object
+					}
+				}else if (direction == 2){
+					if(mainMaze.isEmpty(i, j-1) == false){
+						//draw a fire ball/object
+					}
+				}else if (direction == 3){
+					if(mainMaze.isEmpty(i+1, j) == false){
+						//draw a fire ball or object
+					}
+				}else if (direction == 4){
+					if(mainMaze.isEmpty(i, j+1) == false){
+						//draw a fire ball/object
+					}
+				}
+				refreshMaze();
+
+			}
+
+
+
+			// If the user presses "q", quit
+			if(e.getKeyCode() == KeyEvent.VK_Q){
+				System.exit(0);
+			}
+
+			if(player.getILocation() == goalX && player.getJLocation() == goalY){
+				parentPanel.displayEndGame();
+
+			}
+			if(enemyOff == true){
+				if(player2.getILocation() == goalX && player2.getJLocation() == goalY){
+					parentPanel.displayEndGame();
 				}
 			}
 			refreshMaze();
-
 		}
-
-
-
-		// If the user presses "q", quit
-		if(e.getKeyCode() == KeyEvent.VK_Q){
-			System.exit(0);
-		}
-
-		if(player.getILocation() == goalX && player.getJLocation() == goalY){
-			parentPanel.displayEndGame();
-			
-		}
-		if(enemyOff == true){
-			if(player2.getILocation() == goalX && player2.getJLocation() == goalY){
-				parentPanel.displayEndGame();
-			}
-		}
-		refreshMaze();
-
 	}
 
 	/**
