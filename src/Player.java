@@ -211,7 +211,7 @@ public class Player extends JLabel {
 				//load north 
 				if (this.previousDirection == 1){
 					//need to fix
-					img = ImageIO.read(new File("src/link_stationary.png"));
+					img = ImageIO.read(new File("src/link_back.png"));
 				}else if (this.previousDirection == 2){
 				//load east
 					img = ImageIO.read(new File("src/link_right.png"));
