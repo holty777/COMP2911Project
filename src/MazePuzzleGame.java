@@ -21,18 +21,16 @@ public class MazePuzzleGame implements Runnable {
 
 		menuPanel = new MenuPanel(this);
 		menuPanel.setPreferredSize(new Dimension(300, 700));
-
-		gamePanel = new GameBoardPanel(null, this);
-		gamePanel.setPreferredSize(new Dimension(700, 700));
+		
 	}
 
 	public static void main(String[] args) throws IOException {
 
-		//mazeGameThread = new Thread(new GameEngine());
+		mazeGameThread = new Thread(new GameBoardPanel(null, null));
 
 		guiThread = new Thread(new MazePuzzleGame());
-
-		//mazeGameThread.start();
+		
+		mazeGameThread.start();
 		guiThread.start();
 	}
 

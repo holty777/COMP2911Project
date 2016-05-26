@@ -18,7 +18,7 @@ import javax.swing.JPanel;
  * 			Shiyuan Liang
  *
  */
-public class GameBoardPanel extends JPanel {
+public class GameBoardPanel extends JPanel implements Runnable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -210,6 +210,11 @@ public class GameBoardPanel extends JPanel {
 
 	public GameWindow getGameWindow(){
 		return gameWindow;
+	}
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
 	}
 
 
