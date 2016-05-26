@@ -240,7 +240,7 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 					}else if (newMazeItems.getItemID(i, j) == 3){
 						image = new ImageIcon("src/item_mini.png");
 					}else if (newMazeItems.getItemID(i, j) == 4) {
-						image = new ImageIcon("src/item_speed.png");
+						image = new ImageIcon("src/item_teleport.png");
 					}else if (newMazeItems.getItemID(i, j) == 5){
 						image = new ImageIcon("src/item_bomb.png");
 					}else if (newMazeItems.getItemID(i, j) == 6){
@@ -633,13 +633,14 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 				
 				//create a new trap 
 				if (player.getAttribute() == 1){
-					//chuck a moving fire ball
-					//use the timer
+					//chuck a fire ball in a line for 3 squares
+					
 				}else if (player.getAttribute() == 2){
 					//decrement the attribute here
 					
 					
 					ImageIcon image = new ImageIcon("src/trap_freeze.png");
+					//turn mario into a snowman
 					
 					//drawing the freeze trap
 					Image image1 = image.getImage(); // transform it
@@ -655,8 +656,83 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 					imageLabel.setMaximumSize(new Dimension(10,10));
 					labelGrid[lastPos.get(0)][lastPos.get(1)] = imageLabel;
 				}else if (player.getAttribute () == 4){
-					//jump two squares
-					System.out.println("the speed booster is in play");
+					//teleport two squares
+					//System.out.println("the speed booster is in play");
+					//check last direction, cases then check squares then teleport
+						int i = lastPos.get(0);
+						int j = lastPos.get(1);
+						
+						System.out.println("the last location is: "+i+" "+j);
+					switch(player.getlastDIR()){
+						case(1): //north
+							//j++;
+						
+						System.out.println("the new location is: "+i+" "+j);
+							if(mainMaze.isEmpty(i, j-2) == false){
+								player2.setILocation(i);
+								player2.setJLocation(j-2);
+								labelGrid[i][j-1] = player2;
+								JLabel blank = new JLabel();
+								//blank.setBackground(Color.white);
+								blank.setOpaque(true);
+								blank.setMinimumSize(new Dimension(10,10));
+								blank.setPreferredSize(new Dimension(10,10));
+								blank.setMaximumSize(new Dimension(10,10));
+								labelGrid[i][j] = blank;
+								
+							}
+							break;
+						case(2): //east
+							i--;
+						System.out.println("the new location is: "+i+" "+j);
+							if(mainMaze.isEmpty(i+2, j) == false){
+								player2.setILocation(i+2);
+								player2.setJLocation(j);
+								labelGrid[i][j-1] = player2;
+								JLabel blank = new JLabel();
+								//blank.setBackground(Color.white);
+								blank.setOpaque(true);
+								blank.setMinimumSize(new Dimension(10,10));
+								blank.setPreferredSize(new Dimension(10,10));
+								blank.setMaximumSize(new Dimension(10,10));
+								labelGrid[i][j] = blank;
+							}
+							break;
+						case(3): //south
+							j--;
+						System.out.println("the new location is: "+i+" "+j);
+							if(mainMaze.isEmpty(i, j+2) == false){
+								player2.setILocation(i);
+								player2.setJLocation(j+2);
+								labelGrid[i][j-1] = player2;
+								JLabel blank = new JLabel();
+								//blank.setBackground(Color.white);
+								blank.setOpaque(true);
+								blank.setMinimumSize(new Dimension(10,10));
+								blank.setPreferredSize(new Dimension(10,10));
+								blank.setMaximumSize(new Dimension(10,10));
+								labelGrid[i][j] = blank;	
+							}
+							break;
+						case(4): //west
+							i++;
+						System.out.println("the new location is: "+i+" "+j);
+							if(mainMaze.isEmpty(i-2, j) == false){
+								player2.setILocation(i-2);
+								player2.setJLocation(j);
+								labelGrid[i][j-1] = player2;
+								JLabel blank = new JLabel();
+								//blank.setBackground(Color.white);
+								blank.setOpaque(true);
+								blank.setMinimumSize(new Dimension(10,10));
+								blank.setPreferredSize(new Dimension(10,10));
+								blank.setMaximumSize(new Dimension(10,10));
+								labelGrid[i][j] = blank;
+							}
+							break;
+					}
+					
+					
 				}else if (player.getAttribute() == 5){
 					//add it to the trap list
 					
