@@ -33,13 +33,13 @@ public class GameWindow extends JFrame {
 		mainGame = mg;
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(1000, 700);
+		//setSize(1000, 700);
 		setLocationRelativeTo(null);
 		setResizable(false);
 		setBounds(mainGame.getMainFrame().getBounds());
 
 		gameStatisticsPanel = new GameStatisticsPanel(this, mainGame);
-		gameStatisticsPanel.setPreferredSize(new Dimension(300, 700));
+		//gameStatisticsPanel.setPreferredSize(new Dimension(300, 700));
 		getContentPane().add(gameStatisticsPanel, BorderLayout.WEST);
 
 		
