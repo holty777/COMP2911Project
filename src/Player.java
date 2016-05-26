@@ -101,11 +101,6 @@ public class Player extends JLabel {
 	public void setJLocation(int j){
 		this.jLocation = j;
 	}
-	public Move makeMove(int col, int row) {
-		//implement move functionality
-		Move move = null;
-		return move;
-	}
 
 	public void decAttribute (){
 		if (this.attributeRunTime != 0){
@@ -266,12 +261,6 @@ public class Player extends JLabel {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}	
-		}else{
-			try{
-				img = ImageIO.read(new File("src/triforce.jpg"));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 		}
 
 	}

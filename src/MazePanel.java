@@ -30,6 +30,8 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 	private int length;
 	// The player
 	private Player player;
+	
+	private Player player2;
 	// The target 
 	private Player triForce;
 	// Icon Width
@@ -51,6 +53,7 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 	private Timer timer;
 	private int enemySpeed;
 	private GameBoardPanel parentPanel;
+	private Boolean enemyOff;
 
 	/**
 	 * The "MazePanel" constructor.
@@ -70,7 +73,6 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 		this.movesMade = 0;
 		goalX = 0;
 		goalY = 0;
-
 		labelGrid = new JLabel[height][length];
 		this.height = height;
 		this.length = length;
@@ -92,8 +94,11 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 		} else if(height <= 40){
 			iconWidth = 15;
 		} else iconWidth = 5;
+		
+		if(enemySpeed2 == 0){
+			enemyOff = true;
+		} else enemyOff = false;
 		initMaze();
-
 	}
 
 	/**
@@ -111,12 +116,14 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 				if(mainMaze.isEmpty(i,j) == false){
 					if(check == false){
 						player = new Player(i, j, iconWidth, iconWidth, 0);
+						player.setName(parentPanel.getGameWindow().getStatisticsPanel().getPlayer1()); 
 						player.setMinimumSize(new Dimension(10,10));
 						player.setPreferredSize(new Dimension(10,10));
 						player.setMaximumSize(new Dimension(10,10));
 						labelGrid[i][j] = player;
 						predator.setStart(i, j);
 						predPlayer = new Player(i, j, iconWidth, iconWidth, 2);
+						predPlayer.setName(parentPanel.getGameWindow().getStatisticsPanel().getPlayer2()); 
 						predPlayer.setMinimumSize(new Dimension(10,10));
 						predPlayer.setPreferredSize(new Dimension(10,10));
 						predPlayer.setMaximumSize(new Dimension(10,10));
@@ -173,7 +180,15 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 		}
 
 		//labelGrid[x][1] = predPlayer;
-
+		if(enemyOff == true){
+			player2 = new Player(x, y-1, iconWidth, iconWidth, 2);
+			player2.setMinimumSize(new Dimension(10,10));
+			player2.setPreferredSize(new Dimension(10,10));
+			player2.setMaximumSize(new Dimension(10,10));
+			labelGrid[x][y-1] = player2;
+			player2.setName(parentPanel.getGameWindow().getStatisticsPanel().getPlayer2()); 
+		}
+		
 		triForce = new Player(x/2-1, y/2-1, iconWidth, iconWidth, 1);
 		triForce.setMinimumSize(new Dimension(10,10));
 		triForce.setPreferredSize(new Dimension(10,10));
@@ -186,6 +201,8 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 				this.add(labelGrid[i][j]);
 			}
 		}
+		
+
 
 
 	}
@@ -352,6 +369,110 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 			}
 			refreshMaze();
 		}
+		
+		
+		//Options for 2 Players
+		if(enemyOff == true){
+			if(e.getKeyCode() == KeyEvent.VK_D){
+				int i = player2.getILocation();
+				int j = player2.getJLocation();
+				//set the last direction to east
+				player2.setLastDirection(2);
+
+
+				if(mainMaze.isEmpty(i, j+1) == false){
+					//change graphics
+					player2.changeGraphicMovement();
+					player2.setILocation(i);
+					player2.setJLocation(j+1);
+					labelGrid[i][j+1] = player2;
+					JLabel blank = new JLabel();
+					//	blank.setBackground(Color.white);
+					blank.setOpaque(true);
+					blank.setMinimumSize(new Dimension(10,10));
+					blank.setPreferredSize(new Dimension(10,10));
+					blank.setMaximumSize(new Dimension(10,10));
+					labelGrid[i][j] = blank;
+				}
+			}
+
+			if(e.getKeyCode() == KeyEvent.VK_A){
+				//set the last direction to west
+				player2.setLastDirection(4);
+
+				int i = player2.getILocation();
+				int j = player2.getJLocation();
+				if(mainMaze.isEmpty(i, j-1) == false){
+					//change graphics
+					player2.changeGraphicMovement();
+					player2.setILocation(i);
+					player2.setJLocation(j-1);
+					labelGrid[i][j-1] = player2;
+					JLabel blank = new JLabel();
+					//blank.setBackground(Color.white);
+					blank.setOpaque(true);
+					blank.setMinimumSize(new Dimension(10,10));
+					blank.setPreferredSize(new Dimension(10,10));
+					blank.setMaximumSize(new Dimension(10,10));
+					labelGrid[i][j] = blank;
+
+				}
+				refreshMaze();
+			}
+
+			if(e.getKeyCode() == KeyEvent.VK_W){
+
+				int i = player2.getILocation();
+				int j = player2.getJLocation();
+				//set last direction
+				player2.setLastDirection(1);
+
+				if(mainMaze.isEmpty(i-1, j) == false){
+					//change graphics
+					player2.changeGraphicMovement();
+					player2.setILocation(i-1);
+					player2.setJLocation(j);
+					labelGrid[i-1][j] = player2;
+					JLabel blank = new JLabel();
+					//blank.setBackground(Color.white);
+					blank.setOpaque(true);
+					blank.setMinimumSize(new Dimension(10,10));
+					blank.setPreferredSize(new Dimension(10,10));
+					blank.setMaximumSize(new Dimension(10,10));
+					labelGrid[i][j] = blank;
+				}
+				refreshMaze();
+			}
+
+			if(e.getKeyCode() == KeyEvent.VK_S){
+
+				int i = player2.getILocation();
+				int j = player2.getJLocation();
+
+				//set last direction
+				player2.setLastDirection(3);
+
+				if(mainMaze.isEmpty(i+1, j) == false){
+					//change graphics
+					player2.changeGraphicMovement();
+					player2.setILocation(i+1);
+					player2.setJLocation(j);
+					labelGrid[i+1][j] = player2;
+					JLabel blank = new JLabel();
+					//blank.setBackground(Color.white);
+					blank.setOpaque(true);
+					blank.setMinimumSize(new Dimension(10,10));
+					blank.setPreferredSize(new Dimension(10,10));
+					blank.setMaximumSize(new Dimension(10,10));
+					labelGrid[i][j] = blank;
+
+
+				}
+				refreshMaze();
+			}
+		}
+		
+		
 		//if the user presses space, they shoot stuff
 		if (e.getKeyCode() == KeyEvent.VK_SPACE){
 			int i = player.getILocation();
@@ -387,7 +508,12 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 		}
 
 		if(player.getILocation() == goalX && player.getJLocation() == goalY){
-			parentPanel.displayEndGame();
+			parentPanel.displayEndGame(player.getName());
+		}
+		if(enemyOff == true){
+			if(player2.getILocation() == goalX && player2.getJLocation() == goalY){
+				parentPanel.displayEndGame(player2.getName());
+			}
 		}
 		refreshMaze();
 
@@ -416,7 +542,7 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 	}
 
 	public void startTimer(){
-		timer.schedule(new MyTimerTask(predator, player, predPlayer, labelGrid, this, enemySpeed, parentPanel), 0, enemySpeed);
+		timer.schedule(new MyTimerTask(predator, player, predPlayer, labelGrid, this, enemySpeed, parentPanel, enemyOff), 0, enemySpeed);
 
 	}
 

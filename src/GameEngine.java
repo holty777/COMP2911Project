@@ -30,11 +30,11 @@ public class GameEngine implements Runnable {
 	 * @param gameBoardPanel	A class responsible for displaying the board.
 	 */
 	public void startNewGame(int gameMode, Player player1, Player player2,
-			GameBoardPanel gameBoardPanel) {
+			GameBoardPanel gameBoardPanel, int singleDouble) {
 
 		this.gameMode = gameMode;
 		this.gameBoardPanel = gameBoardPanel;
-		gameBoardPanel.setMaze(gameMode);
+		gameBoardPanel.setMaze(gameMode, singleDouble);
 		gameBoardPanel.getMaze().setFocusable(true);
 		gameBoardPanel.getMaze().requestFocus();
 		gameBoardPanel.getMaze().addKeyListener(gameBoardPanel.getMaze());

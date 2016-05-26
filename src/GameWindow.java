@@ -81,8 +81,8 @@ public class GameWindow extends JFrame {
 	 * @param playerName	The name of player 1.
 	 * @param playerName2	The name of player 2.
 	 */
-	public void startDoublePlayersGame(String playerName, String playerName2) {
-		gameBoardPanel.initDoublePlayersGame(playerName, playerName2);
+	public void startDoublePlayersGame(String playerName, String playerName2, int mazeSize) {
+		gameBoardPanel.initDoublePlayersGame(playerName, playerName2, mazeSize);
 	}
 
 }
