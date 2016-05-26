@@ -4,12 +4,15 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.Timer;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import java.awt.GridLayout;
+import java.awt.Image;
 
 /**
  * The "MazePanel" class creates a handles the input/output for the maze.
@@ -108,6 +111,13 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 	 * to represent the maze.
 	 */
 	public void initMaze(){
+		
+		//some items here
+		ItemGenerator newMazeItems = new ItemGenerator(6, this.mainMaze);
+		//ArrayList <ItemLoc> ItemList = newMazeItems.ArraygetItemLoc();
+		
+		
+		
 		boolean check = false;
 		int x = 0;
 		int y = 0;
@@ -152,8 +162,7 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 						x = i;
 						y = j;
 					}
-				}
-				else {
+				}else {
 
 					JLabel blank = new JLabel();
 					blank.setBackground(Color.BLACK);
@@ -198,6 +207,56 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 		labelGrid[x/2-1][y/2-1] = triForce;
 		goalX = x/2-1;
 		goalY = y/2-1;
+		
+		for(int i=0; i < height; i++){
+			for(int j=0; j < length; j++){
+				if (newMazeItems.ItemLocCheck (i, j) == true && mainMaze.isEmpty(i, j) == false){
+					// print items here
+					//the type of item here 
+					/* 1. fireballs- shoot a fire ball in the direction on which the player is facing
+					* and it travels for 3,5,7 or breaks if it hits a wall
+					* 2. freeze- freezes mario or the other player
+					* 3. mini mario- slow mario down
+					* 4. big mario destroy the map- if timer is end, mario turns big and stream 
+					*   rolls the player
+					* 5. star- invisicibility, increase player speed
+					* 6. speed boost squares- boost the speed the player for a number of squares
+					* 7. drop bombs- and make the whole line on go on fire
+					* */
+
+
+					//declare image
+
+					ImageIcon image = null;
+
+
+					if (newMazeItems.getItemID(i, j) == 1){  
+						image = new ImageIcon("src/item_fireball.png");
+					}else if (newMazeItems.getItemID(i, j) == 2){
+						image = new ImageIcon("src/item_freeze.png");
+					}else if (newMazeItems.getItemID(i, j) == 3){
+						image = new ImageIcon("src/item_mini.png");
+					}else if (newMazeItems.getItemID(i, j) == 4) {
+						image = new ImageIcon("src/item_big.png");
+					}else if (newMazeItems.getItemID(i, j) == 5){
+						image = new ImageIcon("src/item_star.png");
+					}else if (newMazeItems.getItemID (i, j) == 6){	
+						image = new ImageIcon("src/item_speed.png");
+					}else if (newMazeItems.getItemID(i, j) == 7){
+						image = new ImageIcon("src/item_bomb.png");
+					}
+					
+
+					JLabel imageLabel = new JLabel(image);
+					imageLabel.setOpaque(true);
+					imageLabel.setMinimumSize(new Dimension(10,10));
+					imageLabel.setPreferredSize(new Dimension(10,10));
+					imageLabel.setMaximumSize(new Dimension(10,10));
+					labelGrid[i][j] = imageLabel;
+				}
+			}
+		}
+		
 		for(int i=0; i < height; i++){
 			for(int j=0; j < length; j++){
 				this.add(labelGrid[i][j]);

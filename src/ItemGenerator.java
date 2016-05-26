@@ -35,19 +35,25 @@ public class ItemGenerator {
 		ArrayList <ItemLoc> existingLoc = new ArrayList <ItemLoc>();
 
 		int i = 0;
-		while (i != numItems){
+		while (i!=numItems){
 			Random Rand = new Random();
-			int x_coordinate = Rand.nextInt(m.getWidth());
-			int y_coordinate = Rand.nextInt(m.getHeight());
+			int x_coordinate = Rand.nextInt(m.getHeight());
+			int y_coordinate = Rand.nextInt(m.getWidth());
+			
+			System.out.println("the coordinate generated for the item is at "+x_coordinate+" "+
+			y_coordinate);
 
 			if (!m.isEmpty(y_coordinate, x_coordinate)){
+				System.out.println("the coordinate generated for the item is at "+x_coordinate+" "+
+						y_coordinate+" true");
 				//creating new object
-				ItemLoc newitem = new ItemLoc(x_coordinate, y_coordinate, randomItemType());
+				ItemLoc newitem = new ItemLoc(y_coordinate, x_coordinate, randomItemType());
 
 				//check if the that coordinate has that item already
 				if (!existingLoc.contains(newitem)){
 					existingLoc.add(newitem);
 					this.ItemLocations.add(newitem);
+					i++;
 				}
 			}
 		}
@@ -55,6 +61,23 @@ public class ItemGenerator {
 
 	public ArrayList<ItemLoc> ArraygetItemLoc(){
 		return this.ItemLocations;
+	}
+	
+	public boolean ItemLocCheck(int i, int j) {
+		//scan through the arraylist and check if there is an item in that arraylist
+		for (ItemLoc k: ItemLocations){
+			if (k.getX() == i && k.getY() == j) return true;
+		}
+		return false;
+	}
+	
+	public int getItemID(int i, int j){
+		for (ItemLoc k: ItemLocations){
+			if (k.getX() == i && k.getY() == j) return k.getItemType();
+		}
+		
+		//return -1 if there is no such item 
+		return -1;
 	}
 
 }
