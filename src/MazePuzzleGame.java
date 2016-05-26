@@ -52,7 +52,6 @@ public class MazePuzzleGame implements Runnable {
 			homeGlassPane.setVisible(true);
 		}
 		mainFrame.getContentPane().add(menuPanel, BorderLayout.WEST);
-		//mainFrame.getContentPane().add(gamePanel, BorderLayout.EAST);
 		mainFrame.setResizable(false);
 		mainFrame.pack();
 		mainFrame.setVisible(true);
@@ -77,40 +76,6 @@ public class MazePuzzleGame implements Runnable {
 	public void suspendGame() {
 		gameEngine.suspendGame();
 		guiThread.interrupt();
-	}
-	
-	public void changeGlassPane(int mode) {
-		switch (mode) {
-		case 0:
-			// logo
-			homeGlassPane.repaint();
-			break;
-		case 1:
-			// single player menu
-			if (homeGlassPane instanceof SinglePlayerMenu)
-				homeGlassPane.repaint();
-			else
-				homeGlassPane = new SinglePlayerMenu(this);
-			break;
-		case 2:
-			// double players menu
-			if (homeGlassPane instanceof DoublePlayersMenu)
-				homeGlassPane.repaint();
-			else
-				homeGlassPane = new DoublePlayersMenu(this);
-			break;
-		case 4:
-			// how to play page
-			if (homeGlassPane instanceof Instructions)
-				homeGlassPane.repaint();
-			else
-				homeGlassPane = new Instructions();
-			break;
-		default:
-			// blank
-			homeGlassPane = new JPanel();
-		}
-		display();
 	}
 	
 	@Override
