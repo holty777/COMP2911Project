@@ -10,6 +10,8 @@ public class Predator {
 	private int mediumTime = 1;
 	private int headTime = 1;
 	
+	private boolean won = false;
+	
 	private int colValue = 0;
 	private int rowValue = 0;
 
@@ -25,6 +27,10 @@ public class Predator {
 
 	private int getDifficulty() { 
 		return difficulty;
+	}
+	
+	public boolean won(){
+		return this.won;
 	}
 
 	public void setStart(int row, int col){
@@ -99,7 +105,7 @@ public class Predator {
 		
 		//We have found the player, so now back track
 		if (end.getPreviousState() == null){
-			System.out.println("YOU HAVE LOST");
+			this.won = true;
 		}
 		else{
 			while (end.getPreviousState().getPreviousState() != null){
@@ -108,7 +114,7 @@ public class Predator {
 		}
 		this.rowValue = end.getRow();
 		this.colValue = end.getCol();
-		System.out.println("MOVE TO: Row = " + this.rowValue + "Col = " + this.colValue);
+		
 		
 	}
 }

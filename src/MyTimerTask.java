@@ -14,6 +14,7 @@ public class MyTimerTask extends TimerTask {
 	private JLabel[][] labelGrid;
 	private int speed;
 	private int timeElapsed;
+	private boolean finished = false;
 	GameBoardPanel parentPanel;
 	
 	public MyTimerTask(Predator predator, Player player, Player predPlayer, JLabel[][] labelGrid, MazePanel mazePanel, int speed, 
@@ -30,6 +31,7 @@ public class MyTimerTask extends TimerTask {
 
 	@Override
 	public void run() {
+		if (this.finished) return;
 		parentPanel.getGameWindow().getStatisticsPanel().setTimeLabel(timeElapsed/1000);
 		if(timeElapsed > 2000){
 			JLabel blank = new JLabel();
@@ -48,6 +50,7 @@ public class MyTimerTask extends TimerTask {
 			labelGrid[predator.getRow()][predator.getCol()] = predPlayer;
 			mazePanel.refreshMaze();
 		}
+		if (predator.won()) this.finished = true;
 		timeElapsed = timeElapsed + speed;
 		System.out.println("Time Elapsed = " + timeElapsed/1000 );
 	}
