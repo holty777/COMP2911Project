@@ -45,10 +45,6 @@ public class GameBoardPanel extends JPanel {
 		gameEngine = mainGame.getGameEngine();
 		gameStartCheck = 0;
 
-		//setOpaque(true);
-
-		//setBackground(new Color(27, 120, 236));
-
 		ImageIcon image = new ImageIcon("src/hedge.png");
 		JLabel imagelabel = new JLabel(image);
 		imagelabel.setOpaque(true);
@@ -56,10 +52,6 @@ public class GameBoardPanel extends JPanel {
 		imagelabel.setPreferredSize(new Dimension(700,700));
 		imagelabel.setMaximumSize(new Dimension(700,700));
 
-		//imagelabel.pac
-
-		//Image image = GenerateImage.toImage(true);  //this generates an image file
-		//ImageIcon icon = new ImageIcon(image); 
 		JLabel thumb = new JLabel();
 		System.out.println(imagelabel);
 		thumb.setIcon(image);
@@ -81,13 +73,10 @@ public class GameBoardPanel extends JPanel {
 	 * If the game has ended, display the winner.
 	 * @param winner The player who has won.
 	 */
-	public void displayEndGame(int i) {
-		//if (gameMode == 0)
-		//return; // stimulation
-		if(i== 1){
-			gameEngine.suspendGame();
-			gameWindow.getStatisticsPanel().displayEndGame(i);
-		}
+	public void displayEndGame() {
+		int i = 1;
+		gameEngine.suspendGame();
+		gameWindow.getStatisticsPanel().displayEndGame(i);
 	}
 
 	/**
@@ -96,13 +85,7 @@ public class GameBoardPanel extends JPanel {
 	public void restartNewGame() {
 		mainGame.suspendGame();
 
-		// randomize first player for single player mode
 		if (gameMode != 0) {
-			if (randPlayer() == 0) {
-				//Player temp = player1;
-				//player1 = player2;
-				//player2 = temp;
-			}
 			gameWindow.getStatisticsPanel().setPlayerNames(player1.getName(), player2.getName());
 		}
 

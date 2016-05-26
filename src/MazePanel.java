@@ -4,21 +4,12 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.util.Timer;
-
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
 import java.awt.GridLayout;
-import java.awt.Image;
-
-
 
 /**
  * The "MazePanel" class creates a handles the input/output for the maze.
@@ -31,6 +22,7 @@ import java.awt.Image;
  */
 public class MazePanel extends JPanel implements MouseListener, KeyListener {
 
+	private static final long serialVersionUID = 1L;
 	private JPanel homeGlassPane;
 	// The height of the maze.
 	private int height;
@@ -395,7 +387,7 @@ public class MazePanel extends JPanel implements MouseListener, KeyListener {
 		}
 
 		if(player.getILocation() == goalX && player.getJLocation() == goalY){
-			parentPanel.displayEndGame(1);
+			parentPanel.displayEndGame();
 		}
 		refreshMaze();
 

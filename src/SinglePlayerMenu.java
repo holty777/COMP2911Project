@@ -120,12 +120,8 @@ public class SinglePlayerMenu extends JPanel {
 
 				GameWindow singlePlayerWindow;
 				try {
-					singlePlayerWindow = new GameWindow(mainGame,
-							"Single Player Game");
-
-					singlePlayerWindow.startSinglePlayerGame(
-							playerNameField.getText(), mazeSize.getValue(), enemySpeed.getValue(), 1);
-
+					singlePlayerWindow = new GameWindow(mainGame, "Single Player Game");
+					singlePlayerWindow.startSinglePlayerGame(playerNameField.getText(), mazeSize.getValue(), enemySpeed.getValue(), 1);
 					singlePlayerWindow.setVisible(true);
 					mainGame.setVisibility(false);
 					MenuPanel.closeJOptionPanel();
