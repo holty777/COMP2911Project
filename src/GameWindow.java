@@ -25,7 +25,9 @@ public class GameWindow extends JFrame {
 	 * The "GameWindow" class.
 	 * @param mg	The MazePuzzelGame, a class containing information
 	 * 				about the display of the maze.
-	 * @param title
+	 * @param title	The type of game. Either:
+	 * 				- "Double Players Game"
+	 * 				- "Single Player Game"
 	 * @throws IOException 
 	 */
 	public GameWindow(MazePuzzleGame mg, String title) throws IOException {
@@ -43,7 +45,7 @@ public class GameWindow extends JFrame {
 		getContentPane().add(gameStatisticsPanel, BorderLayout.WEST);
 
 		
-		gameBoardPanel = new GameBoardPanel(this, mainGame);
+		gameBoardPanel = new GameBoardPanel(this);
 		gameBoardPanel.setPreferredSize(new Dimension(700, 700));
 		getContentPane().add(gameBoardPanel, BorderLayout.EAST);
 

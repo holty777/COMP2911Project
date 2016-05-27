@@ -23,7 +23,6 @@ public class GameBoardPanel extends JPanel implements Runnable {
 	private static final long serialVersionUID = 1L;
 
 	private GameWindow gameWindow;
-	private MazePuzzleGame mainGame;
 	private MazePanel mainMaze;
 
 	// game data
@@ -33,28 +32,16 @@ public class GameBoardPanel extends JPanel implements Runnable {
 	private int enemySpeed;
 	private int gameStartCheck;
 	private int singleDouble;
+
 	/**
 	 * The constructor for the "GameBoardPanel" class.
-	 * @param gameWindow	
-	 * @param mainGame
-	 * @param homeGlassPane 
+	 * @param gameWindow	The whole game screen
+	 * @param mainGame		The main interface to the game
 	 */
-	public GameBoardPanel(GameWindow gameWindow, MazePuzzleGame mainGame) {
+	public GameBoardPanel(GameWindow gameWindow) {
 		this.gameWindow = gameWindow;
-		this.mainGame = mainGame;
 		gameStartCheck = 0;
 		singleDouble = 1;
-		ImageIcon image = new ImageIcon("src/hedge.png");
-		JLabel imagelabel = new JLabel(image);
-		imagelabel.setOpaque(true);
-		imagelabel.setMinimumSize(new Dimension(700,700));
-		imagelabel.setPreferredSize(new Dimension(700,700));
-		imagelabel.setMaximumSize(new Dimension(700,700));
-
-		JLabel thumb = new JLabel();
-		//System.out.println(imagelabel);
-		thumb.setIcon(image);
-		//setLayout(new GridLayout(6, 7));
 
 		setLayout(new BorderLayout());
 
