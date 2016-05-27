@@ -33,7 +33,8 @@ public class MyTimerTask extends TimerTask {
 	 * @param parentPanel	The JPanel which holds the mazePanel
 	 * @param enemyOff 
 	 */
-	public MyTimerTask(Predator predator, Player player, Player predPlayer, JLabel[][] labelGrid, MazePanel mazePanel, int speed, 
+	public MyTimerTask(Predator predator, Player player, Player predPlayer, 
+			JLabel[][] labelGrid, MazePanel mazePanel, int speed, 
 			GameBoardPanel parentPanel, Boolean enemyOff) {
 		this.predator = predator;
 		this.player = player;
@@ -55,7 +56,6 @@ public class MyTimerTask extends TimerTask {
 		parentPanel.getGameWindow().getStatisticsPanel().setTimeLabel(timeElapsed/1000);
 		if(timeElapsed > 2000 && enemyOff == false){
 			JLabel blank = new JLabel();
-			//blank.setBackground(Color.white);
 			blank.setOpaque(true);
 			blank.setMinimumSize(new Dimension(10,10));
 			blank.setPreferredSize(new Dimension(10,10));

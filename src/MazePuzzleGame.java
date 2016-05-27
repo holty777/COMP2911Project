@@ -1,8 +1,13 @@
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.io.IOException;
 import javax.swing.JFrame;
 
+/**
+ * Main entry point for the project
+ * Opens the 
+ * @author holt
+ *
+ */
 public class MazePuzzleGame implements Runnable {
 
 	private JFrame mainFrame;
