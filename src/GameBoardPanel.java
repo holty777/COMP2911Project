@@ -45,8 +45,8 @@ public class GameBoardPanel extends JPanel implements Runnable {
 
 		setLayout(new BorderLayout());
 
-
 	}
+	
 	/**
 	 * Update the statistics panel with the current information.
 	 */

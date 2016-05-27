@@ -1,5 +1,5 @@
 /**
- * The "GameEngine" class handles all functionality 
+ * The "GameSTATE" class handles all functionality 
  * concerning the current state of the game.
  * @author  Jack Holt
  * 			Jesse Moses
@@ -7,6 +7,12 @@
  * 			Jordan Jacobson
  * 			Shiyuan Liang 
  */
+
+
+//MAY DELETE
+
+
+
 public class GameState {
 	private final int MAX_TURN = 42;
 	private final int COL_MAX = 7;

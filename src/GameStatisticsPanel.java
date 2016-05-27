@@ -31,7 +31,6 @@ public class GameStatisticsPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	private GameWindow gameWindow;
-	private MazePuzzleGame mainGame;
 
 	private JLabel player1;
 	private JLabel player2;
@@ -50,7 +49,6 @@ public class GameStatisticsPanel extends JPanel {
 	 * @throws IOException 
 	 */
 	public GameStatisticsPanel(GameWindow gw, MazePuzzleGame mg) throws IOException {
-		mainGame = mg;
 		gameWindow = gw;
 		//SUPER MARIO FONT
 		try {
@@ -80,13 +78,15 @@ public class GameStatisticsPanel extends JPanel {
 		ImageIcon imgI = new ImageIcon(img);
 		JLabel menu = new JLabel();
 		menu.setIcon(imgI);
-		//		// Button for Single Player
+		
+		// Button for Single Player
 		timeLabel = new JLabel("Time Elapsed: ");
 		timeLabel.setFont(customFont);
 		gc.gridy = 1;
 		add(timeLabel, gc);
 		gc.gridy = 2;
 		add(menu);
+		
 		// who's turn
 		player1 = new JLabel();
 		gc.gridy = 3;
@@ -188,20 +188,36 @@ public class GameStatisticsPanel extends JPanel {
 		repaint();
 	}
 
+	/**
+	 * Display the winner at the end of the game for a two player game.
+	 * @param i	The winner number.
+	 */
 	public void displayEndGame(int i) {
 		if(i == 1)
 			msg.setText(player1.getName() + " wins!");
 		else msg.setText(player2.getName() + " wins!");
 	}
 
+	/**
+	 * Store the amount of time that has passed.
+	 * @param i	The elapsed time in seconds.
+	 */
 	public void setTimeLabel(int i){
 		timeLabel.setText("Time Elapsed: " + i);
 	}
 	
+	/**
+	 * A getter method for player 1.
+	 * @return	Player 1
+	 */
 	public String getPlayer1(){
 		return player1.getText();
 	}
 	
+	/**
+	 * A getter method for player 2.
+	 * @return	Player 2
+	 */
 	public String getPlayer2(){
 		return player2.getText();
 	}
