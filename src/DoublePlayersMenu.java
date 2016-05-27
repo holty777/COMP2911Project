@@ -40,7 +40,7 @@ public class DoublePlayersMenu extends JPanel {
 		gc.weighty = 1;
 		gc.fill = GridBagConstraints.BOTH;
 
-		// user name input
+		// Username 1 input
 		gc.gridx = 0;
 		gc.gridy = 0;
 		JLabel username = new JLabel("Player 1's name:  ");
@@ -50,6 +50,7 @@ public class DoublePlayersMenu extends JPanel {
 		final JTextField player1NameField = new JTextField("", 10);
 		add(player1NameField, gc);
 
+		// Username 2 input
 		gc.gridx = 0;
 		gc.gridy = 1;
 		JLabel username2 = new JLabel("Player 2's name:  ");

@@ -44,11 +44,9 @@ public class GameStatisticsPanel extends JPanel {
 	 * The "GameStatisticsPanel" constructor.
 	 * @param gw	The GameWindow, a class containing information 
 	 * 				about the display of the whole screen.
-	 * @param mg	The MazePuzzelGame, a class containing information
-	 * 				about the display of the maze.
 	 * @throws IOException 
 	 */
-	public GameStatisticsPanel(GameWindow gw, MazePuzzleGame mg) throws IOException {
+	public GameStatisticsPanel(GameWindow gw) throws IOException {
 		gameWindow = gw;
 		//SUPER MARIO FONT
 		try {

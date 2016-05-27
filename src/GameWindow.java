@@ -40,7 +40,7 @@ public class GameWindow extends JFrame {
 		setResizable(false);
 		setBounds(mainGame.getMainFrame().getBounds());
 
-		gameStatisticsPanel = new GameStatisticsPanel(this, mainGame);
+		gameStatisticsPanel = new GameStatisticsPanel(this);
 		//gameStatisticsPanel.setPreferredSize(new Dimension(300, 700));
 		getContentPane().add(gameStatisticsPanel, BorderLayout.WEST);
 
