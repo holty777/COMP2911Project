@@ -164,9 +164,10 @@ public class AlphaMaze {
 
 
 		/*
-		System.out.println("**************");
-		System.out.println("the x and y coordinate @: "+x+" "+y);
-		System.out.println("**************");
+		 * Tester scripts
+		 * System.out.println("**************");
+		 * System.out.println("the x and y coordinate @: "+x+" "+y);
+		 * System.out.println("**************");
 		 */
 
 		//Initialization of the possible moves
