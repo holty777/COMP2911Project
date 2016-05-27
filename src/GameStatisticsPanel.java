@@ -178,7 +178,11 @@ public class GameStatisticsPanel extends JPanel {
 		if (winner == null) {
 			msg.setText("Null wins");
 		} else {
-			msg.setText(winner + " wins!");
+			if (winner.toLowerCase().equals("you")){
+				msg.setText(winner + " win!");
+			} else {
+				msg.setText(winner + " wins!");
+			}
 			msg.setForeground(Color.RED);
 		}
 		repaint();
