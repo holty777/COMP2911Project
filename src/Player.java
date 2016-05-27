@@ -107,7 +107,7 @@ public class Player extends JLabel {
 	}
 	
 	//decrement the ability counter
-	public void decAttribute (){
+	public void decAttributeTime (){
 		if (this.attributeRunTime != 0){
 			this.attributeRunTime --;
 			//turn the player back to normal form 
@@ -120,7 +120,7 @@ public class Player extends JLabel {
 	}
 	
 	//decrement the playable ability counter ie amount of fire balls it have left to shoot
-	public void decCountAttribute (){
+	public void decAttributeCount (){
 		if (this.countattribute != 0){
 			this.countattribute --;
 			if (this.countattribute == 0){
@@ -140,7 +140,7 @@ public class Player extends JLabel {
 		attribute directory
 		1. fireball
 		2. freeze trap
-		3. mini
+		3. mini (not used atm)
 		4. speed/jump
 		5. bomb
 		6. star
@@ -154,19 +154,15 @@ public class Player extends JLabel {
 			this.countattribute = 2;
 		break;
 		case(2): 
-			//the enemy is frozen for 2 turns
-			this.attributeRunTime = 2;
-		break;
-		case(3):
-			//the enemy is mini for 2 turns
-			this.attributeRunTime = 2;
+			//the player can drop 2xfreeze bombs
+			this.countattribute = 2;
 		break;
 		case(4):
-			//speed of the character 
+			//player can teleport once
 			this.countattribute = 1;
 		break;	
 		case(5):
-			//bomb
+			//player can drop 1 bomb	
 			this.countattribute = 1;
 		break;
 		case(6):

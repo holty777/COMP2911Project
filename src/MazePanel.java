@@ -539,7 +539,11 @@ public class MazePanel extends JPanel implements KeyListener {
 				
 				//create a new trap 
 				if (player.getAttribute() == 1){
-
+					
+					//decrement the count for fireball
+					player.decAttributeCount();
+					
+					//+1 position from current
 					int k = 1;
 					switch (player.getlastDIR()){
 						case(1):
@@ -652,7 +656,8 @@ public class MazePanel extends JPanel implements KeyListener {
 				}else if (player.getAttribute() == 2){
 					//freeze trap
 					
-					//decrement the attribute here
+					//decrement the count for freeze bomb
+					player.decAttributeCount();
 
 					ImageIcon image = new ImageIcon("src/trap_freeze.png");
 					//turn mario into a snowman
@@ -676,9 +681,8 @@ public class MazePanel extends JPanel implements KeyListener {
 					
 				}else if (player.getAttribute () == 4){
 					//teleport two squares
-					//System.out.println("the speed booster is in play");
-					//check last direction, cases then check squares then teleport
-
+					//decrement the count for teleport
+					player.decAttributeCount();
 						
 					//	System.out.println("the last location is: "+i+" "+j);
 					switch(player.getlastDIR()){
@@ -747,9 +751,9 @@ public class MazePanel extends JPanel implements KeyListener {
 					
 					
 				}else if (player.getAttribute() == 5){
-				
-	
 					//drop a trap bomb
+					//decrement the count for trap bomb
+					player.decAttributeCount();
 					
 					ImageIcon image = new ImageIcon("src/trap_bomb.png");
 					
@@ -827,13 +831,18 @@ public class MazePanel extends JPanel implements KeyListener {
 	}
 	
 	/**
-	 * create the trap list
+	 * create the trap list,
+	 * used by the timer to get rid of 
+	 * the trap when it duration runs out
 	 */
 	public void clearTraps(){
 		trapList.clear();
 	}
 	/**
-	 * returns a true or false if there is a trap or not at that location
+	 * 
+	 * @param i
+	 * @param j
+	 * @return
 	 */
 	public boolean checkForTrap (int i, int j){
 		for (Traps k : trapList){
@@ -842,6 +851,13 @@ public class MazePanel extends JPanel implements KeyListener {
 		return false;
 	}
 	
+	/**
+	 * get the trap type at that location
+	 * 
+	 * @param i- x coordinate
+	 * @param j- y coordinate
+	 * @return Trap id 1,2,5 (fireball, freeze, bomb)
+	 */
 	public int getTypeofTrap (int i, int j){
 		//if not trap in that location it will return -1
 		for (Traps k : trapList){
