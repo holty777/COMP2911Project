@@ -124,11 +124,11 @@ public class MazePanel extends JPanel implements KeyListener {
 	public void initMaze(){
 		
 		//some items here, ratio of items to map is 25 percent
-		int numitems = Math.round(length/4);
+		int numitems = Math.round(length/2);
 		
 		System.out.println("the number of items generated is: "+numitems);
 		
-		this.newMazeItems = new ItemGenerator(50, this.mainMaze);
+		this.newMazeItems = new ItemGenerator(numitems, this.mainMaze);
 	
 		boolean check = false;
 		int x = 0;

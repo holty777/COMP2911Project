@@ -76,7 +76,14 @@ public class MyTimerTask extends TimerTask {
 			predPlayer.setJLocation(predator.getCol());
 			labelGrid[predator.getRow()][predator.getCol()] = predPlayer;
 			//if the predator steps on a trap
-			if (this.mazePanel.checkForTrap(predator.getRow(), predator.getCol())) this.disableTime = 20;
+			if (this.mazePanel.checkForTrap(predator.getRow(), predator.getCol())) this.disableTime = 10;
+			mazePanel.refreshMaze();
+		}else if (timeElapsed > 2000 && enemyOff == false){
+			predPlayer.changeGraphicMovement();
+			//Put him in the new spot
+			predPlayer.setILocation(predator.getRow());
+			predPlayer.setJLocation(predator.getCol());
+			labelGrid[predator.getRow()][predator.getCol()] = predPlayer;
 			mazePanel.refreshMaze();
 		}
 		//decrement the disable time 
@@ -85,7 +92,7 @@ public class MyTimerTask extends TimerTask {
 		if (this.disableTime > 0) this.disableTime --;
 		System.out.println("------------------------");
 		//clear out traps every 3 seconds
-		if (timeElapsed % 250 == 0){
+		if (timeElapsed % 300 == 0){
 			this.mazePanel.clearTraps();
 		}
 		
