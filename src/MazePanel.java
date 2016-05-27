@@ -832,6 +832,23 @@ public class MazePanel extends JPanel implements KeyListener {
 	public void clearTraps(){
 		trapList.clear();
 	}
-
+	/**
+	 * returns a true or false if there is a trap or not at that location
+	 */
+	public boolean checkForTrap (int i, int j){
+		for (Traps k : trapList){
+			if (k.checkTrap(i,j)) return true;
+		}
+		return false;
+	}
+	
+	public int getTypeofTrap (int i, int j){
+		//if not trap in that location it will return -1
+		for (Traps k : trapList){
+			if (k.checkTrap(i,j)) return k.getItemID() ;
+		}
+		return -1;
+	}
+	
 
 }
