@@ -63,6 +63,8 @@ public class MazePanel extends JPanel implements KeyListener {
 	private Boolean pause = false;	
 	//arraylist of maze
 	private ItemGenerator newMazeItems;
+	//trap Arraylist
+	private ArrayList<Traps> trapList;
 	
 	/**
 	 * The "MazePanel" constructor.
@@ -79,6 +81,7 @@ public class MazePanel extends JPanel implements KeyListener {
 		if(length > 5){
 			length --;
 		}
+		this.trapList = new ArrayList<Traps>();
 		this.movesMade = 0;
 		goalX = 0;
 		goalY = 0;
@@ -525,6 +528,10 @@ public class MazePanel extends JPanel implements KeyListener {
 
 			//if the user presses space, they shoot stuff and drop traps
 			if (e.getKeyCode() == KeyEvent.VK_SPACE){
+				//shoot a fire ball here
+				
+				//decrement fire ball counter here
+				
 				
 				ArrayList<Integer> lastPos = player.getLastLoc();
 				int i = player.getILocation();
@@ -542,7 +549,6 @@ public class MazePanel extends JPanel implements KeyListener {
 								
 
 								ImageIcon image = new ImageIcon("src/trap_fireballU.png");
-								//turn mario into a snowman
 								
 								//drawing the freeze trap
 								Image image1 = image.getImage(); // transform it
@@ -558,6 +564,10 @@ public class MazePanel extends JPanel implements KeyListener {
 								imageLabel.setMaximumSize(new Dimension(10,10));
 								labelGrid[i-k][j] = imageLabel;
 								k++;
+								
+								//add it to the trap list
+								this.trapList.add (new Traps (i-k, j, 1));
+								
 							}
 							break;
 						case(2):
@@ -578,6 +588,9 @@ public class MazePanel extends JPanel implements KeyListener {
 								imageLabel.setMaximumSize(new Dimension(10,10));
 								labelGrid[i][j+k] = imageLabel;
 								k++;
+								
+								//add it to the trap list
+								this.trapList.add (new Traps (i, j+k, 1));
 							}
 							
 							break;
@@ -602,6 +615,9 @@ public class MazePanel extends JPanel implements KeyListener {
 								imageLabel.setMaximumSize(new Dimension(10,10));
 								labelGrid[i+k][j] = imageLabel;
 								k++;
+								
+								//add it to the trap list
+								this.trapList.add (new Traps (i+k, j, 1));
 							}
 							break;
 						case(4):
@@ -625,12 +641,17 @@ public class MazePanel extends JPanel implements KeyListener {
 								imageLabel.setMaximumSize(new Dimension(10,10));
 								labelGrid[i][j-k] = imageLabel	;
 								k++;
+								
+								//add it to the trap list
+								this.trapList.add (new Traps (i, j-k, 1));
 							}
 
 							break;
 					}
 					
 				}else if (player.getAttribute() == 2){
+					//freeze trap
+					
 					//decrement the attribute here
 
 					ImageIcon image = new ImageIcon("src/trap_freeze.png");
@@ -649,17 +670,21 @@ public class MazePanel extends JPanel implements KeyListener {
 					imageLabel.setPreferredSize(new Dimension(10,10));
 					imageLabel.setMaximumSize(new Dimension(10,10));
 					labelGrid[lastPos.get(0)][lastPos.get(1)] = imageLabel;
+					
+					//add it to the trap list
+					this.trapList.add (new Traps (lastPos.get(0), lastPos.get(1), 2));
+					
 				}else if (player.getAttribute () == 4){
 					//teleport two squares
 					//System.out.println("the speed booster is in play");
 					//check last direction, cases then check squares then teleport
 
 						
-						System.out.println("the last location is: "+i+" "+j);
+					//	System.out.println("the last location is: "+i+" "+j);
 					switch(player.getlastDIR()){
 						case(1): //north
 				
-						System.out.println("the new location is: "+i+" "+j);
+						//System.out.println("the new location is: "+i+" "+j);
 							if(mainMaze.isEmpty(i-2, j) == false){
 								//change graphics
 								player.setILocation(i-2);
@@ -674,7 +699,7 @@ public class MazePanel extends JPanel implements KeyListener {
 							break;
 						case(2): //east
 		
-						System.out.println("the new location is: "+i+" "+j);
+						//System.out.println("the new location is: "+i+" "+j);
 							if(mainMaze.isEmpty(i, j+2) == false){
 								//change graphics
 								player.setILocation(i);
@@ -689,7 +714,7 @@ public class MazePanel extends JPanel implements KeyListener {
 							break;
 						case(3): //south
 					
-						System.out.println("the new location is: "+i+" "+j);
+						//System.out.println("the new location is: "+i+" "+j);
 							if(mainMaze.isEmpty(i+2, j) == false){
 								//change graphics
 								player.setILocation(i+2);
@@ -704,7 +729,7 @@ public class MazePanel extends JPanel implements KeyListener {
 							break;
 						case(4): //west
 	
-						System.out.println("the new location is: "+i+" "+j);
+						//System.out.println("the new location is: "+i+" "+j);
 							if(mainMaze.isEmpty(i, j-2) == false){
 								//change graphics
 								player.changeGraphicMovement();
@@ -722,9 +747,8 @@ public class MazePanel extends JPanel implements KeyListener {
 					
 					
 				}else if (player.getAttribute() == 5){
-					//add it to the trap list
-					
-					
+				
+	
 					//drop a trap bomb
 					
 					ImageIcon image = new ImageIcon("src/trap_bomb.png");
@@ -743,6 +767,8 @@ public class MazePanel extends JPanel implements KeyListener {
 					imageLabel.setMaximumSize(new Dimension(10,10));
 					labelGrid[lastPos.get(0)][lastPos.get(1)] = imageLabel;
 					
+					//add it to the trap list
+					this.trapList.add(new Traps(lastPos.get(0), lastPos.get(1), 5));
 					
 				}
 				refreshMaze();
@@ -798,6 +824,13 @@ public class MazePanel extends JPanel implements KeyListener {
 	public void startTimer(){
 		timer.schedule(new MyTimerTask(predator, player, predPlayer, labelGrid, this, enemySpeed, parentPanel, enemyOff), 0, enemySpeed);
 
+	}
+	
+	/**
+	 * create the trap list
+	 */
+	public void clearTraps(){
+		trapList.clear();
 	}
 
 
