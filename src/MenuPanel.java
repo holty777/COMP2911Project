@@ -53,12 +53,12 @@ public class MenuPanel extends JPanel {
 		// add(doublePlayerHighScores, gc);
 		// gc.gridy = 3;
 
-		JLabel singlePlayerButton = new JLabel();
+		final JLabel singlePlayerButton = new JLabel();
 		
 		img = ImageIO.read(new File("src/splayer.png"));
 		Image img3 = ImageIO.read(new File("src/splayerS.png"));
-		ImageIcon imgI2 = new ImageIcon(img);
-		ImageIcon simg2 = new ImageIcon(img3);
+		final ImageIcon imgI2 = new ImageIcon(img);
+		final ImageIcon simg2 = new ImageIcon(img3);
 		singlePlayerButton.setIcon(imgI2);
 
 		add(singlePlayerButton, gc);
@@ -102,9 +102,9 @@ public class MenuPanel extends JPanel {
 		gc.gridy = 4;
 		Image img1 = ImageIO.read(new File("src/dplayer.png"));
 		Image img2 = ImageIO.read(new File("src/dplayerS.png"));
-		ImageIcon dimg = new ImageIcon(img1);
-		ImageIcon dimg2 = new ImageIcon(img2);
-		JLabel twoPlayersButton = new JLabel();
+		final ImageIcon dimg = new ImageIcon(img1);
+		final ImageIcon dimg2 = new ImageIcon(img2);
+		final JLabel twoPlayersButton = new JLabel();
 		twoPlayersButton.setIcon(dimg);
 		add(twoPlayersButton, gc);
 		twoPlayersButton.addMouseListener(new MouseListener() {
@@ -147,9 +147,9 @@ public class MenuPanel extends JPanel {
 		gc.gridy = 5;
 		img1 = ImageIO.read(new File("src/instructions.png"));
 		img2 = ImageIO.read(new File("src/instructionsS.png"));
-		ImageIcon iimg = new ImageIcon(img1);
-		ImageIcon iimg2 = new ImageIcon(img2);
-		JLabel htpButton = new JLabel();
+		final ImageIcon iimg = new ImageIcon(img1);
+		final ImageIcon iimg2 = new ImageIcon(img2);
+		final JLabel htpButton = new JLabel();
 		htpButton.setIcon(iimg);
 		add(htpButton, gc);
 		htpButton.addMouseListener(new MouseListener() {
@@ -192,9 +192,9 @@ public class MenuPanel extends JPanel {
 		gc.gridy = 6;
 		img1 = ImageIO.read(new File("src/quit.png"));
 		img2 = ImageIO.read(new File("src/quitS.png"));
-		ImageIcon qimg = new ImageIcon(img1);
-		ImageIcon qimg2 = new ImageIcon(img2);
-		JLabel quitButton = new JLabel();
+		final ImageIcon qimg = new ImageIcon(img1);
+		final ImageIcon qimg2 = new ImageIcon(img2);
+		final JLabel quitButton = new JLabel();
 		quitButton.setIcon(qimg);
 		add(quitButton, gc);
 		quitButton.addMouseListener(new MouseListener() {
