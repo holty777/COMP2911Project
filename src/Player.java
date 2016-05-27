@@ -19,6 +19,7 @@ public class Player extends JLabel {
 	private int iLocation;
 	private int jLocation;
 	private boolean hasTriforce;
+	private int multiplier;
 
 	//player attribute
 	/*
@@ -41,6 +42,7 @@ public class Player extends JLabel {
 
 
 	public Player(int i, int j, int height, int width, int character) {
+		this.multiplier = 1;
 		this.LastLoc = new ArrayList <Integer>();
 		this.height = height;
 		this.width = width;
@@ -147,28 +149,39 @@ public class Player extends JLabel {
 		
 		 */
 		//set attribute and set turns
-		this.attribute = attr;
-		switch (attr){
-		case(1): 
-			//the player gets to shoot 2xfire ball 
-			this.countattribute = 2;
-		break;
-		case(2): 
-			//the player can drop 2xfreeze bombs
-			this.countattribute = 2;
-		break;
-		case(4):
-			//player can teleport once
-			this.countattribute = 1;
-		break;	
-		case(5):
-			//player can drop 1 bomb	
-			this.countattribute = 1;
-		break;
-		case(6):
-			//star attribute
-			this.attributeRunTime = 3;
-		break;
+		
+		//if the current character is not disable
+		if(this.attribute != 3){
+			this.attribute = attr;
+			switch (attr){
+			case(1): 
+				//the player gets to shoot 2xfire ball 
+				this.countattribute = 1*this.multiplier;
+			break;
+			case(2): 
+				//the player can drop 2xfreeze bombs
+				this.countattribute = 2*this.multiplier;
+			break;
+			case(3):
+				//disabler, reset multiplier to one
+				this.multiplier = 1;
+				this.attribute = 3;
+				this.attributeRunTime = 3;
+				break;
+			case(4):
+				//player can teleport once
+				this.countattribute = 1*this.multiplier;
+			break;	
+			case(5):
+				//player can drop 1 bomb	
+				this.countattribute = 1*this.multiplier;
+			break;
+			case(6):
+				//star attribute
+				//if player lvl is less than 4
+				if (this.multiplier < 4) this.multiplier++;
+			break;
+			}
 		}
 
 	}

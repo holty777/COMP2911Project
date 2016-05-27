@@ -123,8 +123,12 @@ public class MazePanel extends JPanel implements KeyListener {
 	 */
 	public void initMaze(){
 		
-		//some items here
-		this.newMazeItems = new ItemGenerator(6, this.mainMaze);
+		//some items here, ratio of items to map is 25 percent
+		int numitems = Math.round(length/4);
+		
+		System.out.println("the number of items generated is: "+numitems);
+		
+		this.newMazeItems = new ItemGenerator(numitems, this.mainMaze);
 	
 		boolean check = false;
 		int x = 0;
@@ -306,6 +310,9 @@ public class MazePanel extends JPanel implements KeyListener {
 				int j = player.getJLocation();
 				//set the last direction to east
 				player.setLastDirection(2);
+				
+				//decrement runtime
+				player.decAttributeTime ();
 
 				if(mainMaze.isEmpty(i, j+1) == false){
 					
@@ -339,11 +346,16 @@ public class MazePanel extends JPanel implements KeyListener {
 			}
 
 			if(e.getKeyCode() == KeyEvent.VK_LEFT){
-				//set the last direction to west
-				player.setLastDirection(4);
-
+				//get the current position of the player
 				int i = player.getILocation();
 				int j = player.getJLocation();
+				
+				//set the last direction to west
+				player.setLastDirection(4);
+				
+				//decrement runtime
+				player.decAttributeTime ();
+				
 				if(mainMaze.isEmpty(i, j-1) == false){
 					//check if the next square is an item
 					if (this.newMazeItems.ItemLocCheck(i,j-1)){
@@ -375,6 +387,10 @@ public class MazePanel extends JPanel implements KeyListener {
 			if(e.getKeyCode() == KeyEvent.VK_UP){
 				int i = player.getILocation();
 				int j = player.getJLocation();
+				
+				//decrement runtime
+				player.decAttributeTime ();
+				
 				//set last direction
 				player.setLastDirection(1);
 
@@ -412,7 +428,9 @@ public class MazePanel extends JPanel implements KeyListener {
 
 				int i = player.getILocation();
 				int j = player.getJLocation();
-
+				//decrement runtime
+				player.decAttributeTime ();
+				
 				//set last direction
 				player.setLastDirection(3);
 

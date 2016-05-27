@@ -22,10 +22,10 @@ public class ItemGenerator {
 	 * 1. fireballs- shoot a fire ball in the direction on which the player is facing
 	 * and it travels for 3,5,7 or breaks if it hits a wall
 	 * 2. freeze- freezes mario or the other player
-	 * 3. mini mario- slow mario down
-	 * 4. speed boost- increase the speed of the player	
+	 * 3. mini- disable the user from using items for 3 turns
+	 * 4. teleport- jump 2 squares
 	 * 5. drop bomb- drop a bomb and if the player walks over it, he respawn at the starting point
-	 * 6. star- invisicibility, increase player speed
+	 * 6. star- 1 up, increase the multiplier so player can drop more items
 	 * 
 	 */
 	/**
@@ -57,7 +57,33 @@ public class ItemGenerator {
 	 */
 	public void generateCoordinates (AlphaMaze maze, int numItems){
 		ArrayList <ItemLoc> existingLoc = new ArrayList <ItemLoc>();
-
+		
+		//item balancing 
+		/*
+		//approximate 25 percent fire balls
+		 int fireballs;
+		 //approximate 20 percent 
+		 int freeze ;
+		 //min is 20 percent 
+		 int mini
+		 //approximate 5 percent of teleport
+		 int teleport;
+		 //approximate 25 percent
+		 int bomb = 
+		 //approximate 25
+		 int star ;
+		 
+		 
+		 //counter for items
+		 int CountFire = 0;
+		 int CountFreeze = 0;
+		 int CountMini = 0; 
+		 int Counteleport
+		 int CountBomb
+		 int CountStar
+		*/
+		
+		
 		int i = 0;
 		while (i!=numItems){
 			Random rand = new Random();
