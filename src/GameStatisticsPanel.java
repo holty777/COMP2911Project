@@ -35,7 +35,6 @@ public class GameStatisticsPanel extends JPanel {
 	private JLabel player1;
 	private JLabel player2;
 	private JLabel msg;
-	private JLabel modeLabel;
 	private JLabel modeDescription;
 	private JLabel timeLabel;
 	Font customFont = null;
@@ -72,12 +71,13 @@ public class GameStatisticsPanel extends JPanel {
 		gc.gridy = 0;
 		gc.anchor = GridBagConstraints.CENTER;
 		
+		//Picture at top of panel (LOGO)
 		Image img = ImageIO.read(new File("src/MenuPic.png"));
 		ImageIcon imgI = new ImageIcon(img);
 		JLabel menu = new JLabel();
 		menu.setIcon(imgI);
 		
-		// Button for Single Player
+		// Time Elapsed Label
 		timeLabel = new JLabel("Time Elapsed: ");
 		timeLabel.setFont(customFont);
 		gc.gridy = 1;
@@ -85,7 +85,7 @@ public class GameStatisticsPanel extends JPanel {
 		gc.gridy = 2;
 		add(menu);
 		
-		// who's turn
+		// Players names
 		player1 = new JLabel();
 		gc.gridy = 3;
 		add(player1, gc);
@@ -93,6 +93,7 @@ public class GameStatisticsPanel extends JPanel {
 		player2 = new JLabel();
 		add(player2, gc);
 
+		// Message to the game (started, won, lost etc)
 		gc.anchor = GridBagConstraints.SOUTH;
 		msg = new JLabel();
 		msg.setFont(customFont);
@@ -104,7 +105,8 @@ public class GameStatisticsPanel extends JPanel {
 		modeDescription = new JLabel();
 		gc.gridy = 6;
 		add(modeDescription, gc);
-
+		
+		//Restart Button
 		JButton restartGameButton = new JButton("Restart");
 		restartGameButton.setContentAreaFilled(false);
 		restartGameButton.setFocusPainted(false);
@@ -120,6 +122,7 @@ public class GameStatisticsPanel extends JPanel {
 		gc.gridy = 6;
 		add(restartGameButton, gc);
 
+		//Pause Button
 		JButton pauseGameButton = new JButton("Pause");
 		pauseGameButton.setContentAreaFilled(false);
 		pauseGameButton.setFocusPainted(false);
@@ -142,8 +145,7 @@ public class GameStatisticsPanel extends JPanel {
 	 * @param p1	Player 1
 	 * @param p2	Player 2
 	 */
-	public void setPlayerNames(String p1, String p2) {
-		//uncommenting crashes 
+	public void setPlayerNames(String p1, String p2) { 
 		player1.setHorizontalAlignment(JLabel.RIGHT);
 		player1.setFont(customFont);
 		player1.setText("Player 1 : " + p1);

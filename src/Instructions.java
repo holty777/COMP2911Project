@@ -22,7 +22,6 @@ import javax.swing.Timer;
 public class Instructions extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	//private MazePuzzleGame mainGame;
 	private Timer timer;
 	private float opacity = 0;
 
@@ -36,7 +35,7 @@ public class Instructions extends JPanel {
 		gc.weighty = 0;
 		gc.fill = GridBagConstraints.BOTH;
 
-		// user name input
+		// Instruction Text Input
 
 		gc.gridx = 0;
 		gc.gridy = 0;
@@ -46,14 +45,9 @@ public class Instructions extends JPanel {
 				+ "Single player:<br>"
 				+ "Reach the Obelisk before Mario catches you...<br>"
 				+ "");
-//		Jlabel Line = new JLabel("Try to evade the evil Mario or defeat him head to head in an exiting game.");
-//		Jlabel Line = new JLabel("Single player:");
-//		Jlabel Line = new JLabel("Reach the Obelisk before Mario catches you...");
-	JLabel secondLine = new JLabel("Move through the maze with the arrow keys");
-//		Jlabel Line = new JLabel("Double player:");
+		JLabel secondLine = new JLabel("Move through the maze with the arrow keys");
 		JLabel thirdLine = new JLabel("Try to reach the obelisc before your opponent");
-//		Jlabel Line = new JLabel("");
-//		Jlabel Line = new JLabel("Use the items to assist in your journy. Try to figure our what each of them do!!");
+
 
 		add(firstLine, gc);
 		gc.gridx = 0;

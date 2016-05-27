@@ -1,10 +1,4 @@
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.util.Random;
-
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -106,26 +100,6 @@ public class GameBoardPanel extends JPanel implements Runnable {
 			playerName = "YOU";
 		gameMode = mazeSize;
 		this.enemySpeed = enemySpeed;
-		String nameAI = "AI";
-		//		switch (AIMode) {
-		//		case 0:
-		//			gameMode = 0;
-		//			break;
-		//		case 1:
-		//			gameMode = 1;
-		//			break;
-		//		case 2:
-		//			gameMode = 2;
-		//		}
-
-		/*if (randPlayer() == 0) {
-			player1 = new User(playerName);
-			player2 = new AI(nameAI, AIMode);
-		} else {
-			player1 = new AI(nameAI, AIMode);
-			player2 = new User(playerName);
-		}*/
-		//gameMode = 1;
 		gameWindow.getStatisticsPanel().setPlayerNames(playerName, "AI");
 		gameStartCheck = i;
 		if(gameStartCheck == 1)
@@ -147,29 +121,12 @@ public class GameBoardPanel extends JPanel implements Runnable {
 			name2 = "Player 2";
 		}
 		gameMode = mazeSize;
-		// randomize user play order
-		/*if (randPlayer() == 0) {
-			player1 = new User(name1);
-			player2 = new User(name2);
-		} else {
-			player1 = new User(name2);
-			player2 = new User(name1);
-		}*/
 
 		gameMode = 2;
 		gameWindow.getStatisticsPanel().setPlayerNames(name1, name2);
 		singleDouble = 2;
 		startNewGame();
 		updateStatisticsPanel();
-	}
-
-	/**
-	 * Generate a random number to determine which player moves first.
-	 * @return	A random number, either 0, 1.
-	 */
-	private int randPlayer() {
-		Random rand = new Random();
-		return rand.nextInt(2);
 	}
 
 	/**
@@ -198,7 +155,6 @@ public class GameBoardPanel extends JPanel implements Runnable {
 	}
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
 		
 	}
 

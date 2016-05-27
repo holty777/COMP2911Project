@@ -23,7 +23,7 @@ public class AlphaMaze {
 	 * 	- 0: Pathway
 	 * 	- 1: Wall
 	 */
-	private int [][] mazemtx;
+	private int [][] mazeMtx;
 	//private int [][] start;
 	//private int [][] end;
 	
@@ -33,7 +33,7 @@ public class AlphaMaze {
 	 * @param width The width of the maze to be generated.
 	 */
 	public AlphaMaze (int height, int width){
-		this.mazemtx =  new int [height][width];
+		this.mazeMtx =  new int [height][width];
 		this.width = width;
 		this.height = height;
 		//this.start = new int [1][1];
@@ -54,18 +54,18 @@ public class AlphaMaze {
 		generate();
 		//print();
 		//exit - win game
-		mazemtx[width-2][height-1] = 0;
+		mazeMtx[width-2][height-1] = 0;
 		//triforce location
 		if (this.width%2==0){
 			System.out.println("ALPHA!!");
 			System.out.println(width/2);
 			System.out.println(height/2);
-			mazemtx[(width+1)/2][(height+1)/2] = 0;
+			mazeMtx[(width+1)/2][(height+1)/2] = 0;
 		}else{
 			System.out.println("ALPHA");
 			System.out.println((width-1)/2);
 			System.out.println((height-1)/2);
-			mazemtx[(width)/2][(height)/2] = 0;
+			mazeMtx[(width)/2][(height)/2] = 0;
 		}
 		
 	}
@@ -78,7 +78,7 @@ public class AlphaMaze {
 	public void reset(){
 		for(int i=0; i<height; i++){
 			for (int j=0; j<width; j++){
-				mazemtx[i][j] = 1;
+				mazeMtx[i][j] = 1;
 			}
 		}
 	}
@@ -130,7 +130,7 @@ public class AlphaMaze {
 
 				removeWall(moves);
 				visited.push(curr);
-				visited.push(pushnextsq (moves));
+				visited.push(pushNextSq (moves));
 				visited.push(moves);
 			}
 		}
@@ -283,26 +283,26 @@ public class AlphaMaze {
 
 		if (n.getDIR() == 1){
 			//north case
-			mazemtx[n.getY()][n.getX()] = 0;
-			mazemtx[n.getY()+1][n.getX()] = 0;
+			mazeMtx[n.getY()][n.getX()] = 0;
+			mazeMtx[n.getY()+1][n.getX()] = 0;
 		}
 
 		if (n.getDIR() == 2){
 			//east case
-			mazemtx[n.getY()][n.getX()] = 0;
-			mazemtx[n.getY()][n.getX()-1] = 0;
+			mazeMtx[n.getY()][n.getX()] = 0;
+			mazeMtx[n.getY()][n.getX()-1] = 0;
 		}
 
 		if (n.getDIR() == 3){
 			//south case
-			mazemtx[n.getY()][n.getX()] = 0;
-			mazemtx[n.getY()-1][n.getX()] = 0;
+			mazeMtx[n.getY()][n.getX()] = 0;
+			mazeMtx[n.getY()-1][n.getX()] = 0;
 		}
 
 		if (n.getDIR() == 4){
 			//west case
-			mazemtx[n.getY()][n.getX()] = 0;
-			mazemtx[n.getY()][n.getX()+1] = 0;
+			mazeMtx[n.getY()][n.getX()] = 0;
+			mazeMtx[n.getY()][n.getX()+1] = 0;
 		}
 	}
 
@@ -311,7 +311,7 @@ public class AlphaMaze {
 	 * @param p	The current node.
 	 * @return	A node to add to the stack.
 	 */
-	public State pushnextsq (State p){
+	public State pushNextSq (State p){
 		/*
 		 * use as a reference
 		State checkN = new State (x, y-1, 1);
@@ -328,7 +328,7 @@ public class AlphaMaze {
 		 */
 
 
-		State nextblock = null;
+		State nextBlock = null;
 
 		/*
 		 * If the direction of the current node is 1
@@ -336,23 +336,23 @@ public class AlphaMaze {
 		 */
 		if (p.getDIR() == 1){
 			//north
-			nextblock = 
+			nextBlock = 
 					new State (p.getX(), p.getY()+1, p.getDIR());
 		}else if (p.getDIR() == 2){
 			//east
-			nextblock = 
+			nextBlock = 
 					new State (p.getX()-1, p.getY(), p.getDIR());
 		}else if (p.getDIR() == 3){
 			//south
-			nextblock = 
+			nextBlock = 
 					new State (p.getX(), p.getY()-1, p.getDIR());
 		}else if (p.getDIR() == 4){
 			//west
-			nextblock = 
+			nextBlock = 
 					new State (p.getX()+1, p.getY(), p.getDIR());
 		}
 
-		return nextblock;
+		return nextBlock;
 	}
 
 
@@ -368,7 +368,7 @@ public class AlphaMaze {
 		if (height<0 || height >this.height-1 || width < 0 || width>this.width-1){
 			return false;
 		}
-		if (mazemtx[height][width] == 1){
+		if (mazeMtx[height][width] == 1){
 			return true;
 		}
 		return false;

@@ -22,21 +22,21 @@ public class GameWindow extends JFrame {
 
 	/**
 	 * The "GameWindow" Constructor.
-	 * @param mg	The MazePuzzelGame, a class containing information
+	 * @param mazeGame	The MazePuzzelGame, a class containing information
 	 * 				about the display of the maze.
 	 * @param title	The type of game. Either:
 	 * 				- "Double Players Game"
 	 * 				- "Single Player Game"
 	 * @throws IOException 
 	 */
-	public GameWindow(MazePuzzleGame mg, String title) throws IOException {
+	public GameWindow(MazePuzzleGame mazeGame, String title) throws IOException {
 		super(title);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		setLocationRelativeTo(null);
 		setResizable(false);
-		setBounds(mg.getMainFrame().getBounds());
+		setBounds(mazeGame.getMainFrame().getBounds());
 
 		gameStatisticsPanel = new GameStatisticsPanel(this);
 
