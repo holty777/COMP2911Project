@@ -19,10 +19,9 @@ public class GameWindow extends JFrame {
 
 	private GameBoardPanel gameBoardPanel;
 	private GameStatisticsPanel gameStatisticsPanel;
-	private MazePuzzleGame mainGame;
 
 	/**
-	 * The "GameWindow" class.
+	 * The "GameWindow" Constructor.
 	 * @param mg	The MazePuzzelGame, a class containing information
 	 * 				about the display of the maze.
 	 * @param title	The type of game. Either:
@@ -32,19 +31,17 @@ public class GameWindow extends JFrame {
 	 */
 	public GameWindow(MazePuzzleGame mg, String title) throws IOException {
 		super(title);
-		mainGame = mg;
-
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//setSize(1000, 700);
+
 		setLocationRelativeTo(null);
 		setResizable(false);
-		setBounds(mainGame.getMainFrame().getBounds());
+		setBounds(mg.getMainFrame().getBounds());
 
 		gameStatisticsPanel = new GameStatisticsPanel(this);
-		//gameStatisticsPanel.setPreferredSize(new Dimension(300, 700));
+
 		getContentPane().add(gameStatisticsPanel, BorderLayout.WEST);
 
-		
 		gameBoardPanel = new GameBoardPanel(this);
 		gameBoardPanel.setPreferredSize(new Dimension(700, 700));
 		getContentPane().add(gameBoardPanel, BorderLayout.EAST);
