@@ -128,7 +128,7 @@ public class MazePanel extends JPanel implements KeyListener {
 		
 		System.out.println("the number of items generated is: "+numitems);
 		
-		this.newMazeItems = new ItemGenerator(numitems, this.mainMaze);
+		this.newMazeItems = new ItemGenerator(50, this.mainMaze);
 	
 		boolean check = false;
 		int x = 0;
@@ -588,7 +588,7 @@ public class MazePanel extends JPanel implements KeyListener {
 								k++;
 								
 								//add it to the trap list
-								this.trapList.add (new Traps (i-k, j, 1));
+								this.trapList.add (new Traps (i-(k-1), j, 1));
 								
 							}
 							break;
@@ -612,7 +612,7 @@ public class MazePanel extends JPanel implements KeyListener {
 								k++;
 								
 								//add it to the trap list
-								this.trapList.add (new Traps (i, j+k, 1));
+								this.trapList.add (new Traps (i, j+(k-1), 1));
 							}
 							
 							break;
@@ -639,7 +639,7 @@ public class MazePanel extends JPanel implements KeyListener {
 								k++;
 								
 								//add it to the trap list
-								this.trapList.add (new Traps (i+k, j, 1));
+								this.trapList.add (new Traps (i+(k-1), j, 1));
 							}
 							break;
 						case(4):
@@ -665,7 +665,7 @@ public class MazePanel extends JPanel implements KeyListener {
 								k++;
 								
 								//add it to the trap list
-								this.trapList.add (new Traps (i, j-k, 1));
+								this.trapList.add (new Traps (i, j-(k-1), 1));
 							}
 
 							break;
@@ -854,6 +854,10 @@ public class MazePanel extends JPanel implements KeyListener {
 	 * the trap when it duration runs out
 	 */
 	public void clearTraps(){
+		for (Traps k: trapList ){
+			JLabel blank = new JLabel();
+			labelGrid[k.getX()][k.getY()] = blank;
+		}
 		trapList.clear();
 	}
 	/**

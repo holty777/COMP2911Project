@@ -20,4 +20,11 @@ public class Traps {
 		return this.itemID;
 	}
 	
+	public int getX(){
+		return this.LocX;
+	}
+	
+	public int getY(){
+		return this.LocY;
+	}
 }

@@ -21,6 +21,8 @@ public class MyTimerTask extends TimerTask {
 	private boolean finished = false;
 	GameBoardPanel parentPanel;
 	private boolean enemyOff = false;
+	//how long it is being disable if it walks into a trap
+	private int disableTime ;
 
 	/**
 	 * 
@@ -45,6 +47,7 @@ public class MyTimerTask extends TimerTask {
 		timeElapsed = 0;
 		this.parentPanel = parentPanel;
 		this.enemyOff = enemyOff;
+		this.disableTime = 0;
 	}
 	
 	/**
@@ -54,7 +57,8 @@ public class MyTimerTask extends TimerTask {
 	public void run() {
 		if (this.finished) return;
 		parentPanel.getGameWindow().getStatisticsPanel().setTimeLabel(timeElapsed/1000);
-		if(timeElapsed > 2000 && enemyOff == false){
+		//release mario after 2 seconds
+		if(timeElapsed > 2000 && enemyOff == false && this.disableTime == 0){
 			JLabel blank = new JLabel();
 			blank.setOpaque(true);
 			blank.setMinimumSize(new Dimension(10,10));
@@ -62,7 +66,8 @@ public class MyTimerTask extends TimerTask {
 			blank.setMaximumSize(new Dimension(10,10));
 			//Make it blank
 			labelGrid[predator.getRow()][predator.getCol()] = blank;
-			//Move predator
+			
+			
 			predator.makeMove(player.getILocation(), player.getJLocation());
 			predPlayer.setLastDirection(predator.getPreviousDirection());
 			predPlayer.changeGraphicMovement();
@@ -70,8 +75,20 @@ public class MyTimerTask extends TimerTask {
 			predPlayer.setILocation(predator.getRow());
 			predPlayer.setJLocation(predator.getCol());
 			labelGrid[predator.getRow()][predator.getCol()] = predPlayer;
+			//if the predator steps on a trap
+			if (this.mazePanel.checkForTrap(predator.getRow(), predator.getCol())) this.disableTime = 20;
 			mazePanel.refreshMaze();
 		}
+		//decrement the disable time 
+		System.out.println("------------------------");
+		System.out.println("disable time for: "+this.disableTime);
+		if (this.disableTime > 0) this.disableTime --;
+		System.out.println("------------------------");
+		//clear out traps every 3 seconds
+		if (timeElapsed % 250 == 0){
+			this.mazePanel.clearTraps();
+		}
+		
 		if (predator.won()){
 			this.finished = true;
 		};
