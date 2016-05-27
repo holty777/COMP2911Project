@@ -40,28 +40,19 @@ public class Instructions extends JPanel {
 
 		gc.gridx = 0;
 		gc.gridy = 0;
-		JLabel firstLine = new JLabel("<html>Hello!!!<br>"
+		JLabel firstLine = new JLabel("<html>"
+				+ "<center><b>The Legend of Zelda: Mario's Maze</b></center><br>"
 				+ "Try to evade the evil Mario or defeat him head to head in an exiting game.<br>"
 				+ "<br>"
-				+ "Single player:<br>"
+				+ "<b>Single player:</b><br>"
 				+ "Reach the Obelisk before Mario catches you...<br>"
-				+ "");
-//		Jlabel Line = new JLabel("Try to evade the evil Mario or defeat him head to head in an exiting game.");
-//		Jlabel Line = new JLabel("Single player:");
-//		Jlabel Line = new JLabel("Reach the Obelisk before Mario catches you...");
-	JLabel secondLine = new JLabel("Move through the maze with the arrow keys");
-//		Jlabel Line = new JLabel("Double player:");
-		JLabel thirdLine = new JLabel("Try to reach the obelisc before your opponent");
-//		Jlabel Line = new JLabel("");
-//		Jlabel Line = new JLabel("Use the items to assist in your journy. Try to figure our what each of them do!!");
-
+				+ "Move through the maze with the arrow keys<br>"
+				+ "<b>Double player:</b><br>"
+				+ "Try to reach the obelisc before your opponent<br>"
+				+ "<br>"
+				+ "Use the items to assist in your journey. Try to figure our what each of them do!!");
 		add(firstLine, gc);
-		gc.gridx = 0;
-		gc.gridy = 1;
-		add(secondLine, gc);
-		gc.gridy = 2;
-		add(thirdLine, gc);
-		//add(startGame, gc);
+
 		timer = new Timer(15, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
