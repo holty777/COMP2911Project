@@ -32,6 +32,7 @@ public class GameBoardPanel extends JPanel implements Runnable {
 	private int enemySpeed;
 	private int gameStartCheck;
 	private int singleDouble;
+
 	/**
 	 * The constructor for the "GameBoardPanel" class.
 	 * @param gameWindow	The whole game screen
@@ -41,15 +42,6 @@ public class GameBoardPanel extends JPanel implements Runnable {
 		this.gameWindow = gameWindow;
 		gameStartCheck = 0;
 		singleDouble = 1;
-		ImageIcon image = new ImageIcon("src/hedge.png");
-		JLabel imagelabel = new JLabel(image);
-		imagelabel.setOpaque(true);
-		imagelabel.setMinimumSize(new Dimension(700,700));
-		imagelabel.setPreferredSize(new Dimension(700,700));
-		imagelabel.setMaximumSize(new Dimension(700,700));
-
-		JLabel thumb = new JLabel();
-		thumb.setIcon(image);
 
 		setLayout(new BorderLayout());
 
